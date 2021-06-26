@@ -1,7 +1,14 @@
-import { AppProps } from 'next/app'
+import React, { ReactNode } from "react";
+import { AppProps } from "next/app";
+import GlobalStyles from "../styles/global";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }: AppProps): ReactNode {
+  return (
+    <>
+      <Component {...pageProps} />
+      <GlobalStyles />
+    </>
+  );
 }
 
-export default MyApp
+export default MyApp;
