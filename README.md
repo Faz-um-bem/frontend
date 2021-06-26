@@ -33,4 +33,5 @@ yarn dev
   <li><a href="https://styled-components.com/" target="_blank">Styled Components</a></li>
   <li><a href="https://eslint.org/" target="_blank">Eslint</a></li>
   <li><a href="https://prettier.io/" target="_blank">Prettier</a></li>
+  <li><a href="https://react-leaflet.js.org/">Leaflet</a></li>
 </ul>
