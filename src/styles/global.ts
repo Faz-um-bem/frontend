@@ -9,9 +9,11 @@ const GlobalStyles = createGlobalStyle`
     --red: #D93636;
     --green: #51B853;
     --yellow: #FFD666;
+    --gray: #C4C4C4;
 
     --heading: #034074;
     --text: #000000;
+    --text-secondary: #617480;
     --description: #A0ACB2;
   }
 
@@ -38,6 +40,10 @@ const GlobalStyles = createGlobalStyle`
   body, input, button {
     font-family: 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  input, textarea {
+    outline: none;
   }
 
   a {
