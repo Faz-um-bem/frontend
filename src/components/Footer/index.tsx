@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import { Container } from "./styled";
+import { Container } from './styled';
 
 export function Footer() {
   return (
     <Container>
       <h1>&copy; 2021 - Faz um bem!</h1>
-      <span>Feito com s2 por Universidade Federal de Santa Maria</span>
+      <span>Feito com ♥ por Universidade Federal de Santa Maria</span>
     </Container>
   );
 }
