@@ -1,5 +1,7 @@
-<img alt="Faz um bem" src="#" />
-<h2 align='center'>Faz um bem</h2>
+<div align="center">
+   <img alt="Faz um bem" src="https://raw.githubusercontent.com/Faz-um-bem/frontend/ed721fb4d69c8d8f4fbbb259b6eff4d57e796ce6/public/imgs/logo.svg" />
+ </div>
+
 
 ## Descrição do projeto
 
