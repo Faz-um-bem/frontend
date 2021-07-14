@@ -11,7 +11,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
 
-  div {
+  > div {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -25,7 +25,9 @@ export const Container = styled.div`
   }
 `;
 
-export const HeaderContent = styled.div``;
+export const HeaderContent = styled.div`
+  flex: 1;
+`;
 
 export const HeaderItem = styled.button.attrs({
   type: "button",
@@ -48,5 +50,57 @@ export const HeaderItem = styled.button.attrs({
 
   :hover {
     text-decoration: underline;
+  }
+`;
+
+export const LoginContent = styled.div`
+  button {
+    padding: 0.8rem;
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 0.5rem;
+    color: var(--white);
+
+    width: 16rem;
+
+    transition: all 0.5s;
+
+    a {
+      color: inherit;
+    }
+
+    :hover {
+      background: var(--white);
+      color: var(--blue);
+      font-weight: bold;
+    }
+  }
+`;
+
+export const LoggedContent = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  h1 {
+    color: var(--heading);
+    font-size: 1.8rem;
+    font-weight: normal;
+
+    margin-right: 1rem;
+    padding-right: 1rem;
+
+    border-right: 1px solid var(--description);
+  }
+
+  button {
+    background: transparent;
+    color: var(--blue);
+    /* border: 0; */
+
+    width: 5rem;
+
+    font-size: 1.5rem;
   }
 `;
