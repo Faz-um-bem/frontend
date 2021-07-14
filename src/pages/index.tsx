@@ -44,7 +44,7 @@ export default function Home() {
           </Content>
         </Wrapper>
 
-        <Section>
+        <Section id="about">
           <h1>O que é o Faz um bem?</h1>
           <ContentHeading>
             <p>
@@ -125,10 +125,10 @@ export default function Home() {
             <img src="/imgs/hugging.svg" alt="" />
           </ContentImageRight>
 
-          <ContentImageLeft id="contact">
+          <ContentImageLeft>
             <img src="/imgs/hugging.svg" alt="" />
 
-            <FormContainer>
+            <FormContainer id="contact">
               <InputContent placeholder="Nome*" />
               <InputContent placeholder="Telefone*" />
               <InputContent placeholder="E-mail*" />
