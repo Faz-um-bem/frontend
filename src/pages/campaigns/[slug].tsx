@@ -1,8 +1,12 @@
-import React from "react";
-import Head from "next/head";
-import dynamic from "next/dynamic";
+import React from 'react';
+import Head from 'next/head';
+import dynamic from 'next/dynamic';
+import { BiCheckShield } from 'react-icons/bi';
+import { IoMdMail, IoMdPhonePortrait } from 'react-icons/io';
+import { FiClock } from 'react-icons/fi';
+import { RiPhoneFill } from 'react-icons/ri';
 
-import Header from "../../components/Header";
+import Header from '../../components/Header';
 
 import {
   Container,
@@ -11,12 +15,29 @@ import {
   MapContainer,
   Contacts,
   ButtonContent,
-} from "./campaign";
-import { Footer } from "../../components/Footer";
+} from './campaign';
+import { Footer } from '../../components/Footer';
 
-const Map = dynamic(() => import("../../components/Map"), { ssr: false });
+const Map = dynamic(() => import('../../components/Map'), { ssr: false });
 
-const campaign: React.FC = () => {
+export default function campaign() {
+  const init = {
+    latitude: -29.705408,
+    longitude: -53.8146707,
+  };
+
+  const place = [
+    {
+      id: `1`,
+      name: 'testando 123',
+      slug: 'teste-123',
+      location: {
+        latitude: -29.705408,
+        longitude: -53.8146707,
+      },
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -31,7 +52,7 @@ const campaign: React.FC = () => {
             <h1>Campanha X</h1>
 
             <Verify>
-              icon
+              <BiCheckShield size={50} />
               <span>Verificado</span>
             </Verify>
           </header>
@@ -55,7 +76,7 @@ const campaign: React.FC = () => {
 
             <h1>Localização</h1>
             <MapContainer>
-              <Map />
+              <Map initialLocation={init} places={place} />
             </MapContainer>
             <p>
               Rua Silva Jardim, 390, Nossa Senhora do Rosário, Santa Maria - RS,
@@ -65,9 +86,25 @@ const campaign: React.FC = () => {
             <h1>Contato</h1>
             <Contacts>
               <div>
-                <p>E-mail: institution@example.com</p>
-                <p>Telefone: (55) 3220-0000</p>
-                <p>Celular: (55) 9 9999-9999</p>
+                <div>
+                  <IoMdMail size={18} />
+                  <p>E-mail: institution@example.com</p>
+                </div>
+
+                <div>
+                  <RiPhoneFill size={18} />
+                  <p>Telefone: (55) 3218-0000</p>
+                </div>
+
+                <div>
+                  <IoMdPhonePortrait size={18} />
+                  <p>Celular: (55) 9 9999-9999</p>
+                </div>
+
+                <div>
+                  <FiClock size={18} />
+                  <p>Das 8h às 18h</p>
+                </div>
               </div>
 
               <ButtonContent>Entrar em contato</ButtonContent>
@@ -79,6 +116,4 @@ const campaign: React.FC = () => {
       </Container>
     </>
   );
-};
-
-export default campaign;
+}

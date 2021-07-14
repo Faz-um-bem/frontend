@@ -84,9 +84,23 @@ export const Contacts = styled.div`
   grid-template-columns: repeat(2, 1fr);
 
   div {
-    margin: auto;
+    margin: 0 auto;
 
-    text-align: center;
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      svg {
+        margin-right: 1rem;
+        color: var(--blue);
+      }
+
+      p {
+        margin: auto 0;
+        line-height: 3rem;
+      }
+    }
   }
 `;
 
