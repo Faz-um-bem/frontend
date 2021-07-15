@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
-import { OptionItem }  from '../../components/OptionItem';
+import { OptionItem } from '../../components/OptionItem';
 
 import { Container, Content, Items } from './styles';
 
