@@ -6,7 +6,6 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
 };
 
-// eslint-disable-next-line
 export function Input({ label, ...rest }: InputProps) {
   return (
     <Container>

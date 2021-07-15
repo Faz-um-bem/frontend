@@ -1,9 +1,15 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
-import { Container, HeaderContent, HeaderItem, LoginContent, LoggedContent } from "./styles";
+import {
+  Container,
+  HeaderContent,
+  HeaderItem,
+  LoginContent,
+  LoggedContent,
+} from './styles';
 
-export default function Header() {
+export function Header() {
   const logged = false;
 
   return (
@@ -45,4 +51,4 @@ export default function Header() {
       </div>
     </Container>
   );
-};
+}

@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import React, { ButtonHTMLAttributes } from 'react';
 
 import { Container } from './styles';
 
@@ -21,14 +20,7 @@ type CardProps = {
   };
 };
 
-// eslint-disable-next-line
-export function Card({
-  id,
-  name,
-  description,
-  location,
-  contact,
- }: CardProps) {
+export function Card({ id, name, description, location, contact }: CardProps) {
   const router = useRouter();
 
   const handleCampaign = () => {

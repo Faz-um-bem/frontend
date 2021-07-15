@@ -6,7 +6,7 @@ import { IoMdMail, IoMdPhonePortrait } from 'react-icons/io';
 import { FiClock } from 'react-icons/fi';
 import { RiPhoneFill } from 'react-icons/ri';
 
-import Header from '../../components/Header';
+import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 
 import {

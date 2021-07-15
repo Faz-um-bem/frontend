@@ -2,8 +2,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FaEdit } from 'react-icons/fa';
 
-import Header from '../../components/Header';
-import OptionItem from '../../components/OptionItem';
+import { Header } from '../../components/Header';
+import { OptionItem } from '../../components/OptionItem';
 import { Footer } from '../../components/Footer';
 
 import { Container, Content, OptionList } from './styles';

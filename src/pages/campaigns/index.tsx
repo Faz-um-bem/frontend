@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 
 import { useRouter } from 'next/router';
-import Header from '../../components/Header';
+import { Header }  from '../../components/Header';
 import { Card } from '../../components/Card';
 
 import { Container, Content, Heading, ListContainer } from './styles';

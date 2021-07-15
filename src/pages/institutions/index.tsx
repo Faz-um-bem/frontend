@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
-import Header from '../../components/Header';
+import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { Card } from '../../components/Card';
 
