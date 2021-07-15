@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { CardListItem } from '../../../../components/CardListItem';
 
 import { Footer } from '../../../../components/Footer';
-import { Header }  from '../../../../components/Header';
+import { Header } from '../../../../components/Header';
 
 import { Container, CampaignList, Content } from './styled';
 
