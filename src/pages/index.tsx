@@ -1,8 +1,8 @@
-import Head from "next/head";
-import React from "react";
+import Head from 'next/head';
+import React from 'react';
 
-import Header from "../components/Header";
-import { Footer } from "../components/Footer";
+import Header from '../components/Header';
+import { Footer } from '../components/Footer';
 
 import {
   Container,
@@ -18,8 +18,8 @@ import {
   InputContent,
   TextareaContent,
   SubmitButton,
-} from "./styles";
-// eslint-disable-next-line
+} from './styles';
+
 export default function Home() {
   return (
     <>
