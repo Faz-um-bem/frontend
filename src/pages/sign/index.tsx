@@ -10,7 +10,7 @@ import OptionItem from '../../components/OptionItem';
 
 import { Container, Content, Items } from './styles';
 
-export default function sign() {
+export default function Sign() {
   const router = useRouter();
 
   const handleCampaign = (type: string) => {

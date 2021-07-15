@@ -8,7 +8,7 @@ import { Textarea } from '../../../../components/Textarea';
 
 import { Container, Content, SignInButton } from './styles';
 
-export default function signupInstitution() {
+export default function SignupInstitution() {
   return (
     <>
       <Head>

@@ -8,7 +8,7 @@ import { Card } from '../../components/Card';
 import { Container, Content, Heading, ListContainer } from './styles';
 import { Footer } from '../../components/Footer';
 
-export default function campaigns() {
+export default function Ccampaigns() {
   const router = useRouter();
 
   const cam = [

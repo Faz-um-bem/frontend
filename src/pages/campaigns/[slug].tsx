@@ -20,7 +20,7 @@ import { Footer } from '../../components/Footer';
 
 const Map = dynamic(() => import('../../components/Map'), { ssr: false });
 
-export default function campaign() {
+export default function Campaign() {
   const init = {
     latitude: -29.705408,
     longitude: -53.8146707,

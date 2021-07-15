@@ -7,7 +7,7 @@ import { Input } from '../../../../components/Input';
 
 import { Container, Content, SignInButton } from './styles';
 
-export default function recoveryCurator() {
+export default function RecoveryCurator() {
   return (
     <>
       <Head>

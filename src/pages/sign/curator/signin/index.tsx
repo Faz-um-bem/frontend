@@ -7,7 +7,7 @@ import { Input } from '../../../../components/Input';
 
 import { Container, Content, SignInButton } from './styles';
 
-export default function signinCurator() {
+export default function SigninCurator() {
   return (
     <>
       <Head>

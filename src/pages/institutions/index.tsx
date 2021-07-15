@@ -16,7 +16,7 @@ import {
 
 const Map = dynamic(() => import('../../components/Map'), { ssr: false });
 
-export default function institutions() {
+export default function Institutions() {
   const inst = [
     {
       id: `1`,
