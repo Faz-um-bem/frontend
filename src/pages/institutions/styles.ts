@@ -11,7 +11,8 @@ export const Content = styled.main`
   flex-direction: column;
   max-width: 1120px;
   width: 100%;
-  min-height: calc(100vh - 80px - 6rem);
+  min-height: calc(100vh - 8rem - 6rem - 5rem);
+  margin: 2.5rem 0;
 `;
 
 export const Heading = styled.div`

@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { Button }  from "../components/Button";
+import styled from 'styled-components';
+import { Button } from '../components/Button';
 
-import { Input } from "../components/Input";
-import { Textarea } from "../components/Textarea";
+import { Input } from '../components/Input';
+import { Textarea } from '../components/Textarea';
 
 export const Container = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 8rem - 6rem - 5rem);
   width: 100%;
   background: linear-gradient(120deg, #034074, rgba(3, 64, 115, 0.6));
 
