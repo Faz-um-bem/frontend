@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -5,9 +6,17 @@ import { Header } from '../../../../components/Header';
 import { Footer } from '../../../../components/Footer';
 import { Input } from '../../../../components/Input';
 
+import { useAuth } from '../../../../hooks/AuthContext';
+
 import { Container, Content, SignInButton } from './styles';
 
 export default function SigninInstitution() {
+  const { signIn } = useAuth();
+
+  const handleLogin = useCallback(() => {
+    signIn({ email: 'wederson@example', password: 'password' });
+  }, []);
+
   return (
     <>
       <Head>
@@ -22,7 +31,7 @@ export default function SigninInstitution() {
             <Input placeholder="E-mail" type="email" />
             <Input placeholder="Senha" type="password" />
 
-            <SignInButton>Entrar</SignInButton>
+            <SignInButton onClick={handleLogin}>Entrar</SignInButton>
           </form>
 
           <div>

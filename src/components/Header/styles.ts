@@ -34,7 +34,7 @@ export const HeaderItem = styled.button.attrs({
 })`
   background: transparent;
   border: 0;
-  margin: 0 10px;
+  margin: 0 5px;
   padding: 0.2rem 0.5rem;
 
   color: var(--blue);

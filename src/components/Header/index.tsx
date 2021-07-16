@@ -1,5 +1,6 @@
-import React from 'react';
 import Link from 'next/link';
+
+import { useAuth } from '../../hooks/AuthContext';
 
 import {
   Container,
@@ -10,7 +11,7 @@ import {
 } from './styles';
 
 export function Header() {
-  const logged = false;
+  const { signOut, isAuthenticated, user } = useAuth();
 
   return (
     <Container>
@@ -33,18 +34,25 @@ export function Header() {
           <HeaderItem>
             <Link href="/#contact">Contato</Link>
           </HeaderItem>
+          {isAuthenticated && (
+            <HeaderItem>
+              <Link href="/dashboard">Painel</Link>
+            </HeaderItem>
+          )}
         </HeaderContent>
 
         <LoginContent>
-          {!logged ? (
+          {!isAuthenticated ? (
             <button type="button">
               <Link href="/sign">Entrar</Link>
             </button>
           ) : (
             <LoggedContent>
-              <h1>Olá Wederson Fagundes</h1>
+              <h1>Olá {user.name}</h1>
 
-              <button type="button">Sair</button>
+              <button type="button" onClick={signOut}>
+                Sair
+              </button>
             </LoggedContent>
           )}
         </LoginContent>
