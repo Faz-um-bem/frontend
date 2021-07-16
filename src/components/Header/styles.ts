@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 80px;
+  height: 8rem;
   width: 100%;
 
   display: block;
@@ -30,7 +30,7 @@ export const HeaderContent = styled.div`
 `;
 
 export const HeaderItem = styled.button.attrs({
-  type: "button",
+  type: 'button',
 })`
   background: transparent;
   border: 0;
