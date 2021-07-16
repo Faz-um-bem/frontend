@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button }  from '../../../../components/Button';
+import { Button } from '../../../../components/Button';
 
 export const Container = styled.div`
   display: flex;
@@ -8,15 +8,20 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  height: calc(100vh - 80px - 6rem);
+  height: calc(100vh - 8rem - 6rem - 5rem);
   display: flex;
   flex-direction: column;
 
   align-items: center;
   justify-content: center;
 
+  margin: 2.5rem 0;
+
   form {
     width: 40rem;
+
+    display: grid;
+    grid-gap: 1rem;
   }
 
   > div {
@@ -27,6 +32,10 @@ export const Content = styled.div`
     justify-content: space-around;
 
     margin-top: 1.5rem;
+
+    a {
+      font-size: 1.5rem;
+    }
   }
 `;
 

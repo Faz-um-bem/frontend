@@ -27,10 +27,6 @@ export default function SignupCurator() {
             <h2>Dados do usuário</h2>
             <Input placeholder="Nome completo" type="text" />
 
-            <h2>Contato</h2>
-            <Input placeholder="Telefone 1" type="number" />
-            <Input placeholder="Telefone 2" type="number" />
-
             <SignInButton>Entrar</SignInButton>
           </form>
 

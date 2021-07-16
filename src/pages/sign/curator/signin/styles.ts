@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button }  from '../../../../components/Button';
+import { Button } from '../../../../components/Button';
 
 export const Container = styled.div`
   display: flex;
@@ -8,12 +8,14 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  height: calc(100vh - 80px - 6rem);
+  height: calc(100vh - 8rem - 6rem - 5rem);
   display: flex;
   flex-direction: column;
 
   align-items: center;
   justify-content: center;
+
+  margin: 2.5rem 0;
 
   form {
     width: 40rem;
@@ -25,16 +27,14 @@ export const Content = styled.div`
   }
 
   > div {
-    width: 30rem;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2.5rem;
 
     margin-top: 1.5rem;
 
     a {
-      font-size: 1rem;
+      font-size: 1.5rem;
       color: var(--black);
 
       :active :visited {
