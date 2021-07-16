@@ -1,11 +1,17 @@
-import React, { ReactNode } from "react";
-import { AppProps } from "next/app";
-import GlobalStyles from "../styles/global";
+import React, { ReactNode } from 'react';
+import { AppProps } from 'next/app';
+
+import GlobalStyles from '../styles/global';
+
+import { AuthProvider } from '../hooks/AuthContext';
 
 function MyApp({ Component, pageProps }: AppProps): ReactNode {
   return (
     <>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
+
       <GlobalStyles />
     </>
   );
