@@ -1,6 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-// eslint-disable-next-line
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -9,7 +8,7 @@ export const Container = styled.div`
   background: var(--white);
   border-radius: 0.8rem;
 
-  width: 100%;
+  justify-content: stretch;
 
   & + div {
     margin-top: 1rem;
