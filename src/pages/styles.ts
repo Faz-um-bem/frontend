@@ -11,13 +11,15 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  min-height: calc(100vh - 8rem - 6rem - 5rem);
+  min-height: calc(100vh - 8rem);
   width: 100%;
   background: linear-gradient(120deg, #034074, rgba(3, 64, 115, 0.6));
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding: 2.5rem 0;
 `;
 
 export const Content = styled.main`

@@ -84,7 +84,7 @@ export default function Home() {
           </ContentFullText>
 
           <ContentImageLeft>
-            <img src="/imgs/hugging.svg" alt="" />
+            <span />
             <p>
               A plataforma cadastra campanhas e instituições que possam fazer a
               diferença na vida de famílias e comunidas. Você busca campanhas ou
@@ -96,18 +96,18 @@ export default function Home() {
             </p>
           </ContentImageLeft>
 
-          <ContentImageRight>
+          <ContentImageLeft>
+            <span />
             <p>
               As intituições são responsáveis pelo conteúdo disponibilizado,
               assim como pela execução das doações. A plataforma não é
               responsável pela captação de recursos, nem pela entrega às
               instituições.
             </p>
-            <img src="/imgs/hugging.svg" alt="" />
-          </ContentImageRight>
+          </ContentImageLeft>
 
           <ContentImageLeft>
-            <img src="/imgs/hugging.svg" alt="" />
+            <span />
             <p>
               As instituições são responsáveis pelo conteúdo disponibilizado,
               assim como pela execução das doações. A plataforma não é
@@ -116,17 +116,17 @@ export default function Home() {
             </p>
           </ContentImageLeft>
 
-          <ContentImageRight>
+          <ContentImageLeft>
+            <span />
             <p>
               Para ser um apoiador, ajude a divulgar essa plataforma, para que
               chegue a um número enorme de pessoas que possam fazer a diferença.
               Entre em contato pelo email: fazumbem@inf.ufsm.br e saiba mais.
             </p>
-            <img src="/imgs/hugging.svg" alt="" />
-          </ContentImageRight>
+          </ContentImageLeft>
 
           <ContentImageLeft>
-            <img src="/imgs/hugging.svg" alt="" />
+            <span />
 
             <FormContainer id="contact">
               <InputContent placeholder="Nome*" />
