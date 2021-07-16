@@ -56,7 +56,7 @@ export default function Map({ initialLocation, places = [] }: MapProps) {
             >
               {[place.name]}
 
-              <Link href={`/institution/${place.slug}`}>
+              <Link href={`/institutions/${place.slug}`}>
                 >
               </Link>
             </Popup>
