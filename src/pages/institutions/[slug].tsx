@@ -20,7 +20,7 @@ import {
 
 const Map = dynamic(() => import('../../components/Map'), { ssr: false });
 
-export default function Campaign() {
+export default function Institution() {
   const init = {
     latitude: -29.705408,
     longitude: -53.8146707,
@@ -41,7 +41,7 @@ export default function Campaign() {
   return (
     <>
       <Head>
-        <title> Campanha | Faz um bem!</title>
+        <title> Instituição | Faz um bem!</title>
       </Head>
 
       <Container>
@@ -49,7 +49,7 @@ export default function Campaign() {
 
         <Content>
           <header>
-            <h1>Campanha X</h1>
+            <h1>Instituição Y</h1>
 
             <Verify>
               <BiCheckShield size={50} />
@@ -58,7 +58,7 @@ export default function Campaign() {
           </header>
 
           <main>
-            <h1>Sobre a campanha</h1>
+            <h1>Sobre a Instituição</h1>
 
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Venenatis
