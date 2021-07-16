@@ -36,5 +36,6 @@ yarn dev
   <li><a href="https://eslint.org/" target="_blank">Eslint</a></li>
   <li><a href="https://prettier.io/" target="_blank">Prettier</a></li>
   <li><a href="https://react-leaflet.js.org/">Leaflet</a></li>
-  <li><a htef="https://axios-http.com/">Axios</a></li>
+  <li><a href="https://axios-http.com/">Axios</a></li>
+  <li><a href="https://github.com/maticzav/nookies">Nookies</a></li>
 </ul>
