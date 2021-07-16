@@ -38,7 +38,7 @@ export function Header() {
         <LoginContent>
           {!logged ? (
             <button type="button">
-              <Link href="/sign">Acessar a plataforma</Link>
+              <Link href="/sign">Entrar</Link>
             </button>
           ) : (
             <LoggedContent>
