@@ -1,6 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-// eslint-disable-next-line
 export const InputContent = styled.textarea`
   padding: 1rem 1.5rem;
 

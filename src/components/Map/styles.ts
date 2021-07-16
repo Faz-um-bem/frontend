@@ -1,5 +1,5 @@
-import styled from "styled-components";
-// eslint-disable-next-line
+import styled from 'styled-components';
+
 export const Container = styled.div`
   width: 100%;
   height: 100%;
