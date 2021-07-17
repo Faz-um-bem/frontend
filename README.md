@@ -38,4 +38,7 @@ yarn dev
   <li><a href="https://react-leaflet.js.org/">Leaflet</a></li>
   <li><a href="https://axios-http.com/">Axios</a></li>
   <li><a href="https://github.com/maticzav/nookies">Nookies</a></li>
+  <li><a href="https://react-hook-form.com/">React Hook Form</a></li>
+  <li><a href="https://github.com/jquense/yup">Yup</a></li>
+
 </ul>
