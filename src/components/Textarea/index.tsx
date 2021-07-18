@@ -26,8 +26,6 @@ const TextareaBase: ForwardRefRenderFunction<HTMLTextAreaElement, InputProps> =
 
     const handleInputBlur = useCallback(() => {
       setIsFocused(false);
-
-      // setIsFilled(!!inputRef.current?.value);
     }, []);
 
     return (
@@ -35,7 +33,7 @@ const TextareaBase: ForwardRefRenderFunction<HTMLTextAreaElement, InputProps> =
         <InputContent
           name={name}
           onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
+          onBlurCapture={handleInputBlur}
           rows={5}
           ref={ref}
           {...rest}
