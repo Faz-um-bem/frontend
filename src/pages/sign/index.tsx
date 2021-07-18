@@ -4,12 +4,15 @@ import { HiDocumentSearch } from 'react-icons/hi';
 import { FaBuilding } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 
+import { GetServerSideProps } from 'next';
+import { parseCookies } from 'nookies';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { OptionItem } from '../../components/OptionItem';
 
 import { Container, Content, Items } from './styles';
-import { roles } from '../../util/enum';
+import { roles } from '../../utils/enum';
+import { withSSRGuest } from '../../utils/withSSRGuest';
 
 export default function Sign() {
   const router = useRouter();
@@ -50,3 +53,11 @@ export default function Sign() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRGuest(
+  async ctx => {
+    return {
+      props: {},
+    };
+  },
+);

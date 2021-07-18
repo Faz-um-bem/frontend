@@ -1,18 +1,21 @@
 import { useCallback } from 'react';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useRouter } from 'next/router';
+import { useAuth } from '../../../hooks/useAuth';
+
 import { Header } from '../../../components/Header';
 import { Footer } from '../../../components/Footer';
 import { Input } from '../../../components/Input';
 
-import { useAuth } from '../../../hooks/AuthContext';
+import { roles } from '../../../utils/enum';
+import { withSSRGuest } from '../../../utils/withSSRGuest';
 
 import { Container, Content, SignInButton } from './styles';
-import { roles } from '../../../util/enum';
 
 type FormData = {
   email: string;
@@ -118,3 +121,11 @@ export default function SigninInstitution() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRGuest(
+  async ctx => {
+    return {
+      props: {},
+    };
+  },
+);

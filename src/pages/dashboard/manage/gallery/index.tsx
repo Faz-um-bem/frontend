@@ -1,12 +1,28 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Header } from '../../../../components/Header';
 import { Footer } from '../../../../components/Footer';
+import { GalleryItem } from '../../../../components/GalleryItem';
+
+import { useCan } from '../../../../hooks/useCan';
+
+import { withSSRAuth } from '../../../../utils/withSSRAuth';
+import { roles } from '../../../../utils/enum';
 
 import { Container, Content, GalleryContainer } from './styled';
-import { GalleryItem } from './GalleryItem';
 
 export default function Gallery() {
+  const router = useRouter();
+  const userCanSeePage = useCan({ role: roles.institution });
+
+  useEffect(() => {
+    if (!userCanSeePage) {
+      router.push('/error');
+    }
+  }, []);
   return (
     <>
       <Head>
@@ -41,3 +57,9 @@ export default function Gallery() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async ctx => {
+  return {
+    props: {},
+  };
+});

@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
@@ -5,6 +6,8 @@ import { useCallback } from 'react';
 import { Header } from '../../../components/Header';
 import { Footer } from '../../../components/Footer';
 import { Input } from '../../../components/Input';
+
+import { withSSRGuest } from '../../../utils/withSSRGuest';
 
 import { Container, Content, SignInButton } from './styles';
 
@@ -43,3 +46,11 @@ export default function RecoveryInstitution() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRGuest(
+  async ctx => {
+    return {
+      props: {},
+    };
+  },
+);

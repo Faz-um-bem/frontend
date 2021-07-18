@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -7,9 +8,10 @@ import { Footer } from '../../../components/Footer';
 import { FormInstitution } from '../../../components/FormInstitution';
 import { FormCurator } from '../../../components/FormCurator';
 
-import { Container, Content } from './styles';
+import { roles } from '../../../utils/enum';
+import { withSSRGuest } from '../../../utils/withSSRGuest';
 
-import { roles } from '../../../util/enum';
+import { Container, Content } from './styles';
 
 type SubmitData = {
   email: string;
@@ -76,3 +78,11 @@ export default function SignUp() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRGuest(
+  async ctx => {
+    return {
+      props: {},
+    };
+  },
+);

@@ -1,8 +1,11 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { CardListItem } from '../../../../components/CardListItem';
 
+import { CardListItem } from '../../../../components/CardListItem';
 import { Footer } from '../../../../components/Footer';
 import { Header } from '../../../../components/Header';
+
+import { withSSRAuth } from '../../../../utils/withSSRAuth';
 
 import { Container, CampaignList, Content } from './styled';
 
@@ -53,3 +56,9 @@ export default function ManageCampaign() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async ctx => {
+  return {
+    props: {},
+  };
+});

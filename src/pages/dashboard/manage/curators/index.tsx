@@ -1,12 +1,28 @@
+import { useEffect } from 'react';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { CardListItem } from '../../../../components/CardListItem';
+import { useRouter } from 'next/router';
 
+import { CardListItem } from '../../../../components/CardListItem';
 import { Footer } from '../../../../components/Footer';
 import { Header } from '../../../../components/Header';
+import { useCan } from '../../../../hooks/useCan';
+import { permissions } from '../../../../utils/enum';
+
+import { withSSRAuth } from '../../../../utils/withSSRAuth';
 
 import { Container, CampaignList, Content } from './styled';
 
 export default function ManageInstitutions() {
+  const router = useRouter();
+  const userCanSeePage = useCan({ permission: permissions.administrator });
+
+  useEffect(() => {
+    if (!userCanSeePage) {
+      router.push('/error');
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -35,3 +51,9 @@ export default function ManageInstitutions() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async ctx => {
+  return {
+    props: {},
+  };
+});
