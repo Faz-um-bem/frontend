@@ -1,5 +1,5 @@
+import { useCallback } from 'react';
 import Head from 'next/head';
-import React, { useCallback } from 'react';
 import { FiMail, FiPhone, FiUser } from 'react-icons/fi';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';

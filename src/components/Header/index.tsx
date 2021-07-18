@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 
 import {
   Container,

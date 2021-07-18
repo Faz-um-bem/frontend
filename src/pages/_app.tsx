@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 
 import GlobalStyles from '../styles/global';
 
-import { AuthProvider } from '../hooks/AuthContext';
+import { AuthProvider } from '../contexts/AuthContext';
 
 function MyApp({ Component, pageProps }: AppProps): ReactNode {
   return (
