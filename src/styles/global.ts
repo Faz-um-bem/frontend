@@ -20,6 +20,9 @@ const GlobalStyles = createGlobalStyle`
     --text-secondary: #617480;
     --text-white: #FFFFFF;
     --description: #A0ACB2;
+
+    --background-disabled: #f5f5f5;
+    --text-disabled: #ededed;
   }
 
   * {

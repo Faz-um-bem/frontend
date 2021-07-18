@@ -18,6 +18,19 @@ export const Container = styled.button`
   svg {
     color: var(--blue);
   }
+
+  &:disabled {
+    background: var(--background-disabled);
+    cursor: default;
+
+    svg {
+      color: var(--text-disabled);
+    }
+
+    h1 {
+      color: var(--text-disabled);
+    }
+  }
 `;
 
 export const Label = styled.h1`
