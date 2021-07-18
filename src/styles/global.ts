@@ -1,19 +1,24 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   :root {
     --background: #EDF1F6;
+    --background-gray: #EDF1F6;
+    --background-purple: #754058;
 
     --white: #ffffff;
     --blue: #034074;
     --red: #D93636;
     --green: #51B853;
-    --yellow: #FFD666;
+    --yellow: #F1EABE;
     --gray: #C4C4C4;
+    --purple: #754058;
+    --orange: #D94423;
 
     --heading: #034074;
     --text: #000000;
     --text-secondary: #617480;
+    --text-white: #FFFFFF;
     --description: #A0ACB2;
   }
 
@@ -25,6 +30,7 @@ const GlobalStyles = createGlobalStyle`
 
   html {
     font-size: 62.5%;
+    scroll-behavior: smooth;
   }
 
   html, body, #__next {
@@ -37,7 +43,7 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, button {
+  body, input, button, textarea {
     font-family: 'Noto Sans', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
