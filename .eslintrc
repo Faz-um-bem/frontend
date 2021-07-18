@@ -38,6 +38,7 @@
     "@typescript-eslint/ban-types": "off",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-return-await": "off",
     "react/jsx-filename-extension": [
       1,
       {
