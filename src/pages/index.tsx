@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import React, { useCallback } from 'react';
 import { FiMail, FiPhone, FiUser } from 'react-icons/fi';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -34,7 +33,10 @@ type SignInFormData = {
 
 const formSchema = yup.object().shape({
   name: yup.string().required('Nome é obrigatório'),
-  email: yup.string().required('E-mail é obrigatório').email(),
+  email: yup
+    .string()
+    .required('E-mail é obrigatório')
+    .email('O e-mail precisa ser válido'),
   phone: yup
     .string()
     .min(11, 'O número deve conter DDD + Número')
