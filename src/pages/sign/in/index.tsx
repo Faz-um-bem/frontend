@@ -91,7 +91,9 @@ export default function SigninInstitution() {
               {...register('password')}
             />
 
-            <SignInButton type="submit">Entrar</SignInButton>
+            <SignInButton type="submit">
+              {formState.isSubmitting ? 'Aguarde...' : 'Entrar'}
+            </SignInButton>
           </form>
 
           <div>
