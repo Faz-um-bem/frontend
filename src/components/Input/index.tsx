@@ -17,7 +17,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   containerStyle?: CSSProperties;
   icon?: ComponentType<IconBaseProps>;
   name: string;
-  error: FieldError;
+  error?: FieldError;
 };
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
@@ -56,7 +56,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 
       {!!error && (
         <Error title={error.message}>
-          <FiAlertCircle color="#c53030" size={20} />
+          <FiAlertCircle className="error" color="#c53030" size={20} />
         </Error>
       )}
     </Container>

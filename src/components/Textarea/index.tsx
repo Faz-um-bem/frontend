@@ -11,7 +11,7 @@ import { FiAlertCircle } from 'react-icons/fi';
 import { Container, Error, InputContent } from './styles';
 
 type InputProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  error: FieldError;
+  error?: FieldError;
   name: string;
 };
 
@@ -36,7 +36,7 @@ const TextareaBase: ForwardRefRenderFunction<HTMLTextAreaElement, InputProps> =
           name={name}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
-          rows="5"
+          rows={5}
           ref={ref}
           {...rest}
         />
