@@ -24,4 +24,5 @@ export const Label = styled.h1`
   font-size: 1.5rem;
   color: var(--heading);
   margin-top: 1rem;
+  width: 10rem;
 `;
