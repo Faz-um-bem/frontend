@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 
 import { Header } from '../../../components/Header';
 import { Footer } from '../../../components/Footer';
-import { SignUpInstitution } from './institution';
-import { SignUpCurator } from './curator';
+import { FormInstitution } from '../../../components/FormInstitution';
+import { FormCurator } from '../../../components/FormCurator';
 
 import { Container, Content } from './styles';
 
@@ -59,9 +59,9 @@ export default function SignUp() {
 
         <Content>
           {query.role === String(roles.institution) ? (
-            <SignUpInstitution onSubmitForm={handleSubmit} />
+            <FormInstitution onSubmitForm={handleSubmit} />
           ) : (
-            <SignUpCurator onSubmitForm={handleSubmit} />
+            <FormCurator onSubmitForm={handleSubmit} />
           )}
 
           <div>
