@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Input } from '../../../../components/Input';
+import { Input } from '../Input';
 
 import { Container, SignInButton } from './styles';
 
@@ -14,7 +14,7 @@ type FormData = {
   name: string;
 };
 
-type SignUpCuratorProps = {
+type FormCuratorProps = {
   onSubmitForm(data: FormData): Promise<void>;
 };
 
@@ -35,7 +35,7 @@ const formSchema = yup.object().shape({
   name: yup.string().required('Nome é obrigatório'),
 });
 
-export function SignUpCurator({ onSubmitForm }: SignUpCuratorProps) {
+export function FormCurator({ onSubmitForm }: FormCuratorProps) {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -85,7 +85,7 @@ export function SignUpCurator({ onSubmitForm }: SignUpCuratorProps) {
         {...register('name')}
       />
 
-      <SignInButton type="submit">Entrar</SignInButton>
+      <SignInButton type="submit">Cadastrar</SignInButton>
     </Container>
   );
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Button } from '../../../../components/Button';
-import { Input } from '../../../../components/Input';
-import { Textarea } from '../../../../components/Textarea';
+import { Button } from '../Button';
+import { Input } from '../Input';
+import { Textarea } from '../Textarea';
 
 export const Container = styled.form`
   div {

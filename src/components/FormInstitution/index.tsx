@@ -29,7 +29,7 @@ type FormData = {
   phone_secondary: number;
 };
 
-type SignUpInstituionProps = {
+type FormInstitutionProps = {
   onSubmitForm(data: FormData): Promise<void>;
 };
 
@@ -65,7 +65,7 @@ const formSchema = yup.object().shape({
   // phone_secondary: yup.number().min(11, 'Deve conter 11 dígitos'),
 });
 
-export function SignUpInstitution({ onSubmitForm }: SignUpInstituionProps) {
+export function FormInstitution({ onSubmitForm }: FormInstitutionProps) {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
   });

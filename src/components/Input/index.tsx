@@ -33,8 +33,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
-
-    // setIsFilled(!!inputRef.current?.value);
   }, []);
 
   return (
@@ -48,8 +46,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       <InputContent
         name={name}
         onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        // defaultValue={defaultValue}
+        onBlurCapture={handleInputBlur}
         ref={ref}
         {...rest}
       />
