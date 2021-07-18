@@ -45,7 +45,6 @@ export function FormCurator({ onSubmitForm }: FormCuratorProps) {
     async (data, event) => {
       await new Promise(resolve => setTimeout(resolve, 3000));
       event.preventDefault();
-      console.log(data);
       // onSubmitForm(data);
     },
     [],

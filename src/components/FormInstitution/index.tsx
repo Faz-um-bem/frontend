@@ -75,7 +75,6 @@ export function FormInstitution({ onSubmitForm }: FormInstitutionProps) {
     async (data, event) => {
       await new Promise(resolve => setTimeout(resolve, 3000));
       event.preventDefault();
-      console.log(data);
       // onSubmitForm(data);
     },
     [],
