@@ -2,7 +2,6 @@ import {
   createContext,
   ReactNode,
   useCallback,
-  useContext,
   useEffect,
   useState,
 } from 'react';
@@ -14,6 +13,8 @@ import { setCookie, parseCookies, destroyCookie } from 'nookies';
 type User = {
   name: string;
   email: string;
+  role: number;
+  permission: number | null;
 };
 
 type SignInCredentials = {
@@ -21,7 +22,7 @@ type SignInCredentials = {
   password: string;
 };
 
-type AuthContextData = {
+export type AuthContextData = {
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
   isAuthenticated: boolean;
@@ -41,31 +42,33 @@ function AuthProvider({ children }: AuthProviderProps) {
   const isAuthenticated = !!user;
 
   useEffect(() => {
-    const { 'fazumbem.user': userCookie } = parseCookies();
+    const { 'fazumbem.token': token } = parseCookies();
 
-    console.log(userCookie);
+    if (token) {
+      setUser({
+        name: 'Wederson Fagundes',
+        email: 'wederson@example.com',
+        role: 2,
+        permission: null,
+      });
+    }
   }, []);
 
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     // const response = await api.post('sessions', { email, password });
+    const token = 'faketoken';
 
     setUser({
       name: 'Wederson Fagundes',
       email: 'wederson@example.com',
+      role: 2,
+      permission: null,
     });
 
-    setCookie(
-      undefined,
-      'fazumbem.user',
-      JSON.stringify({
-        name: 'Wederson Fagundes',
-        email: 'wederson@example.com',
-      }),
-      {
-        maxAge: 60 * 60 * 24 * 30, // 30 days
-        path: '/',
-      },
-    );
+    setCookie(undefined, 'fazumbem.token', token, {
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+      path: '/',
+    });
 
     // api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
@@ -73,7 +76,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const signOut = useCallback(() => {
-    destroyCookie(undefined, 'fazumbem.user');
+    destroyCookie(undefined, 'fazumbem.token');
     setUser(null);
 
     router.push('/');
@@ -86,14 +89,4 @@ function AuthProvider({ children }: AuthProviderProps) {
   );
 }
 
-function useAuth(): AuthContextData {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-
-  return context;
-}
-
-export { AuthProvider, useAuth };
+export { AuthProvider, AuthContext };
