@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../../../../components/Button';
+import { Button } from '../../../components/Button';
 
 export const Container = styled.div`
   display: flex;
@@ -35,13 +35,11 @@ export const Content = styled.div`
 
     margin-top: 1.5rem;
 
-    a {
-      font-size: 1rem;
+    button {
+      background: transparent;
+      border: 0;
+      font-size: 1.5rem;
       color: var(--black);
-
-      :active :visited {
-        color: inherit;
-      }
     }
   }
 `;

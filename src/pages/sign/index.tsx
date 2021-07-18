@@ -9,12 +9,16 @@ import { Footer } from '../../components/Footer';
 import { OptionItem } from '../../components/OptionItem';
 
 import { Container, Content, Items } from './styles';
+import { roles } from '../../util/enum';
 
 export default function Sign() {
   const router = useRouter();
 
-  const handleCampaign = (type: string) => {
-    router.push(`/sign/${type}/signin`);
+  const handleCampaign = (role: number) => {
+    router.push({
+      pathname: '/sign/in',
+      query: { role },
+    });
   };
 
   return (
@@ -31,12 +35,12 @@ export default function Sign() {
             <OptionItem
               label="Sou uma instituição"
               icon={FaBuilding}
-              onClick={() => handleCampaign('institution')}
+              onClick={() => handleCampaign(roles.institution)}
             />
             <OptionItem
               label="Sou um(a) curador(a)"
               icon={HiDocumentSearch}
-              onClick={() => handleCampaign('curator')}
+              onClick={() => handleCampaign(roles.curator)}
             />
           </Items>
         </Content>

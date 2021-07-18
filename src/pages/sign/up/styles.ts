@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Button } from '../../../../components/Button';
 
 export const Container = styled.div`
   display: flex;
@@ -17,33 +16,32 @@ export const Content = styled.div`
 
   margin: 2.5rem 0;
 
+  font-size: 1.5rem;
+
   form {
-    width: 40rem;
+    display: grid;
+    grid-gap: 1rem;
+    width: 50rem;
 
     h2 {
-      font-size: 1rem;
-      margin: 1rem 0;
+      font-size: 1.6rem;
     }
   }
 
   > div {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 3rem;
+    width: 30rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
     margin-top: 1.5rem;
 
-    a {
+    button {
+      background: transparent;
+      border: 0;
       font-size: 1.5rem;
       color: var(--black);
-
-      :active :visited {
-        color: inherit;
-      }
     }
   }
-`;
-
-export const SignInButton = styled(Button)`
-  margin-top: 1.5rem;
 `;
