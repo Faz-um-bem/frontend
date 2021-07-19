@@ -1,9 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
+import 'leaflet/dist/leaflet.css';
+
 const GlobalStyles = createGlobalStyle`
   :root {
     --background: #EDF1F6;
     --background-gray: #EDF1F6;
+    --background-dark-gray: #A8A8B3;
     --background-purple: #754058;
 
     --white: #ffffff;
@@ -64,6 +67,39 @@ const GlobalStyles = createGlobalStyle`
 
   button {
     cursor: pointer;
+  }
+
+  .react-modal-overlay {
+    background: #03407486;
+    backdrop-filter: blur(1px);
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .react-modal-content {
+    width: 100%;
+    max-width: 576px;
+    background-color: #EDF1F6;
+    /* padding: 3rem; */
+    position: relative;
+    border-radius: 0.5rem;
+  }
+
+  .react-modal-close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    border: 0;
+    background-color: transparent;
+    color: #A0ACB2;
   }
 `;
 
