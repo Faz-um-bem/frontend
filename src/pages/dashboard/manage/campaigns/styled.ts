@@ -12,6 +12,22 @@ export const Content = styled.div`
   width: 100%;
   margin: 2.5rem 0;
 
+  header {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+
+    button {
+      margin-left: 1.5rem;
+      background: transparent;
+      border: 0;
+
+      svg {
+        color: var(--blue);
+      }
+    }
+  }
+
   h1 {
     color: var(--heading);
   }

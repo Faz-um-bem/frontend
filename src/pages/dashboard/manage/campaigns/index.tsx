@@ -1,5 +1,7 @@
+import { useState, useCallback } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { BsPlusCircleFill } from 'react-icons/bs';
 
 import { CardListItem } from '../../../../components/CardListItem';
 import { Footer } from '../../../../components/Footer';
@@ -8,8 +10,25 @@ import { Header } from '../../../../components/Header';
 import { withSSRAuth } from '../../../../utils/withSSRAuth';
 
 import { Container, CampaignList, Content } from './styled';
+import { NewCampaigModal } from '../../../../components/modal/NewCampaigModal';
 
 export default function ManageCampaign() {
+  const [isCreateNewCampaignOpen, setIsCreateNewCampaignOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
+
+  const handleCreateNewCampaignOpen = useCallback(() => {
+    setIsCreateNewCampaignOpen(true);
+  }, []);
+
+  const handleCreateNewCampaignClose = useCallback(() => {
+    setIsCreateNewCampaignOpen(false);
+  }, []);
+
+  const handleEditCampaign = useCallback(data => {
+    setModalData(data);
+    setIsCreateNewCampaignOpen(true);
+  }, []);
+
   return (
     <>
       <Head>
@@ -20,7 +39,12 @@ export default function ManageCampaign() {
         <Header />
 
         <Content>
-          <h1>Gerênciar Campanhas</h1>
+          <header>
+            <h1>Gerênciar Campanhas</h1>
+            <button type="button" onClick={handleCreateNewCampaignOpen}>
+              <BsPlusCircleFill size={25} />
+            </button>
+          </header>
 
           <CampaignList>
             <CardListItem
@@ -53,6 +77,11 @@ export default function ManageCampaign() {
 
         <Footer />
       </Container>
+
+      <NewCampaigModal
+        isOpen={isCreateNewCampaignOpen}
+        onRequestClose={handleCreateNewCampaignClose}
+      />
     </>
   );
 }
