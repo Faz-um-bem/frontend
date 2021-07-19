@@ -3,8 +3,6 @@ import Link from "next/link";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import Leaflet from "leaflet";
 
-import "leaflet/dist/leaflet.css";
-
 import { Container } from "./styles";
 
 const mapIcon = Leaflet.icon({
@@ -62,36 +60,6 @@ export default function Map({ initialLocation, places = [] }: MapProps) {
             </Popup>
           </Marker>
         ))}
-
-        {/* <Marker icon={mapIcon} position={[-29.6987317, -53.8780534]}>
-          <Popup
-            closeButton={false}
-            minWidth={240}
-            maxWidth={240}
-            className="map-popup"
-          >
-            Teste
-
-            <Link href="/institution">
-              >
-            </Link>
-          </Popup>
-        </Marker>
-
-        <Marker icon={mapIcon} position={[-29.7063996, -53.818438]}>
-          <Popup
-            closeButton={false}
-            minWidth={240}
-            maxWidth={240}
-            className="map-popup"
-          >
-            Teste
-
-            <Link href="/institution">
-              >
-            </Link>
-          </Popup>
-        </Marker> */}
       </MapContainer>
     </Container>
   );
