@@ -40,5 +40,5 @@ yarn dev
   <li><a href="https://github.com/maticzav/nookies">Nookies</a></li>
   <li><a href="https://react-hook-form.com/">React Hook Form</a></li>
   <li><a href="https://github.com/jquense/yup">Yup</a></li>
-
+  <li><a href="https://www.npmjs.com/package/react-modal">React Modal</a></li>
 </ul>
