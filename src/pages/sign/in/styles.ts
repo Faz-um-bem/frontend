@@ -19,6 +19,9 @@ export const Content = styled.div`
 
   form {
     width: 40rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
 
     h2 {
       font-size: 1rem;
@@ -47,5 +50,5 @@ export const Content = styled.div`
 `;
 
 export const SignInButton = styled(Button)`
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
 `;

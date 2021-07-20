@@ -233,6 +233,9 @@ export const ContactContainer = styled.div`
 export const FormContainer = styled.form`
   width: 100%;
   padding-left: 225px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
 
   > div:last-child {
     display: grid;
