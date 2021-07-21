@@ -1,7 +1,7 @@
+import { useCallback } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
 
 import { Header } from '../../../components/Header';
 import { Footer } from '../../../components/Footer';
@@ -14,9 +14,7 @@ import { Container, Content, SignInButton } from './styles';
 export default function RecoveryInstitution() {
   const { back } = useRouter();
 
-  const handleSubmit = useCallback(() => {
-    //
-  }, []);
+  const handleSubmit = useCallback(() => {}, []);
 
   return (
     <>
@@ -31,7 +29,7 @@ export default function RecoveryInstitution() {
           <form onSubmit={() => {}}>
             <Input name="email" placeholder="E-mail" type="email" />
 
-            <SignInButton onClick={() => {}}>Recuperar</SignInButton>
+            <SignInButton onClick={handleSubmit}>Recuperar</SignInButton>
           </form>
 
           <div>
@@ -47,10 +45,8 @@ export default function RecoveryInstitution() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRGuest(
-  async ctx => {
-    return {
-      props: {},
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {},
+  };
+});

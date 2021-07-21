@@ -9,7 +9,7 @@ import { LatLngExpression } from 'leaflet';
 
 type MapSelectProps = {
   position: LatLngExpression;
-  onChangePosition(latlng: LatLngExpression): void;
+  onChangePosition: (latlng: LatLngExpression) => void; // eslint-disable-line
 };
 
 export default function MapSelect({

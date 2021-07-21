@@ -14,7 +14,7 @@ import { NewCampaigModal } from '../../../../components/modal/NewCampaigModal';
 
 export default function ManageCampaign() {
   const [isCreateNewCampaignOpen, setIsCreateNewCampaignOpen] = useState(false);
-  const [modalData, setModalData] = useState({});
+  // const [modalData, setModalData] = useState({});
 
   const handleCreateNewCampaignOpen = useCallback(() => {
     setIsCreateNewCampaignOpen(true);
@@ -24,10 +24,10 @@ export default function ManageCampaign() {
     setIsCreateNewCampaignOpen(false);
   }, []);
 
-  const handleEditCampaign = useCallback(data => {
-    setModalData(data);
-    setIsCreateNewCampaignOpen(true);
-  }, []);
+  // const handleEditCampaign = useCallback(data => {
+  //   setModalData(data);
+  //   setIsCreateNewCampaignOpen(true);
+  // }, []);
 
   return (
     <>
@@ -86,7 +86,7 @@ export default function ManageCampaign() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRAuth(async ctx => {
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async () => {
   return {
     props: {},
   };

@@ -16,7 +16,7 @@ export function GalleryItem({ url, addNewImage = false }: GalleryItemProps) {
           <button type="button">
             <IoMdClose size={20} />
           </button>
-          <img src={url} alt="Image" />
+          <img src={url} alt="Foto" />
         </ImageContent>
       ) : (
         <NoImage>

@@ -30,7 +30,7 @@ type FormData = {
 };
 
 type FormInstitutionProps = {
-  onSubmitForm(data: FormData): Promise<void>;
+  onSubmitForm(data: FormData): Promise<void>; // eslint-disable-line
 };
 
 const formSchema = yup.object().shape({
@@ -75,9 +75,9 @@ export function FormInstitution({ onSubmitForm }: FormInstitutionProps) {
     async (data, event) => {
       await new Promise(resolve => setTimeout(resolve, 3000));
       event.preventDefault();
-      // onSubmitForm(data);
+      onSubmitForm(data);
     },
-    [],
+    [onSubmitForm],
   );
 
   return (

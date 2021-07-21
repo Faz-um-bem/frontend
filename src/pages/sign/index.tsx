@@ -1,11 +1,10 @@
 import Head from 'next/head';
-import React from 'react';
+import { useCallback } from 'react';
 import { HiDocumentSearch } from 'react-icons/hi';
 import { FaBuilding } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 
 import { GetServerSideProps } from 'next';
-import { parseCookies } from 'nookies';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { OptionItem } from '../../components/OptionItem';
@@ -17,12 +16,15 @@ import { withSSRGuest } from '../../utils/withSSRGuest';
 export default function Sign() {
   const router = useRouter();
 
-  const handleCampaign = (role: number) => {
-    router.push({
-      pathname: '/sign/in',
-      query: { role },
-    });
-  };
+  const handleCampaign = useCallback(
+    (role: number) => {
+      router.push({
+        pathname: '/sign/in',
+        query: { role },
+      });
+    },
+    [router],
+  );
 
   return (
     <>
@@ -54,10 +56,8 @@ export default function Sign() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRGuest(
-  async ctx => {
-    return {
-      props: {},
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {},
+  };
+});

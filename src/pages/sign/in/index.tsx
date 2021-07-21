@@ -48,7 +48,7 @@ export default function SigninInstitution() {
 
       signIn({ email: 'wederson@example', password: 'password' });
     },
-    [],
+    [signIn],
   );
 
   const handleSignUp = useCallback(() => {
@@ -56,13 +56,13 @@ export default function SigninInstitution() {
       pathname: '/sign/up',
       query: { role: query.role },
     });
-  }, []);
+  }, [push, query.role]);
 
   const handleRecovery = useCallback(() => {
     push({
       pathname: '/sign/recovery',
     });
-  }, []);
+  }, [push]);
 
   return (
     <>
@@ -122,10 +122,8 @@ export default function SigninInstitution() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRGuest(
-  async ctx => {
-    return {
-      props: {},
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {},
+  };
+});

@@ -13,38 +13,38 @@ import { withSSRGuest } from '../../../utils/withSSRGuest';
 
 import { Container, Content } from './styles';
 
-type SubmitData = {
-  email: string;
-  password: string;
-  confirm_password: string;
-  name: string;
-  reason_social?: string;
-  cnpj?: number;
-  description?: string;
-  address?: string;
-  address_number?: string;
-  address_complement?: string;
-  neighborhood?: string;
-  cep?: number;
-  uf?: string;
-  city?: string;
-  phone?: number;
-  phone_secondary?: number;
-};
+// type SubmitData = {
+//   email: string;
+//   password: string;
+//   confirm_password: string;
+//   name: string;
+//   reason_social?: string;
+//   cnpj?: number;
+//   description?: string;
+//   address?: string;
+//   address_number?: string;
+//   address_complement?: string;
+//   neighborhood?: string;
+//   cep?: number;
+//   uf?: string;
+//   city?: string;
+//   phone?: number;
+//   phone_secondary?: number;
+// };
 
 export default function SignUp() {
   const { query, push } = useRouter();
 
-  const handleSubmit = useCallback(async (data: SubmitData) => {
-    //
-  }, []);
+  const handleSubmit = useCallback(async () =>
+    // data: SubmitData
+    {}, []);
 
   const handleSignIn = useCallback(() => {
     push({
       pathname: '/sign/in',
       query: { role: query.role },
     });
-  }, []);
+  }, [push, query.role]);
 
   return (
     <>
@@ -79,10 +79,8 @@ export default function SignUp() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRGuest(
-  async ctx => {
-    return {
-      props: {},
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {},
+  };
+});

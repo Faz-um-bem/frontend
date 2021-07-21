@@ -22,7 +22,7 @@ export default function Gallery() {
     if (!userCanSeePage) {
       router.push('/error');
     }
-  }, []);
+  }, [router, userCanSeePage]);
   return (
     <>
       <Head>
@@ -58,7 +58,7 @@ export default function Gallery() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRAuth(async ctx => {
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async () => {
   return {
     props: {},
   };

@@ -25,7 +25,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   ref,
 ) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
+  // const [isFilled, setIsFilled] = useState(false);
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -38,7 +38,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   return (
     <Container
       isErrored={!!error}
-      isFilled={isFilled}
+      isFilled={false}
       isFocused={isFocused}
       style={containerStyle}
     >

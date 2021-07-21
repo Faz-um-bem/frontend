@@ -13,9 +13,11 @@ import { Container, Content } from './styled';
 
 export default function Profile() {
   const { back } = useRouter();
-  const handleSubmit = useCallback(async (data: Object) => {
-    //
-  }, []);
+  const handleSubmit = useCallback(async () =>
+    // data: Object
+    {
+      //
+    }, []);
 
   return (
     <>
@@ -41,7 +43,7 @@ export default function Profile() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = withSSRAuth(async ctx => {
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async () => {
   return {
     props: {},
   };
