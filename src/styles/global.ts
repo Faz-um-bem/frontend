@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle`
     --yellow: #F1EABE;
     --gray: #C4C4C4;
     --purple: #754058;
-    --orange: #D94423;
+    --orange: #DE3C4B;
 
     --heading: #034074;
     --text: #000000;
@@ -67,6 +67,21 @@ const GlobalStyles = createGlobalStyle`
 
   button {
     cursor: pointer;
+  }
+
+  ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+  ::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-track-piece {
+    background-color: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--blue);
   }
 
   .react-modal-overlay {
