@@ -21,7 +21,7 @@ export default function ManageInstitutions() {
     if (!userCanSeePage) {
       router.push('/error');
     }
-  }, []);
+  }, [userCanSeePage, router]);
 
   return (
     <>
