@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
-import { Card } from '../../components/Card';
+// import { Card } from '../../components/Card';
 
 import {
   Container,
@@ -67,11 +67,11 @@ export default function Institutions() {
           </MapContainer>
 
           <ListContainer>
+            {/* <Card />
             <Card />
             <Card />
             <Card />
-            <Card />
-            <Card />
+            <Card /> */}
           </ListContainer>
         </Content>
 
