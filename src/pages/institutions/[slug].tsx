@@ -16,7 +16,7 @@ import {
   MapContainer,
   Contacts,
   ButtonContent,
-} from './campaign';
+} from './institution';
 
 const Map = dynamic(() => import('../../components/Map'), { ssr: false });
 
