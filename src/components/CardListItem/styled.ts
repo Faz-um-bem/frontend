@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface ContainerProps {
+interface ContentProps {
   description: string | null;
   status: 'active' | 'draft' | 'inactive' | 'refused' | null;
 }
@@ -12,7 +12,7 @@ const colors = {
   inactive: '#C4C4C4',
 };
 
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div`
   display: flex;
   flex-direction: row;
 
@@ -20,23 +20,36 @@ export const Container = styled.div<ContainerProps>`
 
   background: var(--white);
   border-radius: 1rem;
-  padding: 1rem 2rem;
 
   height: 7rem;
 
   & + div {
     margin-top: 1rem;
   }
+`;
+
+export const Content = styled.button<ContentProps>`
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  align-items: center;
+  padding: 1rem 2rem;
+
+  background: transparent;
+  border: 0;
+  border-radius: inherit;
 
   main {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     ${props => props.description === null && `justify-content: center;`}
 
     width: 80rem;
 
     h1 {
-      font-size: 1.5rem;
+      font-size: 2rem;
       color: var(--heading);
     }
 
