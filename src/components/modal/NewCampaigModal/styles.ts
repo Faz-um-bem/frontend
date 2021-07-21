@@ -3,6 +3,10 @@ import { Button } from '~/components/Button';
 import { Input } from '~/components/Input';
 import { Textarea } from '~/components/Textarea';
 
+type ButtonsProps = {
+  delete: boolean;
+};
+
 export const Container = styled.form`
   display: flex;
   flex-direction: column;
@@ -51,8 +55,8 @@ export const InputContent = styled(Input)``;
 
 export const TextareaContet = styled(Textarea)``;
 
-export const ButtonContainer = styled.div`
-  grid-template-columns: 5fr 2fr;
+export const ButtonContainer = styled.div<ButtonsProps>`
+  grid-template-columns: ${props => (props.delete ? '4fr 2fr 2fr' : '4fr 1fr')};
 
   > div {
     display: flex;
@@ -78,7 +82,18 @@ export const ButtonContent = styled(Button)`
 
   :hover {
     color: var(--green);
-    border-color: var(--gren);
+    border-color: var(--green);
+  }
+
+  &.delete {
+    background: var(--white);
+    color: var(--red);
+    border: 1px solid var(--red);
+
+    :hover {
+      background: var(--red);
+      color: var(--white);
+    }
   }
 `;
 

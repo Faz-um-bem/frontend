@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { FiAlertCircle } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
@@ -18,16 +18,48 @@ const MapSelect = dynamic(() => import('~/components/MapSelect'), {
   ssr: false,
 });
 
+type CampaignData = {
+  id: number;
+  title: string;
+  description: string;
+  address: string;
+  address_number: string;
+  address_complement: string;
+  neighborhood: string;
+  postal_code: string;
+  state: string;
+  city: string;
+  address_latitude: string;
+  address_longitude: string;
+  status: 'active' | 'inactive' | 'draft' | 'refused' | null;
+};
+
 type NewCampaigModalProps = {
   isOpen: boolean;
+  data: CampaignData | null;
   onRequestClose: () => void;
+  onCreate: (values: CampaignData) => void;
+  onUpdate: (values: CampaignData) => void;
+  onDelete: () => void;
 };
 
 export function NewCampaigModal({
   isOpen,
+  data,
+  onCreate,
+  onUpdate,
+  onDelete,
   onRequestClose,
 }: NewCampaigModalProps) {
   const [position, setPosition] = useState(null);
+
+  const handleSubmit = useCallback(values => {
+    if (data) {
+      onUpdate(values);
+    } else {
+      onCreate(values);
+    }
+  }, []);
 
   return (
     <Modal
@@ -44,7 +76,7 @@ export function NewCampaigModal({
         >
           <IoMdClose size={30} />
         </button>
-        <h2>Cadastrar campanha</h2>
+        <h2>{data ? 'Editar' : 'Cadastrar'} campanha</h2>
 
         <div>
           <div className="name">
@@ -74,13 +106,17 @@ export function NewCampaigModal({
             <InputContent name="city" placeholder="Cidade" />
           </div>
 
-          <ButtonContainer>
+          <ButtonContainer delete={!!data}>
             <div>
               <FiAlertCircle size={25} />
               <span>Sua campanha será analisada para poder ser publicada.</span>
             </div>
-
-            <ButtonContent>Publicar</ButtonContent>
+            {data && (
+              <ButtonContent className="delete" onClick={onDelete}>
+                Excluir
+              </ButtonContent>
+            )}
+            <ButtonContent onClick={handleSubmit}>Publicar</ButtonContent>
           </ButtonContainer>
         </div>
       </Container>

@@ -3,27 +3,31 @@ import { FiChevronRight } from 'react-icons/fi';
 
 import { Container, Content } from './styled';
 
-type CardListItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+type CardData = {
   title: string;
   description?: string;
   status?: 'active' | 'draft' | 'inactive' | 'refused' | null;
 };
 
-export function CardListItem({
-  title,
-  description = null,
-  status = null,
-}: CardListItemProps) {
+type CardListItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  campaign: CardData;
+};
+
+export function CardListItem({ campaign, ...rest }: CardListItemProps) {
   return (
     <Container>
-      <Content description={description} status={status}>
+      <Content
+        description={campaign.description}
+        status={campaign.status}
+        {...rest}
+      >
         <main>
-          <h1>{title}</h1>
-          <p>{description}</p>
+          <h1>{campaign.title}</h1>
+          {campaign.description && <p>{campaign.description}</p>}
         </main>
 
         <aside>
-          <span>{status}</span>
+          {campaign.status && <span>{campaign.status}</span>}
           <FiChevronRight size={20} />
         </aside>
       </Content>

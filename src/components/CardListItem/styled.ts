@@ -21,7 +21,7 @@ export const Container = styled.div`
   background: var(--white);
   border-radius: 1rem;
 
-  height: 7rem;
+  height: 8rem;
 
   & + div {
     margin-top: 1rem;
@@ -55,7 +55,7 @@ export const Content = styled.button<ContentProps>`
 
     p {
       margin-top: 0.5rem;
-      font-size: 1rem;
+      font-size: 1.5rem;
       color: var(--description);
     }
   }
