@@ -72,8 +72,9 @@ export default function Home() {
           <Content>
             <div>
               <span>
-                FAMÍLIAS EM SITUAÇÃO DE <strong>VULNERABILIDADE</strong>{' '}
-                PRECISAM DA <strong>SUA AJUDA!</strong>
+                FAMÍLIAS EM SITUAÇÃO <br />
+                DE <strong>VULNERABILIDADE</strong> PRECISAM DA{' '}
+                <strong>SUA AJUDA!</strong>
               </span>
 
               <ButtonContainer>Quero ajudar!</ButtonContainer>
@@ -140,7 +141,7 @@ export default function Home() {
 
               <p>
                 A plataforma cadastra campanhas e instituições que possam{' '}
-                <strong>fazer o bem</strong> o bem. Você busca campanhas ou
+                <strong>fazer o bem</strong>. Você busca campanhas ou
                 instituições e vê como pode ajudar. As ajudas funcionam
                 diretamente com os promotores das campanhas, os quais abastecem
                 a plataforma com informações.
@@ -156,8 +157,8 @@ export default function Home() {
                 As intituições são responsáveis pelo conteúdo disponibilizado,
                 assim como pela execução das doações.{' '}
                 <strong>
-                  A plataforma não é responsável pela captação de recursos, nem
-                  pela entrega às instituições.
+                  <br />A plataforma não é responsável pela captação de
+                  recursos, nem pela entrega às instituições.
                 </strong>
               </p>
             </div>
@@ -171,7 +172,8 @@ export default function Home() {
                 Para ser um apoiador, ajude a divulgar essa plataforma, para que
                 chegue a um número enorme de pessoas que possam fazer a
                 diferença. Entre em contato pelo email:{' '}
-                <strong>fazumbem@inf.ufsm.br</strong> e saiba mais.
+                <strong>fazumbem@inf.ufsm.br</strong>
+                <br /> e saiba mais.
               </p>
             </div>
           </MoreInfoContent>

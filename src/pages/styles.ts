@@ -112,6 +112,7 @@ export const Section = styled.section`
         font-size: 3rem;
         text-align: right;
         margin-bottom: 2.5rem;
+        text-transform: uppercase;
       }
     }
   }
@@ -255,4 +256,9 @@ export const InputContent = styled(Input)``;
 
 export const TextareaContent = styled(Textarea)``;
 
-export const SubmitButton = styled(Button)``;
+export const SubmitButton = styled(Button)`
+  background: var(--orange);
+  color: var(--white);
+  font-weight: bold;
+  font-size: 1.5rem;
+`;
