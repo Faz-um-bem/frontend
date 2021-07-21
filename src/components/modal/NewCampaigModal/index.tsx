@@ -1,7 +1,8 @@
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { FiAlertCircle } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import Modal from 'react-modal';
-// import { MapContainer, TileLayer } from 'react-leaflet';
 
 import {
   Container,
@@ -13,6 +14,8 @@ import {
   Map,
 } from './styles';
 
+const MapSelect = dynamic(() => import('../../MapSelect'), { ssr: false });
+
 type NewCampaigModalProps = {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -22,6 +25,8 @@ export function NewCampaigModal({
   isOpen,
   onRequestClose,
 }: NewCampaigModalProps) {
+  const [position, setPosition] = useState(null);
+
   return (
     <Modal
       isOpen={isOpen}
@@ -47,15 +52,7 @@ export function NewCampaigModal({
           <TextareaContet name="description" placeholder="Descrição" />
 
           <Map>
-            {/* <MapContainer
-            center={[-29.6987317, -53.8780534]}
-            zoom={13}
-            style={{ width: '100%', height: '100%', borderRadius: 'inherit' }}
-          >
-            <TileLayer
-              url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`}
-            />
-          </MapContainer> */}
+            <MapSelect position={position} onChangePosition={setPosition} />
           </Map>
 
           <div className="address_name">
