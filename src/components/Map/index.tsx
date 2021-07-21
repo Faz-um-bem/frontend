@@ -1,9 +1,9 @@
-import React from "react";
-import Link from "next/link";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import Leaflet from "leaflet";
+import React from 'react';
+import Link from 'next/link';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import Leaflet from 'leaflet';
 
-import { Container } from "./styles";
+import { Container } from './styles';
 
 const mapIcon = Leaflet.icon({
   iconUrl: 'imgs/marker.svg',
@@ -15,29 +15,31 @@ const mapIcon = Leaflet.icon({
 type Location = {
   latitude: number;
   longitude: number;
-}
+};
 
 type Place = {
   id: string;
   name: string;
   slug: string;
   location: Location;
-}
+};
 
 type MapProps = {
   initialLocation: Location;
   places?: Place[];
-}
-
+};
 
 export default function Map({ initialLocation, places = [] }: MapProps) {
   return (
     <Container>
       <MapContainer
         // center={[-29.6987317, -53.8780534]}
-        center={[initialLocation?.latitude || 0, initialLocation?.longitude || 0]}
+        center={[
+          initialLocation?.latitude || 0,
+          initialLocation?.longitude || 0,
+        ]}
         zoom={13}
-        style={{ width: "100%", height: "100%", borderRadius: "inherit" }}
+        style={{ width: '100%', height: '100%', borderRadius: 'inherit' }}
         scrollWheelZoom={false}
       >
         <TileLayer
@@ -45,7 +47,11 @@ export default function Map({ initialLocation, places = [] }: MapProps) {
         />
 
         {places?.map(place => (
-          <Marker key={place.id} icon={mapIcon} position={[place.location.latitude, place.location.longitude]}>
+          <Marker
+            key={place.id}
+            icon={mapIcon}
+            position={[place.location.latitude, place.location.longitude]}
+          >
             <Popup
               closeButton={false}
               minWidth={240}
@@ -54,13 +60,11 @@ export default function Map({ initialLocation, places = [] }: MapProps) {
             >
               {[place.name]}
 
-              <Link href={`/institutions/${place.slug}`}>
-                >
-              </Link>
+              <Link href={`/institutions/${place.slug}`}>&gt;</Link>
             </Popup>
           </Marker>
         ))}
       </MapContainer>
     </Container>
   );
-};
+}
