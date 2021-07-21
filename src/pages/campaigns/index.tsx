@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 
-import { useRouter } from 'next/router';
 import { Header } from '../../components/Header';
 import { Card } from '../../components/Card';
 
@@ -9,38 +8,57 @@ import { Container, Content, Heading, ListContainer } from './styles';
 import { Footer } from '../../components/Footer';
 
 export default function Ccampaigns() {
-  const router = useRouter();
-
-  const cam = [
+  const campaigns = [
     {
       id: '1',
-      name: 'Testando 1',
-      description:
-        'testandooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
+      image:
+        'https://www.anoregsp.org.br/__Documentos/Upload_Conteudo/destaques/60133/destaque.jpg',
+      title: 'Testando 1',
+      tags: ['Dinheiro', 'Comida'],
+      institution: {
+        name: 'Teste',
+      },
     },
     {
       id: '2',
-      name: 'Testando 1',
-      description:
-        'testandooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
+      image:
+        'https://acontecendoaqui.com.br/sites/default/files/materia_acontecendo_aqui.jpg',
+      title: 'Testando 2',
+      tags: ['Dinheiro', 'Comida'],
+      institution: {
+        name: 'Teste',
+      },
     },
     {
       id: '3',
-      name: 'Testando 1',
-      description:
-        'testandooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
+      image: 'https://fapto.org.br/images/noticia/A5fcfc59fa079b.jpg',
+      title: 'Testando 3',
+      tags: ['teste', 'Comida'],
+      institution: {
+        name: 'Teste',
+      },
     },
     {
       id: '4',
-      name: 'Testando 1',
-      description:
-        'testandooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo',
+      image:
+        'https://www.anoregsp.org.br/__Documentos/Upload_Conteudo/destaques/60133/destaque.jpg',
+      title: 'Testando 4',
+      tags: ['Dinheiro', 'teste'],
+      institution: {
+        name: 'Teste',
+      },
+    },
+    {
+      id: '5',
+      image:
+        'https://acontecendoaqui.com.br/sites/default/files/materia_acontecendo_aqui.jpg',
+      title: 'Testando 5',
+      tags: ['Dinheiro', 'Comida'],
+      institution: {
+        name: 'Teste',
+      },
     },
   ];
-
-  const handleCampaign = () => {
-    router.push(`/campaigns/${'teste'}`);
-  };
 
   return (
     <>
@@ -65,8 +83,8 @@ export default function Ccampaigns() {
           </Heading>
 
           <ListContainer>
-            {cam.map(c => (
-              <Card key={c.id} info={c} />
+            {campaigns.map(campaign => (
+              <Card key={campaign.id} campaign={campaign} />
             ))}
           </ListContainer>
         </Content>

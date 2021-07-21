@@ -13,12 +13,15 @@ export const Container = styled.button.attrs({
 
   border: 0;
 
-  min-height: 30rem;
+  height: 100%;
   max-height: 30rem;
+  max-width: 50rem;
+  width: 100%;
 
   div {
     background: var(--gray);
     height: 14rem;
+    width: 100%;
 
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
@@ -27,6 +30,8 @@ export const Container = styled.button.attrs({
       border-top-left-radius: inherit;
       border-top-right-radius: inherit;
       margin: auto;
+      width: inherit;
+      height: inherit;
     }
   }
 

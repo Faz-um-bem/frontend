@@ -2,45 +2,40 @@ import { useRouter } from 'next/router';
 
 import { Container } from './styles';
 
-type Location = {
-  latitude: number;
-  longitude: number;
-};
-
-type CardProps = {
+type CampaignData = {
   id: string;
-  name: string;
-  description: string;
-  location: Location;
-  contact: {
-    email: string;
-    phone: string;
-    phone2: string;
-    whatsapp: string;
+  image: string;
+  title: string;
+  tags: string[];
+  institution: {
+    name: string;
   };
 };
 
-export function Card({ id, name, description, location, contact }: CardProps) {
+type CardProps = {
+  campaign: CampaignData;
+};
+
+export function Card({ campaign }: CardProps) {
   const router = useRouter();
 
   const handleCampaign = () => {
-    router.push(`/campaigns/${'33333'}`);
+    router.push(`/campaigns/${campaign.id}`);
   };
 
   return (
     <Container onClick={handleCampaign}>
       <div>
-        <img src="" alt="" />
+        <img src={campaign.image} alt={campaign.title} />
       </div>
 
       <main>
-        <h1>{name}</h1>
-        <h2>Nome da instituição</h2>
+        <h1>{campaign.title}</h1>
+        <h2>{campaign.institution.name}</h2>
 
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Expedita
-          doloribus totam nam omnis.
-        </p>
+        {campaign.tags.map((tag, index) => (
+          <p key={String(index)}>{tag}</p>
+        ))}
       </main>
     </Container>
   );
