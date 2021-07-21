@@ -1,13 +1,17 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-import { CardListItem } from '../../../../components/CardListItem';
-import { Footer } from '../../../../components/Footer';
-import { Header } from '../../../../components/Header';
+import { CardListItem } from '~/components/CardListItem';
+import { Footer } from '~/components/Footer';
+import { Header } from '~/components/Header';
 
-import { withSSRAuth } from '../../../../utils/withSSRAuth';
+import { withSSRAuth } from '~/utils/withSSRAuth';
 
-import { Container, CampaignList, Content } from './styled';
+import {
+  Container,
+  CampaignList,
+  Content,
+} from '~/styles/dashboard/manage/institutions';
 
 export default function ManageInstitutions() {
   return (

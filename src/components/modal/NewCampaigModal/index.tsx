@@ -14,7 +14,9 @@ import {
   Map,
 } from './styles';
 
-const MapSelect = dynamic(() => import('../../MapSelect'), { ssr: false });
+const MapSelect = dynamic(() => import('~/components/MapSelect'), {
+  ssr: false,
+});
 
 type NewCampaigModalProps = {
   isOpen: boolean;

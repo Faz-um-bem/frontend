@@ -1,4 +1,3 @@
-import React from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { BiCheckShield } from 'react-icons/bi';
@@ -6,8 +5,8 @@ import { IoMdMail, IoMdPhonePortrait } from 'react-icons/io';
 import { FiClock } from 'react-icons/fi';
 import { RiPhoneFill } from 'react-icons/ri';
 
-import { Header } from '../../components/Header';
-import { Footer } from '../../components/Footer';
+import { Header } from '~/components/Header';
+import { Footer } from '~/components/Footer';
 
 import {
   Container,
@@ -16,9 +15,9 @@ import {
   MapContainer,
   Contacts,
   ButtonContent,
-} from './institution';
+} from '~/styles/institutions/institution';
 
-const Map = dynamic(() => import('../../components/Map'), { ssr: false });
+const Map = dynamic(() => import('~/components/Map'), { ssr: false });
 
 export default function Institution() {
   const init = {

@@ -5,8 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { Header } from '~/components/Header';
+import { Footer } from '~/components/Footer';
 
 import {
   Container,
@@ -22,7 +22,7 @@ import {
   SubmitButton,
   BackgroundContent,
   ContactContainer,
-} from './styles';
+} from '~/styles';
 
 type SignInFormData = {
   name: string;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Button } from '../components/Button';
+import { Button } from '~/components/Button';
 
-import { Input } from '../components/Input';
-import { Textarea } from '../components/Textarea';
+import { Input } from '~/components/Input';
+import { Textarea } from '~/components/Textarea';
 
 export const Container = styled.div`
   display: flex;

@@ -3,16 +3,20 @@ import Head from 'next/head';
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Header } from '../../../../components/Header';
-import { Footer } from '../../../../components/Footer';
-import { GalleryItem } from '../../../../components/GalleryItem';
+import { Header } from '~/components/Header';
+import { Footer } from '~/components/Footer';
+import { GalleryItem } from '~/components/GalleryItem';
 
-import { useCan } from '../../../../hooks/useCan';
+import { useCan } from '~/hooks/useCan';
 
-import { withSSRAuth } from '../../../../utils/withSSRAuth';
-import { roles } from '../../../../utils/enum';
+import { withSSRAuth } from '~/utils/withSSRAuth';
+import { roles } from '~/utils/enum';
 
-import { Container, Content, GalleryContainer } from './styled';
+import {
+  Container,
+  Content,
+  GalleryContainer,
+} from '~/styles/dashboard/manage/gallery';
 
 export default function Gallery() {
   const router = useRouter();

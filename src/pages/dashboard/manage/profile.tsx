@@ -3,13 +3,13 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
-import { Footer } from '../../../../components/Footer';
-import { FormCurator } from '../../../../components/FormCurator';
-import { Header } from '../../../../components/Header';
+import { Footer } from '~/components/Footer';
+import { FormCurator } from '~/components/FormCurator';
+import { Header } from '~/components/Header';
 
-import { withSSRAuth } from '../../../../utils/withSSRAuth';
+import { withSSRAuth } from '~/utils/withSSRAuth';
 
-import { Container, Content } from './styled';
+import { Container, Content } from '~/styles/dashboard/manage/profile';
 
 export default function Profile() {
   const { back } = useRouter();

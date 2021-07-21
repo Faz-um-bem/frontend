@@ -3,15 +3,19 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { CardListItem } from '../../../../components/CardListItem';
-import { Footer } from '../../../../components/Footer';
-import { Header } from '../../../../components/Header';
-import { useCan } from '../../../../hooks/useCan';
-import { permissions } from '../../../../utils/enum';
+import { CardListItem } from '~/components/CardListItem';
+import { Footer } from '~/components/Footer';
+import { Header } from '~/components/Header';
+import { useCan } from '~/hooks/useCan';
+import { permissions } from '~/utils/enum';
 
-import { withSSRAuth } from '../../../../utils/withSSRAuth';
+import { withSSRAuth } from '~/utils/withSSRAuth';
 
-import { Container, CampaignList, Content } from './styled';
+import {
+  Container,
+  CampaignList,
+  Content,
+} from '~/styles/dashboard/manage/curators';
 
 export default function ManageInstitutions() {
   const router = useRouter();

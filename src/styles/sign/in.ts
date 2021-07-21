@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../../../components/Button';
+import { Button } from '~/components/Button';
 
 export const Container = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  height: calc(100vh - 8rem - 6rem - 5rem);
+  min-height: calc(100vh - 8rem - 6rem - 5rem);
   display: flex;
   flex-direction: column;
 
@@ -19,6 +19,9 @@ export const Content = styled.div`
 
   form {
     width: 40rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
 
     h2 {
       font-size: 1rem;
@@ -27,13 +30,15 @@ export const Content = styled.div`
   }
 
   > div {
-    width: 30rem;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
 
     margin-top: 1.5rem;
+
+    &.back {
+      grid-template-columns: 1fr;
+    }
 
     button {
       background: transparent;
@@ -45,5 +50,5 @@ export const Content = styled.div`
 `;
 
 export const SignInButton = styled(Button)`
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
 `;

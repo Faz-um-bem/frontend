@@ -1,11 +1,10 @@
-import React from 'react';
 import Head from 'next/head';
 
-import { Header } from '../../components/Header';
-import { Card } from '../../components/Card';
+import { Header } from '~/components/Header';
+import { Footer } from '~/components/Footer';
+import { Card } from '~/components/Card';
 
-import { Container, Content, Heading, ListContainer } from './styles';
-import { Footer } from '../../components/Footer';
+import { Container, Content, Heading, ListContainer } from '~/styles/campaigns';
 
 export default function Ccampaigns() {
   const campaigns = [

@@ -6,16 +6,16 @@ import { FiBell, FiEdit, FiImage, FiList } from 'react-icons/fi';
 import { FaRegBuilding, FaUsers } from 'react-icons/fa';
 import { HiOutlineClipboardCheck } from 'react-icons/hi';
 
-import { Header } from '../../components/Header';
-import { OptionItem } from '../../components/OptionItem';
-import { Footer } from '../../components/Footer';
+import { Header } from '~/components/Header';
+import { OptionItem } from '~/components/OptionItem';
+import { Footer } from '~/components/Footer';
 
-import { useCan } from '../../hooks/useCan';
+import { useCan } from '~/hooks/useCan';
 
-import { withSSRAuth } from '../../utils/withSSRAuth';
-import { permissions, roles } from '../../utils/enum';
+import { withSSRAuth } from '~/utils/withSSRAuth';
+import { permissions, roles } from '~/utils/enum';
 
-import { Container, Content, OptionList } from './styles';
+import { Container, Content, OptionList } from '~/styles/dashboard';
 
 export default function Dashboard() {
   const router = useRouter();

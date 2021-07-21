@@ -3,14 +3,18 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { BsPlusCircleFill } from 'react-icons/bs';
 
-import { CardListItem } from '../../../../components/CardListItem';
-import { Footer } from '../../../../components/Footer';
-import { Header } from '../../../../components/Header';
+import { CardListItem } from '~/components/CardListItem';
+import { Footer } from '~/components/Footer';
+import { Header } from '~/components/Header';
+import { NewCampaigModal } from '~/components/modal/NewCampaigModal';
 
-import { withSSRAuth } from '../../../../utils/withSSRAuth';
+import { withSSRAuth } from '~/utils/withSSRAuth';
 
-import { Container, CampaignList, Content } from './styled';
-import { NewCampaigModal } from '../../../../components/modal/NewCampaigModal';
+import {
+  Container,
+  CampaignList,
+  Content,
+} from '~/styles/dashboard/manage/campaigns';
 
 export default function ManageCampaign() {
   const [isCreateNewCampaignOpen, setIsCreateNewCampaignOpen] = useState(false);

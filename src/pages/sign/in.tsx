@@ -6,16 +6,16 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useAuth } from '../../../hooks/useAuth';
+import { useAuth } from '~/hooks/useAuth';
 
-import { Header } from '../../../components/Header';
-import { Footer } from '../../../components/Footer';
-import { Input } from '../../../components/Input';
+import { Header } from '~/components/Header';
+import { Footer } from '~/components/Footer';
+import { Input } from '~/components/Input';
 
-import { roles } from '../../../utils/enum';
-import { withSSRGuest } from '../../../utils/withSSRGuest';
+import { roles } from '~/utils/enum';
+import { withSSRGuest } from '~/utils/withSSRGuest';
 
-import { Container, Content, SignInButton } from './styles';
+import { Container, Content, SignInButton } from '~/styles/sign/in';
 
 type FormData = {
   email: string;
