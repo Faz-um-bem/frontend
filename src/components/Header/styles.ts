@@ -4,6 +4,10 @@ type ContainerProps = {
   isDrawerOpen: boolean;
 };
 
+type HeaderContentProps = {
+  isDrawerOpen: boolean;
+};
+
 export const Container = styled.div<ContainerProps>`
   height: 6rem;
   width: 100%;
@@ -34,7 +38,8 @@ export const Container = styled.div<ContainerProps>`
   }
 `;
 
-export const HeaderContent = styled.div`
+export const HeaderContent = styled.div<HeaderContentProps>`
+  ${props => props.isDrawerOpen && `display: flex; flex-direction: column;`}
   flex: 1;
 `;
 
@@ -54,7 +59,7 @@ export const HeaderItem = styled.button.attrs({
   }
 
   :first-child {
-    margin-left: 1rem;
+    margin-left: 2rem;
   }
 
   :hover {

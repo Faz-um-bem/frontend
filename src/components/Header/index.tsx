@@ -39,7 +39,7 @@ export function Header() {
           </button>
         ) : (
           <>
-            <HeaderContent>
+            <HeaderContent isDrawerOpen={isOpen}>
               <HeaderItem>
                 <Link href="/">Início</Link>
               </HeaderItem>
