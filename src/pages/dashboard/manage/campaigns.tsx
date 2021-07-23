@@ -167,6 +167,7 @@ export default function ManageCampaign() {
         data={modalData}
         onCreate={handleCreateCampaign}
         onUpdate={handleUpdateCampaign}
+        onDelete={handleDeleteCampaign}
       />
     </>
   );
