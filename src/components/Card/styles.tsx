@@ -18,9 +18,9 @@ export const Container = styled.button.attrs({
   max-width: 50rem;
   width: 100%;
 
-  div {
+  > div {
     background: var(--gray);
-    height: 14rem;
+    height: 10rem;
     width: 100%;
 
     border-top-left-radius: inherit;
@@ -41,18 +41,27 @@ export const Container = styled.button.attrs({
 
     h1 {
       color: var(--heading);
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
 
     h2 {
       color: var(--description);
-      font-size: 1.5rem;
+      font-size: 1rem;
     }
 
-    p {
-      color: var(--text-secondary);
-      font-size: 1.5rem;
-      margin-top: 1rem;
+    div {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 0.5rem;
+
+      p {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        margin-top: 1rem;
+        & + p {
+        }
+      }
     }
   }
 `;

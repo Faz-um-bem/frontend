@@ -21,7 +21,7 @@ export const Container = styled.div`
   background: var(--white);
   border-radius: 1rem;
 
-  height: 8rem;
+  height: 6rem;
 
   & + div {
     margin-top: 1rem;
@@ -46,16 +46,16 @@ export const Content = styled.button<ContentProps>`
     align-items: flex-start;
     ${props => props.description === null && `justify-content: center;`}
 
-    width: 80rem;
+    width: 100%;
 
     h1 {
-      font-size: 2rem;
+      font-size: 1.2rem;
       color: var(--heading);
     }
 
     p {
       margin-top: 0.5rem;
-      font-size: 1.5rem;
+      font-size: 1rem;
       color: var(--description);
     }
   }

@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  min-height: calc(100vh - 8rem - 6rem - 5rem);
+  min-height: calc(100vh - 6rem - 6rem - 5rem);
   display: flex;
   flex-direction: column;
 
@@ -16,15 +16,15 @@ export const Content = styled.div`
 
   margin: 2.5rem 0;
 
-  font-size: 1.5rem;
+  font-size: 1rem;
 
   form {
     display: grid;
     grid-gap: 1rem;
-    width: 50rem;
+    width: 40rem;
 
     h2 {
-      font-size: 1.6rem;
+      font-size: 1.2rem;
     }
   }
 
@@ -40,7 +40,7 @@ export const Content = styled.div`
     button {
       background: transparent;
       border: 0;
-      font-size: 1.5rem;
+      font-size: 1rem;
       color: var(--black);
     }
   }

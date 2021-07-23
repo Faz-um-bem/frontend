@@ -13,14 +13,14 @@ export const Container = styled.div<ContainerProps>`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  height: 6rem;
+  height: 4rem;
   background: var(--white);
   border-radius: 0.8rem;
   border: 0.2rem solid var(--white);
-  padding-left: 1.5rem;
+  padding-left: 1rem;
 
   > svg {
-    margin-right: 1.5rem;
+    margin-right: 1rem;
   }
 
   ${props =>
@@ -46,9 +46,9 @@ export const Container = styled.div<ContainerProps>`
 export const InputContent = styled.input`
   border: 0;
   flex: 1;
-  padding: 0 1.5rem 0 0;
+  padding: 0 1rem 0 0;
   border-radius: inherit;
-  font-size: 1.5rem;
+  font-size: 1rem;
 
   ::placeholder {
     color: var(--description);
@@ -57,7 +57,7 @@ export const InputContent = styled.input`
 
 export const Error = styled(Tooltip)`
   height: 20px;
-  margin: 0 1.5rem;
+  margin: 0 1rem;
 
   svg {
     margin: 0;

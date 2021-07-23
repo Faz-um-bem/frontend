@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 8rem;
+  height: 6rem;
   width: 100%;
 
-  display: block;
   background: var(--white);
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 
   display: flex;
   justify-content: center;
+  padding: 2.5rem;
 
   > div {
     display: flex;
@@ -20,7 +20,7 @@ export const Container = styled.div`
     width: 100%;
 
     > img {
-      height: 6rem;
+      height: 4.5rem;
     }
   }
 `;
@@ -34,18 +34,18 @@ export const HeaderItem = styled.button.attrs({
 })`
   background: transparent;
   border: 0;
-  margin: 0 5px;
-  padding: 0.2rem 0.5rem;
+  margin: 0 2px;
+  padding: 0.2rem 0.3rem;
 
   color: var(--blue);
-  font-size: 1.8rem;
+  font-size: 1.2rem;
 
   a {
     color: var(--blue);
   }
 
   :first-child {
-    margin-left: 5rem;
+    margin-left: 1rem;
   }
 
   :hover {
@@ -61,7 +61,7 @@ export const LoginContent = styled.div`
     border-radius: 0.5rem;
     color: var(--white);
 
-    width: 16rem;
+    width: 5rem;
 
     transition: all 0.5s;
 
@@ -85,7 +85,7 @@ export const LoggedContent = styled.div`
 
   h1 {
     color: var(--heading);
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     font-weight: normal;
 
     margin-right: 1rem;
@@ -97,10 +97,9 @@ export const LoggedContent = styled.div`
   button {
     background: transparent;
     color: var(--blue);
-    /* border: 0; */
 
     width: 5rem;
 
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 `;

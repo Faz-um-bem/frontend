@@ -12,8 +12,8 @@ export const Container = styled.button`
   align-items: center;
   justify-content: center;
 
-  width: 25rem;
-  height: 25rem;
+  width: 15rem;
+  height: 15rem;
 
   svg {
     color: var(--blue);
@@ -34,7 +34,7 @@ export const Container = styled.button`
 `;
 
 export const Label = styled.h1`
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: var(--heading);
   margin-top: 1rem;
   width: 10rem;

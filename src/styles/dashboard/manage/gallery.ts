@@ -9,7 +9,7 @@ export const Container = styled.div`
 export const Content = styled.div`
   width: 100%;
   max-width: 1120px;
-  min-height: calc(100vh - 8rem - 6rem - 5rem);
+  min-height: calc(100vh - 6rem - 6rem - 5rem);
 
   margin: 2.5rem 0;
 
@@ -20,6 +20,11 @@ export const Content = styled.div`
   > h1 {
     text-align: center;
     color: var(--heading);
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 991.98px) {
+    padding: 0 1rem;
   }
 `;
 

@@ -15,11 +15,11 @@ export const Content = styled.div`
 
   max-width: 1120px;
   width: 100%;
-  min-height: calc(100vh - 8rem - 6rem);
+  min-height: calc(100vh - 6rem - 6rem);
 
   h1 {
     color: var(--heading);
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   form {
@@ -27,17 +27,17 @@ export const Content = styled.div`
 
     display: grid;
     grid-gap: 1rem;
-    width: 50rem;
+    width: 30rem;
 
     h2 {
-      font-size: 1.6rem;
+      font-size: 1.2rem;
     }
   }
 
   > button {
     background: transparent;
     border: 0;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--black);
     margin-top: 2.5rem;
   }

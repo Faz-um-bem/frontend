@@ -11,25 +11,25 @@ export const Content = styled.div`
   max-width: 1120px;
   width: 100%;
 
-  margin: 3rem 0;
+  margin: 2rem 0;
 
   border-radius: 1rem;
 
   h1 {
     color: var(--heading);
-    font-size: 2rem;
-    margin-top: 3rem;
+    font-size: 1.5rem;
+    margin-top: 2rem;
   }
 
   p {
     color: var(--text);
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
   }
 
   header {
     position: relative;
-    height: 40rem;
+    height: 25rem;
 
     display: flex;
     justify-content: center;
@@ -40,20 +40,29 @@ export const Content = styled.div`
     border-top-right-radius: inherit;
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 991.98px) {
+    }
+
+    @media (max-width: 767.98px) {
+    }
+
+    @media (max-width: 575.98px) {
     }
   }
 
   main {
-    padding: 3rem;
+    padding: 2rem;
     background: var(--white);
   }
 `;
 
 export const Verify = styled.div`
   position: absolute;
-  top: 3rem;
-  right: 3rem;
+  top: 1rem;
+  right: 1rem;
 
   display: flex;
   flex-direction: column;
@@ -61,8 +70,8 @@ export const Verify = styled.div`
   align-items: center;
 
   background: var(--green);
-  height: 8rem;
-  width: 8rem;
+  height: 6rem;
+  width: 6rem;
 
   border-radius: 1rem;
 
@@ -70,12 +79,11 @@ export const Verify = styled.div`
 
   span {
     font-size: 1rem;
-    font-weight: bold;
   }
 `;
 
 export const MapContainer = styled.div`
-  height: 40rem;
+  height: 25rem;
   margin: 1.5rem 0;
 `;
 
@@ -98,22 +106,30 @@ export const Contacts = styled.div`
 
       p {
         margin: auto 0;
-        line-height: 3rem;
+        line-height: 2rem;
       }
     }
+  }
+
+  @media (max-width: 575.98px) {
+    grid-template-columns: 1fr;
+    margin-top: 1.5rem;
   }
 `;
 
 export const ButtonContent = styled(Button)`
-  width: 20rem !important;
-  font-size: 1.5rem !important;
-  background: var(--green) !important;
+  width: 20rem;
+  background: var(--green);
 
   margin: auto;
 
   :hover {
     border-color: var(--green);
-    background: var(--white) !important;
+    background: var(--white);
     color: var(--green);
+  }
+
+  @media (max-width: 575.98px) {
+    margin-top: 1.5rem;
   }
 `;

@@ -27,7 +27,7 @@ export default function ManageInstitutions() {
           <h1>Gerênciar Instituições</h1>
 
           <CampaignList>
-            <CardListItem
+            {/* <CardListItem
               title="teste1"
               description="HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA"
               status="active"
@@ -61,7 +61,7 @@ export default function ManageInstitutions() {
               title="teste1"
               description="HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA"
               status="draft"
-            />
+            /> */}
           </CampaignList>
         </Content>
 

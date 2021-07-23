@@ -48,8 +48,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       setUser({
         name: 'Wederson Fagundes',
         email: 'wederson@example.com',
-        role: 2,
-        permission: null,
+        role: 1,
+        permission: 1,
       });
     }
   }, []);
@@ -61,8 +61,8 @@ function AuthProvider({ children }: AuthProviderProps) {
     setUser({
       name: 'Wederson Fagundes',
       email: 'wederson@example.com',
-      role: 2,
-      permission: null,
+      role: 1,
+      permission: 1,
     });
 
     setCookie(undefined, 'fazumbem.token', token, {

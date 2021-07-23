@@ -40,13 +40,13 @@ export default function ManageInstitutions() {
           <h1>Gerênciar Curadores</h1>
 
           <CampaignList>
-            <CardListItem title="Joao Alves" />
+            {/* <CardListItem title="Joao Alves" />
             <CardListItem title="Maria Clara Fernandes" />
             <CardListItem title="Joana da Silva" />
             <CardListItem title="Fernando Ferreira" />
             <CardListItem title="Maiara de Morais" />
             <CardListItem title="Pedro de Andrade" />
-            <CardListItem title="Josué" />
+            <CardListItem title="Josué" /> */}
           </CampaignList>
         </Content>
 

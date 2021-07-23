@@ -11,7 +11,7 @@ export const Content = styled.main`
   flex-direction: column;
   max-width: 1120px;
   width: 100%;
-  min-height: calc(100vh - 8rem - 6rem - 5rem);
+  min-height: calc(100vh - 6rem - 6rem - 5rem);
   margin: 2.5rem 0;
 `;
 
@@ -21,16 +21,17 @@ export const Heading = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  margin-top: 3rem;
+  margin: 0 2.5rem;
+  margin-top: 1rem;
 
   h1 {
     color: var(--heading);
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   p {
     color: var(--text);
-    font-size: 1.5rem;
+    font-size: 1rem;
     margin-top: 1rem;
   }
 `;
@@ -38,9 +39,21 @@ export const Heading = styled.div`
 export const ListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 3rem;
+  grid-gap: 1.5rem;
 
-  margin: 3rem 0;
+  margin: 3rem 2rem;
 
   height: 100%;
+
+  @media (max-width: 991.98px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 767.98px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 575.98px) {
+    grid-template-columns: 1fr;
+  }
 `;

@@ -14,11 +14,15 @@ export const Container = styled.footer`
   color: var(--white);
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: normal;
   }
 
   span {
-    font-size: 1.5rem;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 767.98px) {
+    padding: 2.5rem;
   }
 `;

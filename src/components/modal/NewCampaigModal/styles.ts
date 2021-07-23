@@ -14,7 +14,7 @@ export const Container = styled.form`
   max-height: 500px;
 
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     color: var(--heading);
     padding-bottom: 1.5rem;
     padding: 1.5rem;
@@ -26,16 +26,16 @@ export const Container = styled.form`
 
     > div {
       display: grid;
-      grid-gap: 1.5rem;
+      grid-gap: 0.5rem;
 
       margin-top: 1rem;
 
       &.name {
-        grid-template-columns: 2fr 5fr;
+        grid-template-columns: 1fr 3fr;
       }
 
       &.address_name {
-        grid-template-columns: 5fr 1fr;
+        grid-template-columns: 2fr 1fr;
       }
 
       &.neighborhood {
@@ -43,13 +43,15 @@ export const Container = styled.form`
       }
 
       &.state {
-        grid-template-columns: 1fr 5fr;
+        grid-template-columns: 2fr 8fr;
       }
     }
   }
 `;
 
-export const UploadButton = styled(Button)``;
+export const UploadButton = styled(Button)`
+  height: 4rem;
+`;
 
 export const InputContent = styled(Input)``;
 
@@ -68,8 +70,8 @@ export const ButtonContainer = styled.div<ButtonsProps>`
     }
 
     span {
-      width: 18rem;
-      font-size: 1.2rem;
+      width: 14rem;
+      font-size: 0.8rem;
       color: var(--text);
     }
   }
@@ -78,7 +80,7 @@ export const ButtonContainer = styled.div<ButtonsProps>`
 export const ButtonContent = styled(Button)`
   background: var(--green);
   margin-top: 1.5rem;
-  height: 5rem;
+  height: 3rem;
 
   :hover {
     color: var(--green);

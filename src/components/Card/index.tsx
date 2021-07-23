@@ -33,9 +33,11 @@ export function Card({ campaign }: CardProps) {
         <h1>{campaign.title}</h1>
         <h2>{campaign.institution.name}</h2>
 
-        {campaign.tags.map((tag, index) => (
-          <p key={String(index)}>{tag}</p>
-        ))}
+        <div>
+          {campaign.tags.map((tag, index) => (
+            <p key={String(index)}>{tag}</p>
+          ))}
+        </div>
       </main>
     </Container>
   );

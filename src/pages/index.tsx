@@ -20,7 +20,6 @@ import {
   InputContent,
   TextareaContent,
   SubmitButton,
-  BackgroundContent,
   ContactContainer,
 } from '~/styles';
 
@@ -68,7 +67,8 @@ export default function Home() {
         <Header />
 
         <Wrapper>
-          <BackgroundContent />
+          <div className="background_left" />
+          <div className="background_right" />
           <Content>
             <div>
               <span>
@@ -187,6 +187,8 @@ export default function Home() {
 
             <div>
               <FormContainer onSubmit={handleSubmit(handleSubmitForm)}>
+                <h1>Entre em contato conosco!</h1>
+
                 <InputContent
                   name="name"
                   icon={FiUser}

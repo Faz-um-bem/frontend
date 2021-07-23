@@ -48,7 +48,7 @@ export function Header() {
             </button>
           ) : (
             <LoggedContent>
-              <h1>Olá {user.name}</h1>
+              <h1>{user.name}</h1>
 
               <button type="button" onClick={signOut}>
                 Sair

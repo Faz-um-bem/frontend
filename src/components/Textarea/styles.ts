@@ -44,9 +44,9 @@ export const InputContent = styled.textarea`
   resize: none;
   flex: 1;
   border-radius: inherit;
-  padding: 1.5rem;
+  padding: 1rem;
   border: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 
   ::placeholder {
     color: var(--description);
@@ -59,7 +59,7 @@ export const Error = styled(Tooltip)`
 
   position: absolute;
   top: 1rem;
-  right: 1.5rem;
+  right: 1rem;
 
   svg {
     margin: 0;
