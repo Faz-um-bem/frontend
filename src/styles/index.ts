@@ -327,6 +327,7 @@ export const ContactContainer = styled.div`
     img {
       width: 500px;
       margin: 3rem 0;
+      max-width: none;
       margin-right: -100px;
       position: relative;
     }
