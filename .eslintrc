@@ -39,6 +39,7 @@
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-return-await": "off",
+    "no-unused-vars": "off",
     "@next/next/no-img-element": "off",
     "react/jsx-filename-extension": [
       1,
