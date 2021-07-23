@@ -40,7 +40,7 @@ type NewCampaigModalProps = {
   onRequestClose: () => void;
   onCreate: (values: CampaignData) => void;
   onUpdate: (values: CampaignData) => void;
-  onDelete: () => void;
+  onDelete: (id: number) => void;
 };
 
 export function NewCampaigModal({
@@ -112,7 +112,10 @@ export function NewCampaigModal({
               <span>Sua campanha será analisada para poder ser publicada.</span>
             </div>
             {data && (
-              <ButtonContent className="delete" onClick={onDelete}>
+              <ButtonContent
+                className="delete"
+                onClick={() => onDelete(data.id)}
+              >
                 Excluir
               </ButtonContent>
             )}
