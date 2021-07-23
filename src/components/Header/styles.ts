@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+type ContainerProps = {
+  isDrawerOpen: boolean;
+};
+
+export const Container = styled.div<ContainerProps>`
   height: 6rem;
   width: 100%;
 
@@ -15,12 +19,17 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    ${props => props.isDrawerOpen && 'justify-content: space-between;'}
 
     max-width: 1120px;
     width: 100%;
 
     > img {
       height: 4.5rem;
+    }
+
+    > button > svg {
+      color: var(--blue);
     }
   }
 `;
@@ -101,5 +110,31 @@ export const LoggedContent = styled.div`
     width: 5rem;
 
     font-size: 1rem;
+  }
+`;
+
+export const DrawerButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+
+  button {
+    padding: 0 0.8rem;
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 0.5rem;
+    color: var(--white);
+
+    width: 10rem;
+    height: 4rem;
+
+    transition: all 0.5s;
+
+    :hover {
+      background: var(--white);
+      color: var(--blue);
+      font-weight: bold;
+    }
   }
 `;
