@@ -13,10 +13,11 @@ import { Container, Error, InputContent } from './styles';
 type InputProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   error?: FieldError;
   name: string;
+  isFilled?: boolean;
 };
 
 const TextareaBase: ForwardRefRenderFunction<HTMLTextAreaElement, InputProps> =
-  ({ name, error = null, ...rest }, ref) => {
+  ({ name, error = null, isFilled = false, ...rest }, ref) => {
     const [isFocused, setIsFocused] = useState(false);
     // const [isFilled, setIsFilled] = useState(false);
 
@@ -29,7 +30,7 @@ const TextareaBase: ForwardRefRenderFunction<HTMLTextAreaElement, InputProps> =
     }, []);
 
     return (
-      <Container isErrored={!!error} isFilled={false} isFocused={isFocused}>
+      <Container isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
         <InputContent
           name={name}
           onFocus={handleInputFocus}
