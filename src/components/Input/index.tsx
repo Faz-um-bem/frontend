@@ -18,10 +18,18 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   icon?: ComponentType<IconBaseProps>;
   name: string;
   error?: FieldError;
+  isFilled?: boolean;
 };
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { containerStyle = {}, icon: Icon, name, error = null, ...rest },
+  {
+    containerStyle = {},
+    icon: Icon,
+    name,
+    error = null,
+    isFilled = false,
+    ...rest
+  },
   ref,
 ) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -38,7 +46,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   return (
     <Container
       isErrored={!!error}
-      isFilled={false}
+      isFilled={isFilled}
       isFocused={isFocused}
       style={containerStyle}
     >

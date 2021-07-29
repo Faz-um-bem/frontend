@@ -85,7 +85,7 @@ export const Content = styled.main`
       width: 430px;
       color: var(--blue);
       font-size: 26px;
-      line-height: 3rem;
+      line-height: 2rem;
       font-weight: normal;
       text-align: justify;
     }
@@ -135,7 +135,7 @@ export const Content = styled.main`
 export const ButtonContainer = styled(Button)`
   background: var(--orange);
   margin-top: 3rem;
-  border-radius: 1.5rem;
+  border-radius: 0.8rem;
 
   :hover {
     border-color: var(--orange);
@@ -232,7 +232,7 @@ export const MoreInfo = styled.section`
   align-items: center;
   width: 100%;
 
-  background: var(--yellow);
+  background: var(--purple);
 
   padding: 5rem 0;
 `;
@@ -253,7 +253,8 @@ export const MoreInfoContent = styled.div`
     padding: 2rem;
 
     background: var(--white);
-    box-shadow: 0 2px 4px 1px var(--gray);
+    box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 0.8rem;
 
     font-size: 1rem;
     color: var(--heading);
@@ -309,9 +310,9 @@ export const ContactContainer = styled.div`
       left: 0;
     }
 
-    &.background_purple {
+    &.background_yellow {
       display: flex;
-      background: var(--background-purple);
+      background: var(--background-yellow);
       width: 50%;
       min-height: 100%;
       position: absolute;
@@ -338,7 +339,13 @@ export const ContactContainer = styled.div`
       align-items: flex-end;
       justify-content: center;
 
-      background: var(--purple);
+      background: var(--yellow);
+
+      h1 {
+        color: var(--heading);
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
     }
   }
 

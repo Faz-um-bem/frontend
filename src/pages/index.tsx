@@ -46,8 +46,14 @@ const formSchema = yup.object().shape({
 export default function Home() {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
+    defaultValues: {
+      name: '',
+      phone: '',
+      email: '',
+      message: '',
+    },
   });
-  const { errors } = formState;
+  const { errors, dirtyFields } = formState;
 
   const handleSubmitForm: SubmitHandler<SignInFormData> = useCallback(
     async (data, event) => {
@@ -181,7 +187,7 @@ export default function Home() {
 
         <ContactContainer id="contact">
           <div className="background_gray" />
-          <div className="background_purple" />
+          <div className="background_yellow" />
           <div className="content">
             <img src="/imgs/contact.svg" alt="Contato" />
 
@@ -194,6 +200,7 @@ export default function Home() {
                   icon={FiUser}
                   placeholder="Nome*"
                   error={errors.name}
+                  isFilled={dirtyFields.name}
                   {...register('name')}
                 />
                 <InputContent
@@ -201,6 +208,7 @@ export default function Home() {
                   icon={FiPhone}
                   placeholder="Telefone*"
                   error={errors.phone}
+                  isFilled={dirtyFields.phone}
                   {...register('phone')}
                 />
                 <InputContent
@@ -208,6 +216,7 @@ export default function Home() {
                   icon={FiMail}
                   placeholder="E-mail*"
                   error={errors.email}
+                  isFilled={dirtyFields.email}
                   {...register('email')}
                 />
 
@@ -215,6 +224,7 @@ export default function Home() {
                   name="message"
                   placeholder="Mensagem*"
                   error={errors.message}
+                  isFilled={dirtyFields.message}
                   {...register('message')}
                 />
 

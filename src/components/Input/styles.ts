@@ -21,6 +21,19 @@ export const Container = styled.div<ContainerProps>`
 
   > svg {
     margin-right: 1rem;
+    color: var(--description);
+
+    ${props =>
+      props.isFilled &&
+      css`
+        color: var(--blue);
+      `}
+
+    ${props =>
+      props.isErrored &&
+      css`
+        color: var(--red);
+      `}
   }
 
   ${props =>
@@ -34,12 +47,6 @@ export const Container = styled.div<ContainerProps>`
     css`
       color: var(--blue);
       border-color: var(--blue);
-    `}
-
-  ${props =>
-    props.isFilled &&
-    css`
-      color: var(--blue);
     `}
 `;
 
