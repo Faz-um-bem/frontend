@@ -29,18 +29,71 @@ export const Content = styled.div`
 
   header {
     position: relative;
-    height: 30rem;
+    height: 25rem;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
-    background: var(--gray);
+    background: var(--white);
 
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
 
-    h1 {
-      font-size: 1.5rem;
+    > div:first-child {
+      border-bottom: 1px solid var(--gray);
+      background: var(--white);
+      height: 4rem;
+      width: 100%;
+
+      padding: 0 1rem;
+      margin-bottom: 1.5rem;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+
+      button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        background: var(--background-gray);
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+
+        color: var(--white);
+
+        transition: all 0.2s;
+
+        svg {
+          margin-right: 0.5rem;
+        }
+
+        &:hover {
+          background: var(--blue);
+        }
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: auto 1rem;
+      }
+
+      div {
+        display: flex;
+        flex-direction: row;
+      }
     }
   }
 
@@ -52,7 +105,7 @@ export const Content = styled.div`
 
 export const Verify = styled.div`
   position: absolute;
-  top: 1rem;
+  top: 5rem;
   right: 1rem;
 
   display: flex;
@@ -61,21 +114,102 @@ export const Verify = styled.div`
   align-items: center;
 
   background: var(--green);
-  height: 6rem;
-  width: 6rem;
+  height: 4rem;
+  width: 4rem;
 
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 
   color: var(--white);
 
   span {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 `;
 
 export const MapContainer = styled.div`
-  height: 40rem;
+  height: 30rem;
   margin: 1.5rem 0;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 0.8rem;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--background-gray);
+
+  @media (max-width: 575.98px) {
+    height: 20rem;
+  }
+`;
+
+export const MapFooter = styled.div`
+  width: 100%;
+
+  padding: 1rem 0;
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #f5f8fa;
+
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+`;
+
+export const Gallery = styled.div`
+  > img {
+    margin: 0 auto;
+    width: 100%;
+    height: 40rem;
+    border-radius: 0.8rem;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5rem;
+
+    button {
+      width: 5rem;
+      height: 5rem;
+
+      margin-left: 0.5rem;
+      border-radius: 0.4rem;
+
+      opacity: 0.6;
+
+      overflow-wrap: scroll;
+
+      &:first-child {
+        margin: 0;
+      }
+
+      &.active {
+        opacity: 1;
+      }
+
+      img {
+        border-radius: inherit;
+        width: inherit;
+        height: inherit;
+        object-fit: cover;
+      }
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    > img {
+      height: 30rem;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    > img {
+      height: 20rem;
+    }
+  }
 `;
 
 export const Contacts = styled.div`
@@ -109,8 +243,9 @@ export const Contacts = styled.div`
 `;
 
 export const ButtonContent = styled(Button)`
-  width: 20rem !important;
-  font-size: 1.5rem !important;
+  width: 20rem;
+  height: 3rem;
+  font-size: 1rem;
   background: var(--green) !important;
 
   margin: auto;

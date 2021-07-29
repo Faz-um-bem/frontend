@@ -16,7 +16,7 @@ type CardProps = {
   campaign: CampaignData;
 };
 
-export function Card({ campaign }: CardProps) {
+export function CampaignCard({ campaign }: CardProps) {
   const router = useRouter();
 
   const handleCampaign = () => {

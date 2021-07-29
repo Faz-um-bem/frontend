@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
-import { Card } from '~/components/Card';
+import { CampaignCard } from '~/components/CampaignCard';
 
 import { Container, Content, Heading, ListContainer } from '~/styles/campaigns';
 
@@ -83,7 +83,7 @@ export default function Ccampaigns() {
 
           <ListContainer>
             {campaigns.map(campaign => (
-              <Card key={campaign.id} campaign={campaign} />
+              <CampaignCard key={campaign.id} campaign={campaign} />
             ))}
           </ListContainer>
         </Content>
