@@ -33,6 +33,7 @@ export const Heading = styled.div`
   p {
     color: var(--text);
     font-size: 1rem;
+    margin-bottom: 1rem;
   }
 `;
 
