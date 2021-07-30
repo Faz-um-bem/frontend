@@ -406,10 +406,10 @@ export const FormContainer = styled.form`
     grid-template-columns: 3fr 2fr;
     grid-gap: 1rem;
 
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
 
     span {
-      color: var(--text-white);
+      color: var(--blue);
       font-size: 1rem;
     }
   }
