@@ -126,6 +126,30 @@ export default function Institution() {
         id: 9,
         url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg',
       },
+      {
+        id: 10,
+        url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg',
+      },
+      {
+        id: 11,
+        url: 'https://images.ecycle.com.br/wp-content/uploads/2021/05/20195924/o-que-e-paisagem.jpg.webp',
+      },
+      {
+        id: 12,
+        url: 'https://www.grupoescolar.com/wp-content/uploads/2021/03/paisagem-2C-1024x583.jpg',
+      },
+      {
+        id: 13,
+        url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg',
+      },
+      {
+        id: 14,
+        url: 'https://images.ecycle.com.br/wp-content/uploads/2021/05/20195924/o-que-e-paisagem.jpg.webp',
+      },
+      {
+        id: 15,
+        url: 'https://www.grupoescolar.com/wp-content/uploads/2021/03/paisagem-2C-1024x583.jpg',
+      },
     ],
     address: {
       name: 'Nome da rua',
@@ -211,7 +235,6 @@ export default function Institution() {
                 <FaChevronLeft />
                 Voltar
               </button>
-              <h1>{institution.name}</h1>
 
               <div>
                 <FacebookShareButton url={url} quote={institution.name}>
@@ -257,11 +280,13 @@ export default function Institution() {
           </header>
 
           <main>
-            <h1>Sobre a Instituição</h1>
+            <h1>{institution.name}</h1>
+
+            <h2>Sobre a Instituição</h2>
 
             <p>{institution.description}</p>
 
-            <h1>Localização</h1>
+            <h2>Localização</h2>
             <MapContainer>
               {process.browser && (
                 <InstitutionsMap
@@ -297,7 +322,7 @@ export default function Institution() {
               {institution.address.uf},{institution.address.postal_code}
             </p>
 
-            <h1>Galeria</h1>
+            <h2>Galeria</h2>
 
             <Gallery>
               <img
@@ -319,7 +344,7 @@ export default function Institution() {
               </div>
             </Gallery>
 
-            <h1>Contato</h1>
+            <h2>Contato</h2>
             <Contacts>
               <div>
                 <div>
