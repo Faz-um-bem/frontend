@@ -15,18 +15,6 @@ export const Content = styled.div`
 
   border-radius: 1rem;
 
-  h1 {
-    color: var(--heading);
-    font-size: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  p {
-    color: var(--text);
-    font-size: 1rem;
-    margin-top: 1.5rem;
-  }
-
   header {
     position: relative;
     height: 25rem;
@@ -57,12 +45,13 @@ export const Content = styled.div`
       border-top-left-radius: inherit;
       border-top-right-radius: inherit;
 
-      button {
+      > button {
         display: flex;
         flex-direction: row;
         align-items: center;
+        width: 6rem;
 
-        background: var(--background-gray);
+        background: var(--blue);
         border-radius: 0.5rem;
         padding: 0.5rem 1rem;
 
@@ -71,23 +60,28 @@ export const Content = styled.div`
         transition: all 0.2s;
 
         svg {
-          margin-right: 0.5rem;
+          margin-right: 0.2rem;
         }
 
         &:hover {
-          background: var(--blue);
+          background: var(--background-gray);
+          color: var(--blue);
+          font-weight: bold;
+          border: 1px solid var(--blue);
+        }
+      }
+
+      > div {
+        button {
+          svg {
+            margin-right: 0.5rem;
+          }
         }
       }
 
       img {
         width: 100%;
         height: 100%;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin: auto 1rem;
       }
 
       div {
@@ -100,6 +94,19 @@ export const Content = styled.div`
   main {
     padding: 2rem;
     background: var(--white);
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--heading);
+    }
+
+    h2 {
+      margin: 1.5rem 0 0.5rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--heading);
+    }
   }
 `;
 
@@ -159,6 +166,8 @@ export const MapFooter = styled.div`
 `;
 
 export const Gallery = styled.div`
+  margin-top: 0.5rem;
+
   > img {
     margin: 0 auto;
     width: 100%;
@@ -215,6 +224,7 @@ export const Gallery = styled.div`
 export const Contacts = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  margin-top: 1rem;
 
   div {
     margin: 0 auto;
@@ -231,7 +241,7 @@ export const Contacts = styled.div`
 
       p {
         margin: auto 0;
-        line-height: 3rem;
+        line-height: 2rem;
       }
     }
   }
