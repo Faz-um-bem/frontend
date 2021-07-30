@@ -424,7 +424,7 @@ export const InputContent = styled(Input)``;
 export const TextareaContent = styled(Textarea)``;
 
 export const SubmitButton = styled(Button)`
-  background: var(--orange);
+  background: var(--blue);
   color: var(--white);
   font-weight: bold;
   height: 4rem;
