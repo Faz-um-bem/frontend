@@ -102,7 +102,10 @@ export default function Institutions() {
           </Heading>
 
           <MapContainer>
-            <InstitutionsMap center={[-29.6984707, -53.8853061]}>
+            <InstitutionsMap
+              center={[-29.6984707, -53.8853061]}
+              doubleClickZoom={false}
+            >
               <LocationEvents />
               {institutions?.map(place => (
                 <Marker
