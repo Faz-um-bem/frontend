@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, ChangeEvent } from 'react';
 import dynamic from 'next/dynamic';
 import { FiAlertCircle } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
@@ -64,6 +64,8 @@ export default function NewCampaigModal({
   onRequestClose,
 }: NewCampaigModalProps) {
   const [location, setLocation] = useState(null);
+  const [image, setImage] = useState<File[]>([]);
+  const [previewImages, setPreviewImages] = useState([]);
 
   const handleSubmit = useCallback(values => {
     if (data) {
@@ -73,7 +75,19 @@ export default function NewCampaigModal({
     }
   }, []);
 
-  console.log(location);
+  const handleSelectImages = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target) return;
+
+    const selectedImages = Array.from(event.target.files);
+
+    setImage(selectedImages);
+
+    const selectedImagesPreview = selectedImages.map(img => {
+      return URL.createObjectURL(img);
+    });
+
+    setPreviewImages(selectedImagesPreview);
+  };
 
   const LocationEvents = () => {
     useMapEvents({
@@ -81,7 +95,7 @@ export default function NewCampaigModal({
         setLocation(e.latlng);
       },
     });
-    return null;
+    return location ? <Marker position={location} icon={mapIcon} /> : null;
   };
 
   return (
@@ -102,8 +116,13 @@ export default function NewCampaigModal({
         <h2>{data ? 'Editar' : 'Cadastrar'} campanha</h2>
 
         <div>
+          {!!previewImages.length && <img src={previewImages[0]} alt="teste" />}
           <div className="name">
-            <UploadButton>Upload da imagem</UploadButton>
+            <UploadButton>
+              <label htmlFor="image">Upload da imagem</label>
+
+              <input type="file" id="image" onChange={handleSelectImages} />
+            </UploadButton>
             <InputContent name="title" placeholder="Titulo" />
           </div>
           <TextareaContet name="description" placeholder="Descrição" />
@@ -111,7 +130,6 @@ export default function NewCampaigModal({
           <Map>
             <InstitutionsMap center={[-29.6984707, -53.8853061]}>
               <LocationEvents />
-              {location && <Marker position={location} icon={mapIcon} />}
             </InstitutionsMap>
           </Map>
 

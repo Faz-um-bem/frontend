@@ -24,6 +24,11 @@ export const Container = styled.form`
     overflow-y: scroll;
     padding: 1.5rem;
 
+    > img {
+      height: 8rem;
+      margin: 0 auto;
+    }
+
     > div {
       display: grid;
       grid-gap: 0.5rem;
@@ -49,8 +54,25 @@ export const Container = styled.form`
   }
 `;
 
-export const UploadButton = styled(Button)`
+export const UploadButton = styled.div`
   height: 4rem;
+  display: flex;
+  align-items: center;
+
+  background: var(--blue);
+  padding: 0 0.5rem;
+
+  border-radius: 0.8rem;
+
+  label {
+    text-align: center;
+    color: var(--white);
+    font-size: 1rem;
+  }
+
+  input[type='file'] {
+    display: none;
+  }
 `;
 
 export const InputContent = styled(Input)``;
