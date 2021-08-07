@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FiLock, FiMail } from 'react-icons/fi';
 
 import { useAuth } from '~/hooks/useAuth';
 
@@ -84,6 +85,7 @@ export default function SigninInstitution() {
               placeholder="E-mail"
               type="email"
               error={errors.email}
+              icon={FiMail}
               {...register('email')}
             />
             <Input
@@ -91,6 +93,7 @@ export default function SigninInstitution() {
               placeholder="Senha"
               type="password"
               error={errors.password}
+              icon={FiLock}
               {...register('password')}
             />
 
