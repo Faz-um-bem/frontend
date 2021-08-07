@@ -1,11 +1,10 @@
+import { useEffect, useState, ChangeEvent } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
-import { GalleryItem } from '~/components/GalleryItem';
+import { GalleryItem } from '~/components/cards/GalleryItem';
 
 import { useCan } from '~/hooks/useCan';
 
@@ -18,9 +17,24 @@ import {
   GalleryContainer,
 } from '~/styles/dashboard/manage/gallery';
 
+type ImagesData = {
+  id: number;
+  url: string;
+};
+
 export default function Gallery() {
   const router = useRouter();
   const userCanSeePage = useCan({ role: roles.institution });
+
+  const [images, setImages] = useState<ImagesData[]>([]);
+
+  const handleSelectImages = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+
+    const selectedImages = Array.from(event.target.files);
+
+    setImages(selectedImages);
+  };
 
   useEffect(() => {
     if (!userCanSeePage) {
@@ -40,19 +54,10 @@ export default function Gallery() {
           <h1>Galeria de fotos</h1>
 
           <GalleryContainer>
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem />
-            <GalleryItem addNewImage />
+            {images.map(image => (
+              <GalleryItem key={image.id} url={image.url} />
+            ))}
+            <GalleryItem addNewImage onSelectImages={handleSelectImages} />
           </GalleryContainer>
         </Content>
 
