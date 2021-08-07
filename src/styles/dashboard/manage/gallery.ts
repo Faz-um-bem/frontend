@@ -21,6 +21,7 @@ export const Content = styled.div`
     text-align: center;
     color: var(--heading);
     font-size: 1.5rem;
+    font-weight: bold;
   }
 
   @media (max-width: 991.98px) {
@@ -34,4 +35,18 @@ export const GalleryContainer = styled.div`
   grid-gap: 2.5rem;
 
   margin: 2.5rem 0;
+
+  @media (max-width: 991.98px) {
+    grid-template-columns: repeat(4, 1fr);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 767.98px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 575.98px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
