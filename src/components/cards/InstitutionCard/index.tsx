@@ -15,15 +15,14 @@ type InstitutionCardProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export function InstitutionCard({ data, ...rest }: InstitutionCardProps) {
   return (
     <Container {...rest}>
-      <div>
-        <img src={data?.image || '/imgs/noimage.png'} alt="Imagem" />
-      </div>
-
-      <aside>
+      <img src={data?.image || '/imgs/noimage.png'} alt="Imagem" />
+      <header>
         <h1>{data.title}</h1>
+      </header>
 
+      <main>
         <p>{data.description}</p>
-      </aside>
+      </main>
     </Container>
   );
 }
