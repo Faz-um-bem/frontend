@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic';
 import { FiAlertCircle } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import Modal from 'react-modal';
+import { Marker, useMapEvents } from 'react-leaflet';
+import Leaflet from 'leaflet';
 
 import {
   Container,
@@ -14,8 +16,18 @@ import {
   Map,
 } from './styles';
 
-const MapSelect = dynamic(() => import('~/components/MapSelect'), {
-  ssr: false,
+const InstitutionsMap = dynamic(
+  () => import('~/components/maps/InstitutionsMap'),
+  {
+    ssr: false,
+  },
+);
+
+const mapIcon = Leaflet.icon({
+  iconUrl: '/imgs/marker.svg',
+  iconSize: [58, 68],
+  iconAnchor: [29, 68],
+  popupAnchor: [170, 2],
 });
 
 type CampaignData = {
@@ -43,7 +55,7 @@ type NewCampaigModalProps = {
   onDelete: (id: number) => void;
 };
 
-export function NewCampaigModal({
+export default function NewCampaigModal({
   isOpen,
   data,
   onCreate,
@@ -51,7 +63,7 @@ export function NewCampaigModal({
   onDelete,
   onRequestClose,
 }: NewCampaigModalProps) {
-  const [position, setPosition] = useState(null);
+  const [location, setLocation] = useState(null);
 
   const handleSubmit = useCallback(values => {
     if (data) {
@@ -60,6 +72,17 @@ export function NewCampaigModal({
       onCreate(values);
     }
   }, []);
+
+  console.log(location);
+
+  const LocationEvents = () => {
+    useMapEvents({
+      click(e) {
+        setLocation(e.latlng);
+      },
+    });
+    return null;
+  };
 
   return (
     <Modal
@@ -86,7 +109,10 @@ export function NewCampaigModal({
           <TextareaContet name="description" placeholder="Descrição" />
 
           <Map>
-            <MapSelect position={position} onChangePosition={setPosition} />
+            <InstitutionsMap center={[-29.6984707, -53.8853061]}>
+              <LocationEvents />
+              {location && <Marker position={location} icon={mapIcon} />}
+            </InstitutionsMap>
           </Map>
 
           <div className="address_name">

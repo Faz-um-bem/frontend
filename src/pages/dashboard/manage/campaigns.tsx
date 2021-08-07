@@ -2,12 +2,12 @@ import { useState, useCallback } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { BsPlusCircleFill } from 'react-icons/bs';
+import dynamic from 'next/dynamic';
 
 import { useEffect } from 'react';
 import { CardListItem } from '~/components/CardListItem';
 import { Footer } from '~/components/Footer';
 import { Header } from '~/components/Header';
-import { NewCampaigModal } from '~/components/modal/NewCampaigModal';
 
 import { withSSRAuth } from '~/utils/withSSRAuth';
 
@@ -16,6 +16,14 @@ import {
   CampaignList,
   Content,
 } from '~/styles/dashboard/manage/campaigns';
+// import { NewCampaigModal } from '~/components/modal/NewCampaigModal';
+
+const NewCampaigModal = dynamic(
+  () => import('~/components/modal/NewCampaigModal'),
+  {
+    ssr: false,
+  },
+);
 
 type CampaignData = {
   id: number;
