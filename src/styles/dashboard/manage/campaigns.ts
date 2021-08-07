@@ -18,6 +18,12 @@ export const Content = styled.div`
     height: 30px;
     align-items: center;
 
+    h1 {
+      color: var(--heading);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
     button {
       margin-left: 1.5rem;
       background: transparent;
@@ -27,11 +33,6 @@ export const Content = styled.div`
         color: var(--blue);
       }
     }
-  }
-
-  h1 {
-    color: var(--heading);
-    font-size: 1.5rem;
   }
 
   @media (max-width: 991.98px) {
