@@ -31,11 +31,7 @@ export default function Profile() {
         <Content>
           <h1>Editar Perfil</h1>
 
-          <FormCurator onSubmitForm={handleSubmit} />
-
-          <button type="button" onClick={back}>
-            Voltar
-          </button>
+          <FormCurator isEditing onSubmitForm={handleSubmit} />
         </Content>
         <Footer />
       </Container>

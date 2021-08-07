@@ -20,6 +20,7 @@ export const Content = styled.div`
   h1 {
     color: var(--heading);
     font-size: 1.5rem;
+    font-weight: bold;
   }
 
   form {
@@ -32,13 +33,5 @@ export const Content = styled.div`
     h2 {
       font-size: 1.2rem;
     }
-  }
-
-  > button {
-    background: transparent;
-    border: 0;
-    font-size: 1rem;
-    color: var(--black);
-    margin-top: 2.5rem;
   }
 `;
