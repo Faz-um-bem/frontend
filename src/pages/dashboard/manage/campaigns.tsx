@@ -5,7 +5,7 @@ import { BsPlusCircleFill } from 'react-icons/bs';
 import dynamic from 'next/dynamic';
 
 import { useEffect } from 'react';
-import { CardListItem } from '~/components/CardListItem';
+import { ListItem } from '~/components/cards/ListItem';
 import { Footer } from '~/components/Footer';
 import { Header } from '~/components/Header';
 
@@ -16,7 +16,6 @@ import {
   CampaignList,
   Content,
 } from '~/styles/dashboard/manage/campaigns';
-// import { NewCampaigModal } from '~/components/modal/NewCampaigModal';
 
 const NewCampaigModal = dynamic(
   () => import('~/components/modal/NewCampaigModal'),
@@ -151,13 +150,13 @@ export default function ManageCampaign() {
           <header>
             <h1>Gerênciar Campanhas</h1>
             <button type="button" onClick={handleCreateNewCampaignOpen}>
-              <BsPlusCircleFill size={25} />
+              <BsPlusCircleFill size={24} />
             </button>
           </header>
 
           <CampaignList>
             {campaigns.map(campaign => (
-              <CardListItem
+              <ListItem
                 key={String(campaign.id)}
                 campaign={campaign}
                 onClick={() => handleEditCampaignModalOpen(campaign)}

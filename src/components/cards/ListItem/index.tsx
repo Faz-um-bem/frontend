@@ -13,7 +13,7 @@ type CardListItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   campaign: CardData;
 };
 
-export function CardListItem({ campaign, ...rest }: CardListItemProps) {
+export function ListItem({ campaign, ...rest }: CardListItemProps) {
   return (
     <Container>
       <Content
