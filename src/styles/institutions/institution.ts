@@ -64,6 +64,7 @@ export const HeaderContent = styled.div`
     display: grid;
     grid-template-rows: 1.5fr 1fr;
     grid-gap: 0.5rem;
+    margin-top: 1rem;
 
     h1 {
       font-size: 1.5rem;

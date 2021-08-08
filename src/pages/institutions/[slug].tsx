@@ -330,7 +330,7 @@ export default function Institution() {
               Entrar em contato
             </WhatsAppButton>
 
-            <img src="/imgs/contact-background-img.png" alt="Contact" />
+            <img src="/imgs/contact-background-img-purple.png" alt="Contact" />
           </ContactContainer>
         </Content>
         <Footer />
