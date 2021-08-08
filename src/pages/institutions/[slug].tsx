@@ -1,16 +1,10 @@
-import { useState, useCallback, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-
-import Leaflet from 'leaflet';
-import { Marker } from 'react-leaflet';
 import { BiCheckShield } from 'react-icons/bi';
 import { IoMdMail, IoMdPhonePortrait } from 'react-icons/io';
 import { FiClock } from 'react-icons/fi';
 import { RiPhoneFill } from 'react-icons/ri';
-import { FaChevronLeft } from 'react-icons/fa';
+import dynamic from 'next/dynamic';
 import {
   EmailIcon,
   EmailShareButton,
@@ -25,20 +19,30 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from 'react-share';
+import Link from 'next/link';
+import { Marker } from 'react-leaflet';
+import Leaflet from 'leaflet';
 
+import { FaWhatsapp } from 'react-icons/fa';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
 
 import {
   Container,
-  Content,
+  HeaderContainer,
+  HeaderContent,
   Verify,
+  Content,
+  ShareContainer,
   MapContainer,
   MapFooter,
-  Gallery,
-  Contacts,
-  ButtonContent,
+  ContactContainer,
+  ContactContent,
+  WhatsAppButton,
+  GalleryContainer,
 } from '~/styles/institutions/institution';
+
+const Map = dynamic(() => import('~/components/Map'), { ssr: false });
 
 const mapIcon = Leaflet.icon({
   iconUrl: `/imgs/marker.svg`,
@@ -46,8 +50,6 @@ const mapIcon = Leaflet.icon({
   iconAnchor: [29, 68],
   popupAnchor: [170, 2],
 });
-
-const Map = dynamic(() => import('~/components/Map'), { ssr: false });
 
 type ImagesData = {
   id: number;
@@ -80,7 +82,10 @@ type InstitutionData = {
 };
 
 export default function Institution() {
-  const { back } = useRouter();
+  const url = 'https://github.com';
+  const campaign = {
+    name: 'Bazar lar das vovozinhas',
+  };
 
   const [institution, setInstitution] = useState<InstitutionData>({
     name: 'Instituição Teste',
@@ -170,52 +175,6 @@ export default function Institution() {
   });
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const url = 'https://github.com';
-
-  // const loadInstitution = useCallback(() => {
-  //   const response = {
-  //     name: 'Instituição Teste',
-  //     description:
-  //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Venenatis ut at laoreet amet ut. Gravida odio gravida neque nam pretium elementum. Mi, auctor curabitur ac massa, enim euismod sapien volutpat purus. Pretium purus faucibus faucibus nunc pulvinar in posuere fames. Purus ultricies accumsan vitae, mi senectus. Eu et ac nisl nullam sed id neque vehicula et. Gravida mi eros tristique viverra vestibulum. Mattis tellus lorem molestie eu. Quis cursus molestie a, lectus orci. Eu turpis etiam ultricies nisl, suspendisse faucibus tellus. Euismod augue enim auctor arcu. Duis viverra diam tortor eu blandit. Sed amet, in ultricies bibendum magna. Maecenas et hac est scelerisque at semper lectus.',
-  //    images: [
-  //   { id: 1, url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg' },
-  //   { id: 2, url: 'https://images.ecycle.com.br/wp-content/uploads/2021/05/20195924/o-que-e-paisagem.jpg.webp' },
-  //   { id: 3, url: 'https://www.grupoescolar.com/wp-content/uploads/2021/03/paisagem-2C-1024x583.jpg' },
-  //   { id: 4, url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg' },
-  //   { id: 5, url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg' },
-  //   { id: 6, url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg' },
-  //   { id: 7, url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg' },
-  //   { id: 8, url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg' },
-  //   { id: 9, url: 'https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg' },
-  // ],
-  //     address: {
-  //       name: 'Nome da rua',
-  //       number: '103',
-  //       complement: 'Quadra 91',
-  //       neighborhood: 'Nome do bairro',
-  //       postal_code: '99000333',
-  //       city: 'Nome da cidade',
-  //       uf: 'UF',
-  //       latitude: -29.698378,
-  //       longitude: -53.860909,
-  //     },
-  //     contact: {
-  //       email: 'johndoe@example.com',
-  //       main_phone: '988776655',
-  //       secondary_phone: '988776655',
-  //       whatsapp_phone: '988776655',
-  //       from: '8:00',
-  //       to: '16:00',
-  //     },
-  //   };
-
-  //   setInstitution(response);
-  // }, []);
-
-  // useEffect(() => {
-  //   loadInstitution();
-  // }, []);
-
   return (
     <>
       <Head>
@@ -225,153 +184,155 @@ export default function Institution() {
       <Container>
         <Header />
 
-        <Content>
-          <header>
+        <HeaderContainer>
+          <div className="background">
             <div>
-              <button type="button" onClick={back}>
-                <FaChevronLeft />
-                Voltar
-              </button>
-
-              <div>
-                <FacebookShareButton url={url} quote={institution.name}>
-                  <FacebookIcon size={32} round />
-                </FacebookShareButton>
-
-                <TwitterShareButton url={url} title={institution.name}>
-                  <TwitterIcon size={32} round />
-                </TwitterShareButton>
-
-                <TelegramShareButton url={url} title={institution.name}>
-                  <TelegramIcon size={32} round />
-                </TelegramShareButton>
-
-                <WhatsappShareButton
-                  url={url}
-                  title={institution.name}
-                  separator=":: "
-                >
-                  <WhatsappIcon size={32} round />
-                </WhatsappShareButton>
-
-                <LinkedinShareButton url={url}>
-                  <LinkedinIcon size={32} round />
-                </LinkedinShareButton>
-
-                <EmailShareButton
-                  url={url}
-                  subject={institution.name}
-                  body="body"
-                >
-                  <EmailIcon size={32} round />
-                </EmailShareButton>
-              </div>
+              <Verify>
+                <BiCheckShield size={45} />
+                <span>Verificado</span>
+              </Verify>
             </div>
+          </div>
 
-            <img src="/imgs/noimageinstitution.png" alt="Sem Imagem" />
+          <HeaderContent>
+            <img src="" alt="img" />
+            <div>
+              <h1>ASSOSSIAÇÃO AMPARO PROVIDÊNCIA LAR DAS VOVOZINHAS</h1>
+              <h2>santa maria - rs</h2>
+            </div>
+          </HeaderContent>
+        </HeaderContainer>
 
-            <Verify>
-              <BiCheckShield size={30} />
-              <span>Verificado</span>
-            </Verify>
-          </header>
+        <Content>
+          <h1>Sobre a campanha</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Venenatis
+            ut at laoreet amet ut. Gravida odio gravida neque nam pretium
+            elementum. Mi, auctor curabitur ac massa, enim euismod sapien
+            volutpat purus. Pretium purus faucibus faucibus nunc pulvinar in
+            posuere fames. Purus ultricies accumsan vitae, mi senectus. Eu et ac
+            nisl nullam sed id neque vehicula et. Gravida mi eros tristique
+            viverra vestibulum. Mattis tellus lorem molestie eu. Quis cursus
+            molestie a, lectus orci. Eu turpis etiam ultricies nisl, suspendisse
+            faucibus tellus. Euismod augue enim auctor arcu. Duis viverra diam
+            tortor eu blandit. Sed amet, in ultricies bibendum magna. Maecenas
+            et hac est scelerisque at semper lectus.
+          </p>
 
-          <main>
-            <h1>{institution.name}</h1>
+          <h1>
+            Compartilhe em suas redes sociais e incentive mais pessoas a fazer
+            um bem!
+          </h1>
+          <ShareContainer>
+            <FacebookShareButton url={url} quote={campaign.name}>
+              <FacebookIcon size={40} />
+            </FacebookShareButton>
 
-            <h2>Sobre a Instituição</h2>
+            <TwitterShareButton url={url} title={campaign.name}>
+              <TwitterIcon size={40} />
+            </TwitterShareButton>
 
-            <p>{institution.description}</p>
+            <TelegramShareButton url={url} title={campaign.name}>
+              <TelegramIcon size={40} />
+            </TelegramShareButton>
 
-            <h2>Localização</h2>
-            <MapContainer>
-              {process.browser && (
-                <Map
-                  interactive={false}
-                  center={[
-                    institution.address.latitude,
-                    institution.address.longitude,
-                  ]}
+            <WhatsappShareButton
+              url={url}
+              title={campaign.name}
+              separator=":: "
+            >
+              <WhatsappIcon size={40} />
+            </WhatsappShareButton>
+
+            <LinkedinShareButton url={url}>
+              <LinkedinIcon size={40} />
+            </LinkedinShareButton>
+
+            <EmailShareButton url={url} subject={campaign.name} body="body">
+              <EmailIcon size={40} />
+            </EmailShareButton>
+          </ShareContainer>
+
+          <h1>Galeria de Fotos</h1>
+          <GalleryContainer>
+            <img
+              src={institution?.images[activeImageIndex].url}
+              alt={institution.name}
+            />
+
+            <div>
+              {institution?.images.map((image, index) => (
+                <button
+                  key={image.id}
+                  type="button"
+                  onClick={() => setActiveImageIndex(index)}
                 >
-                  <Marker
-                    icon={mapIcon}
-                    position={[
-                      institution.address.latitude,
-                      institution.address.longitude,
-                    ]}
-                  />
-                </Map>
-              )}
-              <MapFooter>
-                <Link
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${institution.address.latitude},${institution.address.longitude}`}
-                >
-                  <a target="_blank" rel="noopener noreferrer">
-                    Ver rotas no Google Maps
-                  </a>
-                </Link>
-              </MapFooter>
-            </MapContainer>
-            <p>
-              {institution.address.name}, {institution.address.number},{' '}
-              {institution.address.complement},{' '}
-              {institution.address.neighborhood}, {institution.address.city} -{' '}
-              {institution.address.uf},{institution.address.postal_code}
-            </p>
+                  <img src={image.url} alt={institution.name} />
+                </button>
+              ))}
+            </div>
+          </GalleryContainer>
 
-            <h2>Galeria</h2>
+          <h1>Localização</h1>
+          <MapContainer>
+            {process.browser && (
+              <Map interactive={false} center={[-29.6987317, -53.8868081]}>
+                <Marker icon={mapIcon} position={[-29.6987317, -53.8868081]} />
+              </Map>
+            )}
 
-            <Gallery>
-              <img
-                src={institution?.images[activeImageIndex].url}
-                alt="tafdas"
-              />
+            <MapFooter>
+              <Link
+                href={`https://www.google.com/maps/dir/?api=1&destination=${-29.6987317},${-53.8868081}`}
+              >
+                <a target="_blank" rel="noopener noreferrer">
+                  Ver rotas no Google Maps
+                </a>
+              </Link>
+            </MapFooter>
+          </MapContainer>
+          <p>
+            Rua Silva Jardim, 390, Nossa Senhora do Rosário, Santa Maria - RS,
+            97000-000
+          </p>
 
+          <h1>Contato</h1>
+          <ContactContainer>
+            <ContactContent>
               <div>
-                {institution.images.map((image, index) => (
-                  <button
-                    key={image.id}
-                    className={activeImageIndex === index ? 'active' : ''}
-                    type="button"
-                    onClick={() => setActiveImageIndex(index)}
-                  >
-                    <img src={image.url} alt={institution.name} />
-                  </button>
-                ))}
+                <IoMdMail size={20} />
+                <p>
+                  <strong>E-mail:</strong> campaing@example.com
+                </p>
               </div>
-            </Gallery>
-
-            <h2>Contato</h2>
-            <Contacts>
               <div>
-                <div>
-                  <IoMdMail size={18} />
-                  <p>E-mail: {institution.contact.email}</p>
-                </div>
-
-                <div>
-                  <RiPhoneFill size={18} />
-                  <p>Telefone: (55) {institution.contact.main_phone}</p>
-                </div>
-
-                <div>
-                  <IoMdPhonePortrait size={18} />
-                  <p>Celular: (55) {institution.contact.secondary_phone}</p>
-                </div>
-
-                <div>
-                  <FiClock size={18} />
-                  <p>
-                    Das {institution.contact.from} às {institution.contact.to}
-                  </p>
-                </div>
+                <RiPhoneFill size={20} />
+                <p>
+                  <strong>Telefone:</strong> (55) 9988-7766
+                </p>
               </div>
+              <div>
+                <IoMdPhonePortrait size={20} />
+                <p>
+                  <strong>Celular:</strong> (55) 9 8877-6655
+                </p>
+              </div>
+              <div>
+                <FiClock size={20} />
+                <p>
+                  <strong>Horário:</strong> 8:30 às 18:30
+                </p>
+              </div>
+            </ContactContent>
 
-              <ButtonContent>Entrar em contato</ButtonContent>
-            </Contacts>
-          </main>
+            <WhatsAppButton>
+              <FaWhatsapp size={20} />
+              Entrar em contato
+            </WhatsAppButton>
+
+            <img src="/imgs/contact-background-img.png" alt="Contact" />
+          </ContactContainer>
         </Content>
-
         <Footer />
       </Container>
     </>
