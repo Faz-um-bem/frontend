@@ -47,10 +47,7 @@ const mapIcon = Leaflet.icon({
   popupAnchor: [170, 2],
 });
 
-const InstitutionsMap = dynamic(
-  () => import('~/components/maps/InstitutionsMap'),
-  { ssr: false },
-);
+const Map = dynamic(() => import('~/components/Map'), { ssr: false });
 
 type ImagesData = {
   id: number;
@@ -289,7 +286,7 @@ export default function Institution() {
             <h2>Localização</h2>
             <MapContainer>
               {process.browser && (
-                <InstitutionsMap
+                <Map
                   interactive={false}
                   center={[
                     institution.address.latitude,
@@ -303,7 +300,7 @@ export default function Institution() {
                       institution.address.longitude,
                     ]}
                   />
-                </InstitutionsMap>
+                </Map>
               )}
               <MapFooter>
                 <Link

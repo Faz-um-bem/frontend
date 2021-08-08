@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button } from '~/components/Button';
-import { Input } from '~/components/Input';
-import { Textarea } from '~/components/Textarea';
+import { Input } from '~/components/forms/Input';
+import { Textarea } from '~/components/forms/Textarea';
 
 type ButtonsProps = {
   delete: boolean;
@@ -121,7 +121,7 @@ export const ButtonContent = styled(Button)`
   }
 `;
 
-export const Map = styled.div`
+export const MapContainer = styled.div`
   width: 100%;
   height: 250px;
   border-radius: 1rem;

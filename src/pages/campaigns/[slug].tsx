@@ -40,10 +40,7 @@ import {
   WhatsAppButton,
 } from '~/styles/campaigns/campaign';
 
-const InstitutionsMap = dynamic(
-  () => import('~/components/maps/InstitutionsMap'),
-  { ssr: false },
-);
+const Map = dynamic(() => import('~/components/Map'), { ssr: false });
 
 const mapIcon = Leaflet.icon({
   iconUrl: `/imgs/marker.svg`,
@@ -142,12 +139,9 @@ export default function Campaign() {
           <h1>Localização</h1>
           <MapContainer>
             {process.browser && (
-              <InstitutionsMap
-                interactive={false}
-                center={[-29.6987317, -53.8868081]}
-              >
+              <Map interactive={false} center={[-29.6987317, -53.8868081]}>
                 <Marker icon={mapIcon} position={[-29.6987317, -53.8868081]} />
-              </InstitutionsMap>
+              </Map>
             )}
 
             <MapFooter>

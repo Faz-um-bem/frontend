@@ -25,12 +25,9 @@ const mapIcon = Leaflet.icon({
   popupAnchor: [170, 2],
 });
 
-const InstitutionsMap = dynamic(
-  () => import('~/components/maps/InstitutionsMap'),
-  {
-    ssr: false,
-  },
-);
+const Map = dynamic(() => import('~/components/Map'), {
+  ssr: false,
+});
 
 export default function Institutions() {
   const { push } = useRouter();
@@ -102,10 +99,7 @@ export default function Institutions() {
           </Heading>
 
           <MapContainer>
-            <InstitutionsMap
-              center={[-29.6984707, -53.8853061]}
-              doubleClickZoom={false}
-            >
+            <Map center={[-29.6984707, -53.8853061]} doubleClickZoom={false}>
               <LocationEvents />
               {institutions?.map(place => (
                 <Marker
@@ -132,7 +126,7 @@ export default function Institutions() {
                   </Popup>
                 </Marker>
               ))}
-            </InstitutionsMap>
+            </Map>
           </MapContainer>
 
           <ListContainer>

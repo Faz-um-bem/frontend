@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
-import { FormInstitution } from '~/components/FormInstitution';
-import { FormCurator } from '~/components/FormCurator';
+import { FormInstitution } from '~/components/forms/FormInstitution';
+import { FormCurator } from '~/components/forms/FormCurator';
 
 import { roles } from '~/utils/enum';
 import { withSSRGuest } from '~/utils/withSSRGuest';

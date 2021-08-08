@@ -13,15 +13,12 @@ import {
   TextareaContet,
   ButtonContainer,
   ButtonContent,
-  Map,
+  MapContainer,
 } from './styles';
 
-const InstitutionsMap = dynamic(
-  () => import('~/components/maps/InstitutionsMap'),
-  {
-    ssr: false,
-  },
-);
+const Map = dynamic(() => import('~/components/Map'), {
+  ssr: false,
+});
 
 const mapIcon = Leaflet.icon({
   iconUrl: '/imgs/marker.svg',
@@ -127,11 +124,11 @@ export default function NewCampaigModal({
           </div>
           <TextareaContet name="description" placeholder="Descrição" />
 
-          <Map>
-            <InstitutionsMap center={[-29.6984707, -53.8853061]}>
+          <MapContainer>
+            <Map center={[-29.6984707, -53.8853061]}>
               <LocationEvents />
-            </InstitutionsMap>
-          </Map>
+            </Map>
+          </MapContainer>
 
           <div className="address_name">
             <InputContent name="address" placeholder="Endereço" />

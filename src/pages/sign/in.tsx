@@ -11,7 +11,7 @@ import { useAuth } from '~/hooks/useAuth';
 
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
-import { Input } from '~/components/Input';
+import { Input } from '~/components/forms/Input';
 
 import { roles } from '~/utils/enum';
 import { withSSRGuest } from '~/utils/withSSRGuest';

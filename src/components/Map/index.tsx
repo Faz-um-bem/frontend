@@ -8,7 +8,7 @@ type MapProps = MapContainerProps & {
   children: ReactNode;
 };
 
-export default function InstitutionsMap({
+export default function Map({
   interactive = true,
   children,
   ...rest

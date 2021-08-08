@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
 import { Footer } from '~/components/Footer';
-import { FormCurator } from '~/components/FormCurator';
+import { FormCurator } from '~/components/forms/FormCurator';
 import { Header } from '~/components/Header';
 
 import { withSSRAuth } from '~/utils/withSSRAuth';
