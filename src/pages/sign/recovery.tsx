@@ -31,12 +31,6 @@ export default function RecoveryInstitution() {
 
             <SignInButton onClick={handleSubmit}>Recuperar</SignInButton>
           </form>
-
-          <div>
-            <button type="button" onClick={back}>
-              Voltar
-            </button>
-          </div>
         </Content>
 
         <Footer />

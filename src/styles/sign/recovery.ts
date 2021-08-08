@@ -34,13 +34,6 @@ export const Content = styled.div`
     justify-content: space-around;
 
     margin-top: 1.5rem;
-
-    button {
-      background: transparent;
-      border: 0;
-      font-size: 1rem;
-      color: var(--black);
-    }
   }
 `;
 

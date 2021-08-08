@@ -36,7 +36,7 @@ const formSchema = yup.object().shape({
 
 export default function SigninInstitution() {
   const { signIn } = useAuth();
-  const { push, query, back } = useRouter();
+  const { push, query } = useRouter();
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -109,12 +109,6 @@ export default function SigninInstitution() {
 
             <button type="button" onClick={handleSignUp}>
               Não possuo cadastro
-            </button>
-          </div>
-
-          <div className="back">
-            <button type="button" onClick={back}>
-              Voltar
             </button>
           </div>
         </Content>
