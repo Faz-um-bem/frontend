@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { FaChevronRight } from 'react-icons/fa';
 import { Marker, Popup, useMapEvents } from 'react-leaflet';
 import Leaflet from 'leaflet';
 
+import { useState } from 'react';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
 import { InstitutionCard } from '~/components/cards/InstitutionCard';
@@ -31,6 +32,8 @@ const Map = dynamic(() => import('~/components/Map'), {
 
 export default function Institutions() {
   const { push } = useRouter();
+  const [currentLocation, setCurrentLocation] =
+    useState<Leaflet.LatLngExpression>([-29.6984707, -53.8853061]);
 
   const institutions = [
     {
@@ -78,6 +81,12 @@ export default function Institutions() {
     return null;
   };
 
+  // const handleCurrentPosition = position => {
+  //   setCurrentLocation([position.coords.latitude, position.coords.longitude]);
+  // };
+
+  // navigator.geolocation.getCurrentPosition(handleCurrentPosition);
+
   return (
     <>
       <Head>
@@ -99,7 +108,7 @@ export default function Institutions() {
           </Heading>
 
           <MapContainer>
-            <Map center={[-29.6984707, -53.8853061]} doubleClickZoom={false}>
+            <Map center={currentLocation} doubleClickZoom={false}>
               <LocationEvents />
               {institutions?.map(place => (
                 <Marker
