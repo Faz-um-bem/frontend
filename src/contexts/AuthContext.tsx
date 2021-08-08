@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { useRouter } from 'next/router';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
+import { toast } from 'react-toastify';
 
 // import api from '~/services/api';
 
@@ -54,33 +55,37 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }, []);
 
-  const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
-    // const response = await api.post('sessions', { email, password });
-    const token = 'faketoken';
+  const signIn = useCallback(
+    async ({ email, password }: SignInCredentials) => {
+      // const response = await api.post('sessions', { email, password });
+      const token = 'faketoken';
 
-    setUser({
-      name: 'Wederson Fagundes',
-      email: 'wederson@example.com',
-      role: 2,
-      permission: null,
-    });
+      setUser({
+        name: 'Wederson Fagundes',
+        email: 'wederson@example.com',
+        role: 2,
+        permission: null,
+      });
 
-    setCookie(undefined, 'fazumbem.token', token, {
-      maxAge: 60 * 60 * 24 * 1, // 1 days
-      path: '/',
-    });
+      setCookie(undefined, 'fazumbem.token', token, {
+        maxAge: 60 * 60 * 24 * 1, // 1 days
+        path: '/',
+      });
 
-    // api.defaults.headers['Authorization'] = `Bearer ${token}`;
+      // api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
-    router.push('/dashboard');
-  }, []);
+      toast.success('Autenticação realizada com sucesso.');
+      router.push('/dashboard');
+    },
+    [router],
+  );
 
   const signOut = useCallback(() => {
     destroyCookie(undefined, 'fazumbem.token');
     setUser(null);
 
     router.push('/');
-  }, []);
+  }, [router]);
 
   return (
     <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, user }}>

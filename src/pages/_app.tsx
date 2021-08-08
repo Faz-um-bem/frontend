@@ -2,8 +2,9 @@ import React, { ReactNode } from 'react';
 import { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Modal from 'react-modal';
-
+import { ToastContainer } from 'react-toastify';
 import { ChakraProvider } from '@chakra-ui/react';
+
 import GlobalStyles from '~/styles/global';
 
 import { AuthProvider } from '~/contexts/AuthContext';
@@ -25,6 +26,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactNode {
 
       <GlobalStyles />
       <ScrollToTop />
+      <ToastContainer />
     </>
   );
 }
