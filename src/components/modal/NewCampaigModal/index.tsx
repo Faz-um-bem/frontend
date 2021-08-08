@@ -16,6 +16,8 @@ import {
   MapContainer,
 } from './styles';
 
+import { convertToBase64 } from '~/utils/convert';
+
 const Map = dynamic(() => import('~/components/Map'), {
   ssr: false,
 });
@@ -61,8 +63,7 @@ export default function NewCampaigModal({
   onRequestClose,
 }: NewCampaigModalProps) {
   const [location, setLocation] = useState(null);
-  const [image, setImage] = useState<File[]>([]);
-  const [previewImages, setPreviewImages] = useState([]);
+  const [image, setImage] = useState(null);
 
   const handleSubmit = useCallback(values => {
     if (data) {
@@ -72,18 +73,10 @@ export default function NewCampaigModal({
     }
   }, []);
 
-  const handleSelectImages = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleSelectImages = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target) return;
-
-    const selectedImages = Array.from(event.target.files);
-
-    setImage(selectedImages);
-
-    const selectedImagesPreview = selectedImages.map(img => {
-      return URL.createObjectURL(img);
-    });
-
-    setPreviewImages(selectedImagesPreview);
+    const imageBase64 = await convertToBase64(event.target.files[0]);
+    setImage(imageBase64);
   };
 
   const LocationEvents = () => {
@@ -113,7 +106,7 @@ export default function NewCampaigModal({
         <h2>{data ? 'Editar' : 'Cadastrar'} campanha</h2>
 
         <div>
-          {!!previewImages.length && <img src={previewImages[0]} alt="teste" />}
+          {!!image && <img src={image} alt="teste" />}
           <div className="name">
             <UploadButton>
               <label htmlFor="image">Upload da imagem</label>
