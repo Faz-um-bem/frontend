@@ -39,12 +39,6 @@ export const HeaderContainer = styled.header`
       }
     }
   }
-
-  @media (max-width: 767.98px) {
-  }
-
-  @media (max-width: 575.98px) {
-  }
 `;
 
 export const HeaderContent = styled.div`
@@ -98,16 +92,6 @@ export const HeaderContent = styled.div`
     }
   }
 
-  @media (max-width: 991.98px) {
-    padding: 0 1rem;
-
-    > img {
-      width: 450px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-
   @media (max-width: 767.98px) {
     grid-template-columns: 1fr;
   }
@@ -145,12 +129,6 @@ export const Content = styled.div`
 
   @media (max-width: 991.98px) {
     padding: 0 2rem;
-  }
-
-  @media (max-width: 767.98px) {
-  }
-
-  @media (max-width: 575.98px) {
   }
 `;
 
@@ -245,9 +223,6 @@ export const ContactContainer = styled.div`
     margin-top: -5rem;
   }
 
-  @media (max-width: 991.98px) {
-  }
-
   @media (max-width: 767.98px) {
     grid-template-columns: 2fr 1fr;
 
@@ -287,9 +262,6 @@ export const ContactContent = styled.div`
     padding: 0 2rem;
   }
 
-  @media (max-width: 767.98px) {
-  }
-
   @media (max-width: 575.98px) {
     margin: 0 auto;
   }
@@ -315,12 +287,6 @@ export const WhatsAppButton = styled(Button)`
 
   svg {
     margin-right: 1rem;
-  }
-
-  @media (max-width: 991.98px) {
-  }
-
-  @media (max-width: 767.98px) {
   }
 
   @media (max-width: 575.98px) {
