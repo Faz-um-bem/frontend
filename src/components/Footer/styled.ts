@@ -24,5 +24,7 @@ export const Container = styled.footer`
 
   @media (max-width: 767.98px) {
     padding: 2.5rem;
+    text-align: center;
+    padding: 0 4rem;
   }
 `;
