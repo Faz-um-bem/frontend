@@ -16,7 +16,7 @@ type CardProps = {
   campaign: CampaignData;
 };
 
-export function CampaignCard({ campaign }: CardProps) {
+export function CampaignItem({ campaign }: CardProps) {
   const router = useRouter();
 
   const handleCampaign = () => {
@@ -25,9 +25,10 @@ export function CampaignCard({ campaign }: CardProps) {
 
   return (
     <Container onClick={handleCampaign}>
-      <div>
+      <header>
+        <h1>CAMPANHA PARA ARRECADAÇÃO DE ALIMENTOS</h1>
         <img src={campaign.image} alt={campaign.title} />
-      </div>
+      </header>
 
       <main>
         <h1>{campaign.title}</h1>
