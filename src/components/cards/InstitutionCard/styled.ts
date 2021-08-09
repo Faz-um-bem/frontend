@@ -11,7 +11,7 @@ export const Container = styled.button`
   width: 100%;
   max-width: 548px;
   max-height: 210px;
-  /* min-height: 12.5rem; */
+  min-height: 12.5rem;
 
   background: var(--white);
 
@@ -40,8 +40,8 @@ export const Container = styled.button`
 
     width: 100%;
     height: 71px;
-    padding: 15px 0;
-    background: var(--blue);
+    padding: 1rem 0;
+    background: var(--purple);
 
     h1 {
       font-size: 1rem;
@@ -67,6 +67,17 @@ export const Container = styled.button`
   }
 
   @media (max-width: 991.98px) {
+    header {
+      h1 {
+        margin-left: 13rem;
+      }
+    }
+
+    main {
+      p {
+        margin-left: 13rem;
+      }
+    }
   }
 
   @media (max-width: 767.98px) {

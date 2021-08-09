@@ -74,12 +74,4 @@ export const ListContainer = styled.div`
     margin-left: auto;
     margin-right: auto;
   }
-
-  @media (max-width: 767.98px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  @media (max-width: 575.98px) {
-    grid-template-columns: 1fr;
-  }
 `;
