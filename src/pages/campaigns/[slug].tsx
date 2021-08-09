@@ -19,8 +19,6 @@ import {
   WhatsappShareButton,
 } from 'react-share';
 import Link from 'next/link';
-import { Marker } from 'react-leaflet';
-import Leaflet from 'leaflet';
 
 import { FaWhatsapp } from 'react-icons/fa';
 import { Header } from '~/components/Header';
@@ -40,13 +38,8 @@ import {
   WhatsAppButton,
 } from '~/styles/campaigns/campaign';
 
-const Map = dynamic(() => import('~/components/Map'), { ssr: false });
-
-const mapIcon = Leaflet.icon({
-  iconUrl: `/imgs/marker.svg`,
-  iconSize: [58, 68],
-  iconAnchor: [29, 68],
-  popupAnchor: [170, 2],
+const ViewMap = dynamic(() => import('~/components/maps/ViewMap'), {
+  ssr: false,
 });
 
 export default function Campaign() {
@@ -138,11 +131,7 @@ export default function Campaign() {
 
           <h1>Localização</h1>
           <MapContainer>
-            {process.browser && (
-              <Map interactive={false} center={[-29.6987317, -53.8868081]}>
-                <Marker icon={mapIcon} position={[-29.6987317, -53.8868081]} />
-              </Map>
-            )}
+            <ViewMap interactive={false} center={[-29.6987317, -53.8868081]} />
 
             <MapFooter>
               <Link

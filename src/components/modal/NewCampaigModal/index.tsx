@@ -3,9 +3,8 @@ import dynamic from 'next/dynamic';
 import { FiAlertCircle } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import Modal from 'react-modal';
-import { Marker, useMapEvents } from 'react-leaflet';
-import Leaflet from 'leaflet';
 
+import { LatLngExpression } from 'leaflet';
 import {
   Container,
   UploadButton,
@@ -18,15 +17,8 @@ import {
 
 import { convertToBase64 } from '~/utils/convert';
 
-const Map = dynamic(() => import('~/components/Map'), {
+const ViewMap = dynamic(() => import('~/components/maps/SelectMap'), {
   ssr: false,
-});
-
-const mapIcon = Leaflet.icon({
-  iconUrl: '/imgs/marker.svg',
-  iconSize: [58, 68],
-  iconAnchor: [29, 68],
-  popupAnchor: [170, 2],
 });
 
 type CampaignData = {
@@ -62,30 +54,24 @@ export default function NewCampaigModal({
   onDelete,
   onRequestClose,
 }: NewCampaigModalProps) {
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState<LatLngExpression>();
   const [image, setImage] = useState(null);
 
-  const handleSubmit = useCallback(values => {
-    if (data) {
-      onUpdate(values);
-    } else {
-      onCreate(values);
-    }
-  }, []);
+  const handleSubmit = useCallback(
+    values => {
+      if (data) {
+        onUpdate(values);
+      } else {
+        onCreate(values);
+      }
+    },
+    [data, onCreate, onUpdate],
+  );
 
   const handleSelectImages = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target) return;
     const imageBase64 = await convertToBase64(event.target.files[0]);
     setImage(imageBase64);
-  };
-
-  const LocationEvents = () => {
-    useMapEvents({
-      click(e) {
-        setLocation(e.latlng);
-      },
-    });
-    return location ? <Marker position={location} icon={mapIcon} /> : null;
   };
 
   return (
@@ -118,9 +104,11 @@ export default function NewCampaigModal({
           <TextareaContet name="description" placeholder="Descrição" />
 
           <MapContainer>
-            <Map center={[-29.6984707, -53.8853061]}>
-              <LocationEvents />
-            </Map>
+            <ViewMap
+              center={[-29.6984707, -53.8853061]}
+              markerPosition={location}
+              onChangeMakerPosition={setLocation}
+            />
           </MapContainer>
 
           <div className="address_name">

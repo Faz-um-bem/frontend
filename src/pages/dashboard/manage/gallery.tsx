@@ -26,6 +26,7 @@ export default function Gallery() {
   const router = useRouter();
   const userCanSeePage = useCan({ role: roles.institution });
 
+  const [preview, setPreview] = useState<File[]>([]);
   const [images, setImages] = useState<ImagesData[]>([]);
 
   const handleSelectImages = (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +34,7 @@ export default function Gallery() {
 
     const selectedImages = Array.from(event.target.files);
 
-    setImages(selectedImages);
+    setPreview(selectedImages);
   };
 
   useEffect(() => {
