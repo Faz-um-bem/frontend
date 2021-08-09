@@ -47,13 +47,11 @@ export const ListContainer = styled.div`
 
   @media (max-width: 991.98px) {
     grid-template-columns: repeat(3, 1fr);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @media (max-width: 767.98px) {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 575.98px) {
-    grid-template-columns: 1fr;
   }
 `;

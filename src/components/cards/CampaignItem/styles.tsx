@@ -6,62 +6,84 @@ export const Container = styled.button.attrs({
   display: flex;
   flex-direction: column;
 
-  background: var(--white);
-  border-radius: 1rem;
+  width: 15rem;
 
+  background: var(--white);
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 
-  border: 0;
+  border-radius: 0.8rem;
 
-  height: 100%;
-  max-height: 30rem;
-  max-width: 50rem;
-  width: 100%;
+  header {
+    display: flex;
+    flex-direction: column;
 
-  > div {
-    background: var(--gray);
-    height: 10rem;
-    width: 100%;
+    background: var(--background-gray);
 
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
+    width: 100%;
 
-    img {
+    div {
+      background: var(--yellow);
       border-top-left-radius: inherit;
       border-top-right-radius: inherit;
-      margin: auto;
-      width: inherit;
-      height: inherit;
+
+      height: 4rem;
+      padding: 0.5rem;
+
+      h1 {
+        text-align: left;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: var(--heading);
+        line-height: 1.5rem;
+        text-transform: uppercase;
+      }
+    }
+
+    img {
+      height: 8rem;
+      width: 100%;
     }
   }
 
   main {
-    padding: 1rem;
-    text-align: left;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 
-    h1 {
-      color: var(--heading);
-      font-size: 1.5rem;
-    }
+    margin: 0.5rem;
 
-    h2 {
-      color: var(--description);
-      font-size: 1rem;
+    img {
+      height: 5rem;
+      width: 5rem;
+      margin-right: 0.5rem;
+
+      border-radius: 0.8rem;
+      background: var(--background-gray);
     }
 
     div {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-gap: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
 
-      p {
-        color: var(--text-secondary);
-        font-size: 1rem;
-        margin-top: 1rem;
-        & + p {
-        }
-      }
+      width: 100%;
+      height: 100%;
     }
+  }
+`;
+
+export const Tag = styled.p`
+  background: var(--background-gray);
+  border-radius: 0.8rem;
+
+  font-size: 0.8rem;
+
+  padding: 1px 8px;
+  margin-top: 0.5rem;
+
+  &:first-child {
+    margin-top: 0;
   }
 `;

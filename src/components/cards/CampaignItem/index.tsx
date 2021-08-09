@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { Container } from './styles';
+import { Container, Tag } from './styles';
 
 type CampaignData = {
   id: string;
@@ -26,17 +26,18 @@ export function CampaignItem({ campaign }: CardProps) {
   return (
     <Container onClick={handleCampaign}>
       <header>
-        <h1>CAMPANHA PARA ARRECADAÇÃO DE ALIMENTOS</h1>
+        <div>
+          <h1>{campaign.title}</h1>
+        </div>
         <img src={campaign.image} alt={campaign.title} />
       </header>
 
       <main>
-        <h1>{campaign.title}</h1>
-        <h2>{campaign.institution.name}</h2>
+        <img src="" alt="" />
 
         <div>
           {campaign.tags.map((tag, index) => (
-            <p key={String(index)}>{tag}</p>
+            <Tag key={String(index)}>{tag}</Tag>
           ))}
         </div>
       </main>
