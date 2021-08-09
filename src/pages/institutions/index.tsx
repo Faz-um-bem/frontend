@@ -9,7 +9,7 @@ import Leaflet from 'leaflet';
 import { useState } from 'react';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
-import { InstitutionCard } from '~/components/cards/InstitutionCard';
+import { InstitutionItem } from '~/components/cards/InstitutionItem';
 
 import {
   Container,
@@ -140,7 +140,7 @@ export default function Institutions() {
 
           <ListContainer>
             {institutions.map(item => (
-              <InstitutionCard
+              <InstitutionItem
                 key={String(item.id)}
                 data={item}
                 onClick={() => handleGoToInstitution(1, 'teste')}

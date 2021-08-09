@@ -12,7 +12,7 @@ type InstitutionCardProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   data: InstitutionData;
 };
 
-export function InstitutionCard({ data, ...rest }: InstitutionCardProps) {
+export function InstitutionItem({ data, ...rest }: InstitutionCardProps) {
   return (
     <Container {...rest}>
       <img src={data?.image || '/imgs/noimage.png'} alt="Imagem" />
