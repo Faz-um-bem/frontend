@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-top: -1px;
 
   > div {
     width: 100%;
