@@ -190,7 +190,7 @@ export default function Institution() {
           <HeaderContent>
             <img src="" alt="img" />
             <div>
-              <h1>ASSOSSIAÇÃO AMPARO PROVIDÊNCIA LAR DAS VOVOZINHAS</h1>
+              <h1>ASSOCIAÇÃO AMPARO PROVIDÊNCIA LAR DAS VOVOZINHAS</h1>
               <h2>santa maria - rs</h2>
             </div>
           </HeaderContent>
