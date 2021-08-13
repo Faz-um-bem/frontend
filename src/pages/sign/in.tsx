@@ -5,12 +5,13 @@ import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { FiLock, FiMail } from 'react-icons/fi';
 
 import { useAuth } from '~/hooks/useAuth';
 
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
-import { Input } from '~/components/Input';
+import { Input } from '~/components/forms/Input';
 
 import { roles } from '~/utils/enum';
 import { withSSRGuest } from '~/utils/withSSRGuest';
@@ -35,7 +36,7 @@ const formSchema = yup.object().shape({
 
 export default function SigninInstitution() {
   const { signIn } = useAuth();
-  const { push, query, back } = useRouter();
+  const { push, query } = useRouter();
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -84,6 +85,7 @@ export default function SigninInstitution() {
               placeholder="E-mail"
               type="email"
               error={errors.email}
+              icon={FiMail}
               {...register('email')}
             />
             <Input
@@ -91,6 +93,7 @@ export default function SigninInstitution() {
               placeholder="Senha"
               type="password"
               error={errors.password}
+              icon={FiLock}
               {...register('password')}
             />
 
@@ -106,12 +109,6 @@ export default function SigninInstitution() {
 
             <button type="button" onClick={handleSignUp}>
               Não possuo cadastro
-            </button>
-          </div>
-
-          <div className="back">
-            <button type="button" onClick={back}>
-              Voltar
             </button>
           </div>
         </Content>

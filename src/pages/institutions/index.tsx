@@ -1,9 +1,12 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import { useCallback, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
+import { useState } from 'react';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
-// import { Card } from '~/components/Card';
+import { InstitutionItem } from '~/components/cards/InstitutionItem';
 
 import {
   Container,
@@ -13,13 +16,33 @@ import {
   ListContainer,
 } from '~/styles/institutions';
 
-const Map = dynamic(() => import('~/components/Map'), { ssr: false });
+const InstitutionsMap = dynamic(
+  () => import('~/components/maps/InstitutionsMap'),
+  {
+    ssr: false,
+  },
+);
+
+// const mapIcon = Leaflet.icon({
+//   iconUrl: '/imgs/marker.svg',
+//   iconSize: [58, 68],
+//   iconAnchor: [29, 68],
+//   popupAnchor: [170, 2],
+// });
 
 export default function Institutions() {
-  const inst = [
+  const { push } = useRouter();
+  const [currentLocation, setCurrentLocation] = useState([
+    -29.6984707, -53.8853061,
+  ]);
+
+  const institutions = [
     {
-      id: `1`,
-      name: 'testando 123',
+      id: 1,
+      image: null,
+      title: 'testando 123',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel',
       slug: 'teste-123',
       location: {
         latitude: -29.6987317,
@@ -27,9 +50,12 @@ export default function Institutions() {
       },
     },
     {
-      id: `2`,
-      name: 'testando 3333',
-      slug: 'teste-3333',
+      id: 2,
+      image: null,
+      title: 'testando 3333',
+      slug: 'testando-3333',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel',
       location: {
         latitude: -29.7063996,
         longitude: -53.818438,
@@ -37,10 +63,18 @@ export default function Institutions() {
     },
   ];
 
-  const init = {
-    latitude: -29.6987317,
-    longitude: -53.8780534,
-  };
+  const handleGoToInstitution = useCallback(
+    slug => {
+      push(`/institutions/${slug}`);
+    },
+    [push],
+  );
+
+  // const handleCurrentPosition = position => {
+  //   setCurrentLocation([position.coords.latitude, position.coords.longitude]);
+  // };
+
+  // navigator.geolocation.getCurrentPosition(handleCurrentPosition);
 
   return (
     <>
@@ -55,22 +89,30 @@ export default function Institutions() {
           <Heading>
             <div>
               <h1>Instituições cadastradas</h1>
-              <p>Elas levam o seu ato a quem precisa!</p>
+              <p>
+                Aqui você encontra e conhece todas as instituições que fazem um
+                bem!
+              </p>
             </div>
-
-            <div>icon</div>
           </Heading>
 
           <MapContainer>
-            <Map initialLocation={init} places={inst} />
+            <InstitutionsMap
+              center={[-29.6984707, -53.8853061]}
+              doubleClickZoom={false}
+              onGoToInstitution={handleGoToInstitution}
+              institutions={institutions}
+            />
           </MapContainer>
 
           <ListContainer>
-            {/* <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card /> */}
+            {institutions.map(item => (
+              <InstitutionItem
+                key={String(item.id)}
+                data={item}
+                onClick={() => handleGoToInstitution('teste')}
+              />
+            ))}
           </ListContainer>
         </Content>
 

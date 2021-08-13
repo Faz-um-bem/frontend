@@ -36,10 +36,6 @@ export const Content = styled.div`
 
     margin-top: 1.5rem;
 
-    &.back {
-      grid-template-columns: 1fr;
-    }
-
     button {
       background: transparent;
       border: 0;

@@ -30,8 +30,8 @@ export const ImageContent = styled.div`
     justify-content: center;
     align-items: center;
 
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
 
     background: var(--white);
 
@@ -45,20 +45,30 @@ export const ImageContent = styled.div`
   }
 `;
 
-export const NoImage = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+export const NoImage = styled.div`
   width: 100%;
   height: 100%;
 
   border-radius: 1rem;
   border: 1px dashed var(--blue);
-
   background: var(--white);
 
-  svg {
-    color: var(--blue);
+  label {
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: inherit;
+    height: inherit;
+
+    svg {
+      color: var(--blue);
+    }
+  }
+
+  input {
+    display: none;
   }
 `;

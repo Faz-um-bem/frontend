@@ -19,6 +19,9 @@ export const Container = styled.div<ContainerProps>`
   justify-content: center;
   padding: 2.5rem;
 
+  position: relative;
+  z-index: 10;
+
   > div {
     display: flex;
     flex-direction: row;

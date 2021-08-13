@@ -10,14 +10,19 @@ export const Container = styled.div<ShowScrollProps>`
   bottom: 25px;
   right: 25px;
   background: var(--white);
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   ${props => props.showScroll && 'align-items: center'};
+  z-index: 999999;
 
   svg {
-    width: 5rem;
-    height: 5rem;
+    width: 4.5rem;
+    height: 4.5rem;
     color: var(--orange);
+  }
+
+  @media (max-width: 575.98px) {
+    right: 15px;
   }
 `;

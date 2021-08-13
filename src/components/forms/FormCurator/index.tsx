@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Input } from '~/components/Input';
+import { Input } from '~/components/forms/Input';
 
 import { Container, SignInButton } from './styles';
 
@@ -16,6 +16,7 @@ type FormData = {
 
 type FormCuratorProps = {
   onSubmitForm(data: FormData): Promise<void>; // eslint-disable-line
+  isEditing?: boolean;
 };
 
 const formSchema = yup.object().shape({
@@ -35,7 +36,10 @@ const formSchema = yup.object().shape({
   name: yup.string().required('Nome é obrigatório'),
 });
 
-export function FormCurator({ onSubmitForm }: FormCuratorProps) {
+export function FormCurator({
+  onSubmitForm,
+  isEditing = false,
+}: FormCuratorProps) {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
   });
@@ -84,7 +88,9 @@ export function FormCurator({ onSubmitForm }: FormCuratorProps) {
         {...register('name')}
       />
 
-      <SignInButton type="submit">Cadastrar</SignInButton>
+      <SignInButton type="submit">
+        {isEditing ? 'Salvar' : 'Cadastrar'}
+      </SignInButton>
     </Container>
   );
 }

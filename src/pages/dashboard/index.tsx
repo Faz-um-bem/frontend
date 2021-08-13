@@ -7,7 +7,7 @@ import { FaRegBuilding, FaUsers } from 'react-icons/fa';
 import { HiOutlineClipboardCheck } from 'react-icons/hi';
 
 import { Header } from '~/components/Header';
-import { OptionItem } from '~/components/OptionItem';
+import { OptionItem } from '~/components/cards/OptionItem';
 import { Footer } from '~/components/Footer';
 
 import { useCan } from '~/hooks/useCan';

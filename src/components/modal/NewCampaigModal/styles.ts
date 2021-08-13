@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button } from '~/components/Button';
-import { Input } from '~/components/Input';
-import { Textarea } from '~/components/Textarea';
+import { Input } from '~/components/forms/Input';
+import { Textarea } from '~/components/forms/Textarea';
 
 type ButtonsProps = {
   delete: boolean;
@@ -23,6 +23,11 @@ export const Container = styled.form`
   > div {
     overflow-y: scroll;
     padding: 1.5rem;
+
+    > img {
+      height: 8rem;
+      margin: 0 auto;
+    }
 
     > div {
       display: grid;
@@ -49,8 +54,25 @@ export const Container = styled.form`
   }
 `;
 
-export const UploadButton = styled(Button)`
+export const UploadButton = styled.div`
   height: 4rem;
+  display: flex;
+  align-items: center;
+
+  background: var(--blue);
+  padding: 0 0.5rem;
+
+  border-radius: 0.8rem;
+
+  label {
+    text-align: center;
+    color: var(--white);
+    font-size: 1rem;
+  }
+
+  input[type='file'] {
+    display: none;
+  }
 `;
 
 export const InputContent = styled(Input)``;
@@ -99,7 +121,7 @@ export const ButtonContent = styled(Button)`
   }
 `;
 
-export const Map = styled.div`
+export const MapContainer = styled.div`
   width: 100%;
   height: 250px;
   border-radius: 1rem;

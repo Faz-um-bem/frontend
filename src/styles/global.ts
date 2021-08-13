@@ -1,13 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
 
 import 'leaflet/dist/leaflet.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const GlobalStyles = createGlobalStyle`
   :root {
-    --background: #EDF1F6;
+    --background: #F6F6F6;
     --background-gray: #EDF1F6;
     --background-dark-gray: #A8A8B3;
     --background-purple: #754058;
+    --background-yellow: #F1EABE;
 
     --white: #ffffff;
     --blue: #034074;
@@ -16,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
     --yellow: #F1EABE;
     --gray: #C4C4C4;
     --purple: #754058;
-    --orange: #DE3C4B;
+    --orange: #D93636;
 
     --heading: #034074;
     --text: #000000;
@@ -77,8 +79,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
     }
   ::-webkit-scrollbar-track {
     border-radius: 4px;

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-import { CardListItem } from '~/components/CardListItem';
+import { ListItem } from '~/components/cards/ListItem';
 import { Footer } from '~/components/Footer';
 import { Header } from '~/components/Header';
 
@@ -27,37 +27,37 @@ export default function ManageInstitutions() {
           <h1>Gerênciar Instituições</h1>
 
           <CampaignList>
-            {/* <CardListItem
+            {/* <ListItem
               title="teste1"
               description="HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA"
               status="active"
             />
-            <CardListItem
+            <ListItem
               title="teste2"
               description="HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA"
               status="active"
             />
-            <CardListItem
+            <ListItem
               title="teste3"
               description="HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA"
               status="draft"
             />
-            <CardListItem
+            <ListItem
               title="teste4"
               description="HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA"
               status="refused"
             />
-            <CardListItem
+            <ListItem
               title="teste234131"
               description="HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA"
               status="active"
             />
-            <CardListItem
+            <ListItem
               title="teste1"
               description="HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA"
               status="active"
             />
-            <CardListItem
+            <ListItem
               title="teste1"
               description="HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA"
               status="draft"

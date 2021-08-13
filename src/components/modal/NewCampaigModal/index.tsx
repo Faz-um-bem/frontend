@@ -1,9 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, ChangeEvent } from 'react';
 import dynamic from 'next/dynamic';
 import { FiAlertCircle } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import Modal from 'react-modal';
 
+import { LatLngExpression } from 'leaflet';
 import {
   Container,
   UploadButton,
@@ -11,10 +12,12 @@ import {
   TextareaContet,
   ButtonContainer,
   ButtonContent,
-  Map,
+  MapContainer,
 } from './styles';
 
-const MapSelect = dynamic(() => import('~/components/MapSelect'), {
+import { convertToBase64 } from '~/utils/convert';
+
+const ViewMap = dynamic(() => import('~/components/maps/SelectMap'), {
   ssr: false,
 });
 
@@ -43,7 +46,7 @@ type NewCampaigModalProps = {
   onDelete: (id: number) => void;
 };
 
-export function NewCampaigModal({
+export default function NewCampaigModal({
   isOpen,
   data,
   onCreate,
@@ -51,15 +54,25 @@ export function NewCampaigModal({
   onDelete,
   onRequestClose,
 }: NewCampaigModalProps) {
-  const [position, setPosition] = useState(null);
+  const [location, setLocation] = useState<LatLngExpression>();
+  const [image, setImage] = useState(null);
 
-  const handleSubmit = useCallback(values => {
-    if (data) {
-      onUpdate(values);
-    } else {
-      onCreate(values);
-    }
-  }, []);
+  const handleSubmit = useCallback(
+    values => {
+      if (data) {
+        onUpdate(values);
+      } else {
+        onCreate(values);
+      }
+    },
+    [data, onCreate, onUpdate],
+  );
+
+  const handleSelectImages = async (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target) return;
+    const imageBase64 = await convertToBase64(event.target.files[0]);
+    setImage(imageBase64);
+  };
 
   return (
     <Modal
@@ -79,15 +92,24 @@ export function NewCampaigModal({
         <h2>{data ? 'Editar' : 'Cadastrar'} campanha</h2>
 
         <div>
+          {!!image && <img src={image} alt="teste" />}
           <div className="name">
-            <UploadButton>Upload da imagem</UploadButton>
+            <UploadButton>
+              <label htmlFor="image">Upload da imagem</label>
+
+              <input type="file" id="image" onChange={handleSelectImages} />
+            </UploadButton>
             <InputContent name="title" placeholder="Titulo" />
           </div>
           <TextareaContet name="description" placeholder="Descrição" />
 
-          <Map>
-            <MapSelect position={position} onChangePosition={setPosition} />
-          </Map>
+          <MapContainer>
+            <ViewMap
+              center={[-29.6984707, -53.8853061]}
+              markerPosition={location}
+              onChangeMakerPosition={setLocation}
+            />
+          </MapContainer>
 
           <div className="address_name">
             <InputContent name="address" placeholder="Endereço" />

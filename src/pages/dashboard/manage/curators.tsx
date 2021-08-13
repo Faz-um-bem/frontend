@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { CardListItem } from '~/components/CardListItem';
+import { ListItem } from '~/components/cards/ListItem';
 import { Footer } from '~/components/Footer';
 import { Header } from '~/components/Header';
 import { useCan } from '~/hooks/useCan';
@@ -40,13 +40,13 @@ export default function ManageInstitutions() {
           <h1>Gerênciar Curadores</h1>
 
           <CampaignList>
-            {/* <CardListItem title="Joao Alves" />
-            <CardListItem title="Maria Clara Fernandes" />
-            <CardListItem title="Joana da Silva" />
-            <CardListItem title="Fernando Ferreira" />
-            <CardListItem title="Maiara de Morais" />
-            <CardListItem title="Pedro de Andrade" />
-            <CardListItem title="Josué" /> */}
+            {/* <ListItem title="Joao Alves" />
+            <ListItem title="Maria Clara Fernandes" />
+            <ListItem title="Joana da Silva" />
+            <ListItem title="Fernando Ferreira" />
+            <ListItem title="Maiara de Morais" />
+            <ListItem title="Pedro de Andrade" />
+            <ListItem title="Josué" /> */}
           </CampaignList>
         </Content>
 

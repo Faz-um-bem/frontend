@@ -7,7 +7,7 @@ import { GetServerSideProps } from 'next';
 
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
-import { OptionItem } from '~/components/OptionItem';
+import { OptionItem } from '~/components/cards/OptionItem';
 
 import { roles } from '~/utils/enum';
 import { withSSRGuest } from '~/utils/withSSRGuest';

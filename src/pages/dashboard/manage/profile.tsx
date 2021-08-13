@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
 import { Footer } from '~/components/Footer';
-import { FormCurator } from '~/components/FormCurator';
+import { FormCurator } from '~/components/forms/FormCurator';
 import { Header } from '~/components/Header';
 
 import { withSSRAuth } from '~/utils/withSSRAuth';
@@ -31,11 +31,7 @@ export default function Profile() {
         <Content>
           <h1>Editar Perfil</h1>
 
-          <FormCurator onSubmitForm={handleSubmit} />
-
-          <button type="button" onClick={back}>
-            Voltar
-          </button>
+          <FormCurator isEditing onSubmitForm={handleSubmit} />
         </Content>
         <Footer />
       </Container>
