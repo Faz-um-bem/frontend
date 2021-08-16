@@ -66,7 +66,7 @@ export const Content = styled.button<ContentProps>`
     align-items: center;
     justify-content: space-between;
 
-    width: 12rem;
+    /* width: 12rem; */
 
     margin-left: auto;
     padding: 0 1rem;

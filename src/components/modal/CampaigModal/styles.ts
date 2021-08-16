@@ -13,6 +13,14 @@ export const Container = styled.form`
 
   max-height: 500px;
 
+  header {
+    background: var(--white);
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
   h2 {
     font-size: 1.3rem;
     color: var(--heading);

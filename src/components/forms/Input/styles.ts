@@ -6,6 +6,7 @@ interface ContainerProps {
   isFocused: boolean;
   isFilled: boolean;
   isErrored: boolean;
+  disabled: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -14,9 +15,9 @@ export const Container = styled.div<ContainerProps>`
   align-items: center;
   width: 100%;
   height: 4rem;
-  background: var(--white);
+  background: ${props => (props.disabled ? '#fafafa' : 'var(--white)')};
   border-radius: 0.8rem;
-  border: 0.2rem solid var(--white);
+  border: 0.2rem solid ${props => (props.disabled ? '#fafafa' : 'var(--white)')};
   padding-left: 1rem;
 
   > svg {
@@ -56,6 +57,7 @@ export const InputContent = styled.input`
   padding: 0 1rem 0 0;
   border-radius: inherit;
   font-size: 1rem;
+  height: 3rem;
 
   ::placeholder {
     color: var(--description);

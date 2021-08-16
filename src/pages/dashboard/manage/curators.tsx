@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { BsPlusCircleFill } from 'react-icons/bs';
 
 import { ListItem } from '~/components/cards/ListItem';
 import { Footer } from '~/components/Footer';
@@ -16,10 +17,52 @@ import {
   CampaignList,
   Content,
 } from '~/styles/dashboard/manage/curators';
+import { CuratorModal } from '~/components/modal/CuratorModal';
 
 export default function ManageInstitutions() {
   const router = useRouter();
   const userCanSeePage = useCan({ permission: permissions.administrator });
+  const [curators, setCurators] = useState([
+    {
+      id: 1,
+      title: 'Wederson Fagundes',
+      email: 'wederson@example.com',
+      permission: 1,
+    },
+    {
+      id: 2,
+      title: 'Pedro Andrade',
+      email: 'pedro@example.com',
+      permission: 1,
+    },
+    {
+      id: 3,
+      title: 'Greice Pettine',
+      email: 'greice@example.com',
+      permission: 2,
+    },
+    {
+      id: 4,
+      title: 'Josué Veleda',
+      email: 'josue@example.com',
+      permission: 2,
+    },
+  ]);
+  const [modalCuratorInfo, setModalCuratorInfo] = useState({});
+  const [modalCuratorIsVisible, setModalCuratorIsVisible] = useState(false);
+
+  const toggleModalCurator = () =>
+    setModalCuratorIsVisible(currentValue => !currentValue);
+
+  const handleModalCuratorOpen = info => {
+    setModalCuratorInfo(info);
+    toggleModalCurator();
+  };
+
+  const handleModalCuratorClose = () => {
+    setModalCuratorInfo({});
+    toggleModalCurator();
+  };
 
   useEffect(() => {
     if (!userCanSeePage) {
@@ -37,21 +80,34 @@ export default function ManageInstitutions() {
         <Header />
 
         <Content>
-          <h1>Gerênciar Curadores</h1>
+          <header>
+            <h1>Gerênciar Curadores</h1>
+            <button type="button" onClick={() => handleModalCuratorOpen(null)}>
+              <BsPlusCircleFill size={24} />
+            </button>
+          </header>
 
           <CampaignList>
-            {/* <ListItem title="Joao Alves" />
-            <ListItem title="Maria Clara Fernandes" />
-            <ListItem title="Joana da Silva" />
-            <ListItem title="Fernando Ferreira" />
-            <ListItem title="Maiara de Morais" />
-            <ListItem title="Pedro de Andrade" />
-            <ListItem title="Josué" /> */}
+            {curators.map(curator => (
+              <ListItem
+                key={String(curator.id)}
+                data={curator}
+                onClick={() => handleModalCuratorOpen(curator)}
+              />
+            ))}
           </CampaignList>
         </Content>
 
         <Footer />
       </Container>
+
+      <CuratorModal
+        data={modalCuratorInfo}
+        isOpen={modalCuratorIsVisible}
+        onRequestClose={handleModalCuratorClose}
+        onDelete={() => {}}
+        onSubmit={() => {}}
+      />
     </>
   );
 }

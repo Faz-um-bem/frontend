@@ -20,7 +20,7 @@ export const Container = styled.div<ContainerProps>`
   padding: 2.5rem;
 
   position: relative;
-  z-index: 10;
+  z-index: 1;
 
   > div {
     display: flex;
