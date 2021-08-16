@@ -31,7 +31,9 @@ export function Header() {
   return (
     <Container isDrawerOpen={isShowDrawerButton}>
       <div>
-        <img src="/imgs/logo.svg" alt="Faz um bem!" />
+        <Link href="/">
+          <img src="/imgs/logo.svg" alt="Faz um bem!" />
+        </Link>
 
         {isShowDrawerButton ? (
           <button type="button" onClick={onOpen}>
