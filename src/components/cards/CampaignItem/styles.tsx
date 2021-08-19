@@ -23,10 +23,16 @@ export const Container = styled.button.attrs({
     border-top-right-radius: inherit;
     width: 100%;
 
-    div {
-      background: var(--yellow);
+    img {
       border-top-left-radius: inherit;
       border-top-right-radius: inherit;
+
+      height: 8rem;
+      width: 100%;
+    }
+
+    div {
+      background: var(--yellow);
 
       height: 4rem;
       padding: 0.5rem;
@@ -39,11 +45,6 @@ export const Container = styled.button.attrs({
         line-height: 1.5rem;
         text-transform: uppercase;
       }
-    }
-
-    img {
-      height: 8rem;
-      width: 100%;
     }
   }
 
