@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { FiMail, FiPhone, FiUser } from 'react-icons/fi';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -45,6 +46,7 @@ const formSchema = yup.object().shape({
 });
 
 export default function Home() {
+  const router = useRouter();
   const { register, handleSubmit, formState, reset } = useForm({
     resolver: yupResolver(formSchema),
     defaultValues: {
@@ -94,7 +96,9 @@ export default function Home() {
                 <strong>SUA AJUDA!</strong>
               </span>
 
-              <ButtonContainer>Quero ajudar!</ButtonContainer>
+              <ButtonContainer onClick={() => router.push('/campaigns')}>
+                Quero ajudar!
+              </ButtonContainer>
             </div>
 
             <img src="/imgs/main.svg" alt="Background" />
