@@ -120,7 +120,17 @@ function AuthProvider({ children }: AuthProviderProps) {
     destroyCookie(undefined, 'fazumbem.token');
     setUser(null);
 
-    router.push('/');
+    if (
+      ![
+        '/',
+        '/campaigns',
+        '/campaigns/[slug]',
+        '/institutions',
+        '/institutions/[slug]',
+      ].includes(router.pathname)
+    ) {
+      router.push('/');
+    }
   }, [router]);
 
   return (
