@@ -26,20 +26,20 @@ type SignInCredentials = {
 type SignUpData = {
   email: string;
   password: string;
-  confirm_password: string;
+  password_confirmation: string;
   name: string;
-  reason_social?: string;
+  corporate_name?: string;
   cnpj?: string;
   description?: string;
   address?: string;
   address_number?: string;
   address_complement?: string;
   neighborhood?: string;
-  cep?: string;
-  uf?: string;
+  postal_code?: string;
+  state?: string;
   city?: string;
-  phone?: string;
-  phone_secondary?: string;
+  main_phone?: string;
+  secondary_phone?: string;
 };
 
 export type AuthContextData = {

@@ -19,10 +19,17 @@ import {
   Content,
 } from '~/styles/dashboard/manage/institutions';
 
+type InstitutionData = {
+  id: number;
+  title: string;
+  description: string;
+  status: 'active' | 'draft' | 'inactive' | 'refused' | null;
+};
+
 export default function ManageInstitutions() {
   const userIsCurator = useCan({ role: roles.curator });
 
-  const [institutions, setInstitutions] = useState([
+  const [institutions, setInstitutions] = useState<InstitutionData[]>([
     {
       id: 1,
       title: 'teste1',
