@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { toast } from 'react-toastify';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
 
@@ -44,7 +45,7 @@ const formSchema = yup.object().shape({
 });
 
 export default function Home() {
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState, reset } = useForm({
     resolver: yupResolver(formSchema),
     defaultValues: {
       name: '',
@@ -53,14 +54,24 @@ export default function Home() {
       message: '',
     },
   });
-  const { errors, dirtyFields } = formState;
+  const { errors, dirtyFields, isSubmitting } = formState;
 
   const handleSubmitForm: SubmitHandler<SignInFormData> = useCallback(
     async (data, event) => {
-      await new Promise(resolve => setTimeout(resolve, 3000));
       event.preventDefault();
+
+      try {
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        toast.success(
+          'Sua mensagem foi enviada para administração do sistema.',
+        );
+        reset();
+      } catch (err) {
+        toast.error('Falha ao enviar mensagem.');
+      }
     },
-    [],
+    [reset],
   );
 
   return (
@@ -230,7 +241,7 @@ export default function Home() {
 
                 <div>
                   <span>(Todos os campos* são obrigatórios)</span>
-                  <SubmitButton type="submit">
+                  <SubmitButton type="submit" disabled={isSubmitting}>
                     {formState.isSubmitting ? 'Enviando...' : 'Enviar'}
                   </SubmitButton>
                 </div>
