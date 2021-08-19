@@ -40,7 +40,7 @@ export default function SigninInstitution() {
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
   });
-  const { errors } = formState;
+  const { errors, isSubmitting } = formState;
 
   const handleLogin: SubmitHandler<FormData> = useCallback(
     async (data, event) => {
@@ -97,17 +97,25 @@ export default function SigninInstitution() {
               {...register('password')}
             />
 
-            <SignInButton type="submit">
-              {formState.isSubmitting ? 'Aguarde...' : 'Entrar'}
+            <SignInButton type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Aguarde...' : 'Entrar'}
             </SignInButton>
           </form>
 
           <div>
-            <button type="button" onClick={handleRecovery}>
+            <button
+              type="button"
+              onClick={handleRecovery}
+              disabled={isSubmitting}
+            >
               Esqueci minha senha
             </button>
 
-            <button type="button" onClick={handleSignUp}>
+            <button
+              type="button"
+              onClick={handleSignUp}
+              disabled={isSubmitting}
+            >
               Não possuo cadastro
             </button>
           </div>
