@@ -10,24 +10,20 @@ type CardData = {
 };
 
 type CardListItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  campaign: CardData;
+  data: CardData;
 };
 
-export function ListItem({ campaign, ...rest }: CardListItemProps) {
+export function ListItem({ data, ...rest }: CardListItemProps) {
   return (
     <Container>
-      <Content
-        description={campaign.description}
-        status={campaign.status}
-        {...rest}
-      >
+      <Content description={data.description} status={data.status} {...rest}>
         <main>
-          <h1>{campaign.title}</h1>
-          {campaign.description && <p>{campaign.description}</p>}
+          <h1>{data.title}</h1>
+          {data?.description && <p>{data.description}</p>}
         </main>
 
         <aside>
-          {campaign.status && <span>{campaign.status}</span>}
+          {data.status && <span>{data.status}</span>}
           <FiChevronRight size={20} />
         </aside>
       </Content>

@@ -103,6 +103,8 @@ const GlobalStyles = createGlobalStyle`
     left: 0;
     right: 0;
 
+    z-index: 999;
+
     display: flex;
     align-items: center;
     justify-content: center;

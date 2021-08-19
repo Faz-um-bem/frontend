@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import { toast } from 'react-toastify';
 
-// import api from '~/services/api';
+import api from '~/services/api';
 
 type User = {
   name: string;
@@ -23,7 +23,27 @@ type SignInCredentials = {
   password: string;
 };
 
+type SignUpData = {
+  email: string;
+  password: string;
+  confirm_password: string;
+  name: string;
+  reason_social?: string;
+  cnpj?: string;
+  description?: string;
+  address?: string;
+  address_number?: string;
+  address_complement?: string;
+  neighborhood?: string;
+  cep?: string;
+  uf?: string;
+  city?: string;
+  phone?: string;
+  phone_secondary?: string;
+};
+
 export type AuthContextData = {
+  signUp(data: SignUpData): Promise<void>;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
   isAuthenticated: boolean;
@@ -49,8 +69,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       setUser({
         name: 'Wederson Fagundes',
         email: 'wederson@example.com',
-        role: 2,
-        permission: null,
+        role: 1,
+        permission: 1,
       });
     }
   }, []);
@@ -63,8 +83,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       setUser({
         name: 'Wederson Fagundes',
         email: 'wederson@example.com',
-        role: 2,
-        permission: null,
+        role: 1,
+        permission: 1,
       });
 
       setCookie(undefined, 'fazumbem.token', token, {
@@ -80,15 +100,43 @@ function AuthProvider({ children }: AuthProviderProps) {
     [router],
   );
 
+  const signUp = useCallback(
+    async (data: SignUpData) => {
+      try {
+        const response = await api.post('/institutions', data);
+
+        if (response) {
+          toast.success('Cadastro realizado com sucesso.');
+          router.push('/sign');
+        }
+      } catch ({ response }) {
+        toast.error(response.data.message);
+      }
+    },
+    [router],
+  );
+
   const signOut = useCallback(() => {
     destroyCookie(undefined, 'fazumbem.token');
     setUser(null);
 
-    router.push('/');
+    if (
+      ![
+        '/',
+        '/campaigns',
+        '/campaigns/[slug]',
+        '/institutions',
+        '/institutions/[slug]',
+      ].includes(router.pathname)
+    ) {
+      router.push('/');
+    }
   }, [router]);
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, user }}>
+    <AuthContext.Provider
+      value={{ signIn, signUp, signOut, isAuthenticated, user }}
+    >
       {children}
     </AuthContext.Provider>
   );

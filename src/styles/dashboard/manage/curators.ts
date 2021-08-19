@@ -12,9 +12,27 @@ export const Content = styled.div`
   width: 100%;
   margin: 2.5rem 0;
 
-  h1 {
-    color: var(--heading);
-    font-size: 1.5rem;
+  header {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    align-items: center;
+
+    h1 {
+      color: var(--heading);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    button {
+      margin-left: 1.5rem;
+      background: transparent;
+      border: 0;
+
+      svg {
+        color: var(--blue);
+      }
+    }
   }
 
   @media (max-width: 991.98px) {

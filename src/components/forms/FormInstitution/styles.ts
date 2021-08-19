@@ -36,3 +36,10 @@ export const SignInButton = styled(Button)`
 export const InputContent = styled(Input)``;
 
 export const TextareaContent = styled(Textarea)``;
+
+export const MapContainer = styled.div`
+  height: 30rem;
+  width: 100%;
+
+  border-radius: 0.8rem;
+`;

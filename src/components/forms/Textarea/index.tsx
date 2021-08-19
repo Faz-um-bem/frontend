@@ -14,12 +14,15 @@ type InputProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   error?: FieldError;
   name: string;
   isFilled?: boolean;
+  disabled?: boolean;
 };
 
 const TextareaBase: ForwardRefRenderFunction<HTMLTextAreaElement, InputProps> =
-  ({ name, error = null, isFilled = false, ...rest }, ref) => {
+  (
+    { name, error = null, isFilled = false, disabled = false, ...rest },
+    ref,
+  ) => {
     const [isFocused, setIsFocused] = useState(false);
-    // const [isFilled, setIsFilled] = useState(false);
 
     const handleInputFocus = useCallback(() => {
       setIsFocused(true);
@@ -30,13 +33,19 @@ const TextareaBase: ForwardRefRenderFunction<HTMLTextAreaElement, InputProps> =
     }, []);
 
     return (
-      <Container isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
+      <Container
+        disabled={disabled}
+        isErrored={!!error}
+        isFilled={isFilled}
+        isFocused={isFocused}
+      >
         <InputContent
           name={name}
           onFocus={handleInputFocus}
           onBlurCapture={handleInputBlur}
           rows={5}
           ref={ref}
+          disabled={disabled}
           {...rest}
         />
 

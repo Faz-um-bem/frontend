@@ -20,7 +20,7 @@ export const Container = styled.div<ContainerProps>`
   padding: 2.5rem;
 
   position: relative;
-  z-index: 10;
+  z-index: 1;
 
   > div {
     display: flex;
@@ -31,12 +31,14 @@ export const Container = styled.div<ContainerProps>`
     max-width: 1120px;
     width: 100%;
 
-    > img {
-      height: 4.5rem;
-    }
+    > button {
+      > img {
+        height: 4.5rem;
+      }
 
-    > button > svg {
-      color: var(--blue);
+      > svg {
+        color: var(--blue);
+      }
     }
   }
 `;
@@ -62,7 +64,7 @@ export const HeaderItem = styled.button.attrs({
   }
 
   :first-child {
-    margin-left: 2rem;
+    margin-left: 1.2rem;
   }
 
   :hover {

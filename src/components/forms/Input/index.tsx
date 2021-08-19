@@ -19,6 +19,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   error?: FieldError;
   isFilled?: boolean;
+  disabled?: boolean;
 };
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
@@ -28,6 +29,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
     name,
     error = null,
     isFilled = false,
+    disabled = false,
     ...rest
   },
   ref,
@@ -49,6 +51,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       isFilled={isFilled}
       isFocused={isFocused}
       style={containerStyle}
+      disabled={disabled}
     >
       {Icon && <Icon size={20} />}
       <InputContent
@@ -56,6 +59,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
         onFocus={handleInputFocus}
         onBlurCapture={handleInputBlur}
         ref={ref}
+        disabled={disabled}
         {...rest}
       />
 

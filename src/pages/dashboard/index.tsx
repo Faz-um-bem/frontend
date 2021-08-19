@@ -34,12 +34,12 @@ export default function Dashboard() {
       onClick={() => handleSubmit('/dashboard/manage/profile')}
     />,
     <OptionItem
-      label="Gerênciar Campanhas"
+      label="Gerenciar Campanhas"
       icon={FiList}
       onClick={() => handleSubmit('/dashboard/manage/campaigns')}
     />,
     <OptionItem
-      label="Gerênciar Galeria"
+      label="Gerenciar Galeria"
       icon={FiImage}
       onClick={() => handleSubmit('/dashboard/manage/gallery')}
     />,
@@ -58,7 +58,7 @@ export default function Dashboard() {
       onClick={() => handleSubmit('/dashboard/manage/profile')}
     />,
     <OptionItem
-      label="Gerênciar Curadores"
+      label="Gerenciar Curadores"
       icon={FaUsers}
       onClick={() => handleSubmit('/dashboard/manage/curators')}
       disabled={!userCanSeeCurators}
