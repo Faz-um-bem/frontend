@@ -10,7 +10,7 @@ import { Container, SignInButton } from './styles';
 type FormData = {
   email: string;
   password: string;
-  confirm_password: string;
+  password_confirmation: string;
   name: string;
 };
 
@@ -28,7 +28,7 @@ const formSchema = yup.object().shape({
     .string()
     .required('Senha é obrigatória')
     .min(6, 'Senha de conter pelo menos 6 caracteres'),
-  confirm_password: yup
+  password_confirmation: yup
     .string()
     .min(6, 'A senha deve possuir 6 digitos')
     .required('Confirmação de senha é obrigatório')
@@ -72,11 +72,11 @@ export function FormCurator({
         {...register('password')}
       />
       <Input
-        name="confirm_password"
+        name="password_confirmation"
         placeholder="Confirmação de senha"
         type="password"
-        error={errors.confirm_password}
-        {...register('confirm_password')}
+        error={errors.password_confirmation}
+        {...register('password_confirmation')}
       />
 
       <h2>Dados do usuário</h2>
