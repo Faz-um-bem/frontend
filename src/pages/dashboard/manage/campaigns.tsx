@@ -164,7 +164,7 @@ export default function ManageCampaign() {
     <>
       <Head>
         <title>
-          {userIsCurator ? 'Auditar Campanhas' : 'Gerênciar Campanhas'} | Faz um
+          {userIsCurator ? 'Auditar Campanhas' : 'Gerenciar Campanhas'} | Faz um
           bem!
         </title>
       </Head>
@@ -175,7 +175,7 @@ export default function ManageCampaign() {
         <Content>
           <header>
             <h1>
-              {userIsCurator ? 'Auditar Campanhas' : 'Gerênciar Campanhas'}
+              {userIsCurator ? 'Auditar Campanhas' : 'Gerenciar Campanhas'}
             </h1>
             {!userIsCurator && (
               <button type="button" onClick={handleCreateNewCampaignOpen}>

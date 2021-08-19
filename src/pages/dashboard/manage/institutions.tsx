@@ -90,7 +90,7 @@ export default function ManageInstitutions() {
     <>
       <Head>
         <title>
-          {userIsCurator ? 'Auditar Instituições' : 'Gerênciar Instituições'} |
+          {userIsCurator ? 'Auditar Instituições' : 'Gerenciar Instituições'} |
           Faz um bem!
         </title>
       </Head>
@@ -100,7 +100,7 @@ export default function ManageInstitutions() {
 
         <Content>
           <h1>
-            {userIsCurator ? 'Auditar Instituições' : 'Gerênciar Instituições'}
+            {userIsCurator ? 'Auditar Instituições' : 'Gerenciar Instituições'}
           </h1>
 
           <CampaignList>

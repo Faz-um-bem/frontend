@@ -73,7 +73,7 @@ export default function ManageInstitutions() {
   return (
     <>
       <Head>
-        <title>Gerênciar Curadores | Faz um bem!</title>
+        <title>Gerenciar Curadores | Faz um bem!</title>
       </Head>
 
       <Container>
@@ -81,7 +81,7 @@ export default function ManageInstitutions() {
 
         <Content>
           <header>
-            <h1>Gerênciar Curadores</h1>
+            <h1>Gerenciar Curadores</h1>
             <button type="button" onClick={() => handleModalCuratorOpen(null)}>
               <BsPlusCircleFill size={24} />
             </button>
