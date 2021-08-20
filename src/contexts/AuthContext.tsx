@@ -64,17 +64,23 @@ function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>(null);
   const isAuthenticated = !!user;
 
-  useEffect(() => {
+  const loadInstitution = async () => {
     const { 'fazumbem.token': token } = parseCookies();
 
-    if (token) {
-      setUser({
-        name: 'Wederson Fagundes',
-        email: 'wederson@example.com',
-        role: 1,
-        permission: 1,
-      });
+    try {
+      const decoded = jwtDecode(token);
+      const institution = await api.get(`institutions/${decoded.id}`);
+
+      if (token) {
+        setUser(institution.data.data);
+      }
+    } catch (err) {
+      toast.error(err.response.data.message);
     }
+  };
+
+  useEffect(() => {
+    loadInstitution();
   }, []);
 
   const signIn = useCallback(
@@ -86,8 +92,6 @@ function AuthProvider({ children }: AuthProviderProps) {
         const decoded = jwtDecode(token);
         const institution = await api.get(`institutions/${decoded.id}`);
 
-        console.log(institution);
-
         setCookie(undefined, 'fazumbem.token', token, {
           maxAge: 60 * 60 * 24 * 30, // 30 days
           path: '/',
@@ -98,7 +102,7 @@ function AuthProvider({ children }: AuthProviderProps) {
           path: '/',
         });
 
-        setUser(institution);
+        setUser(institution.data.data);
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
 
@@ -106,7 +110,6 @@ function AuthProvider({ children }: AuthProviderProps) {
         router.push('/dashboard');
       } catch (err) {
         toast.error(err.response?.data.message);
-        console.log(err);
       }
     },
     [router],
@@ -130,7 +133,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   const signOut = useCallback(() => {
     destroyCookie(undefined, 'fazumbem.token');
-    setUser(null);
+    destroyCookie(undefined, 'nextauth.refreshToken');
 
     if (
       ![
