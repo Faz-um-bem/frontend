@@ -47,7 +47,11 @@ export default function SigninInstitution() {
       event.preventDefault();
       await new Promise(resolve => setTimeout(resolve, 3000));
 
-      signIn({ email: 'wederson@example', password: 'password' });
+      signIn({
+        email: data.email,
+        password: data.password,
+        type: 'institution',
+      });
     },
     [signIn],
   );

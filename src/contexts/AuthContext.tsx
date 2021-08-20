@@ -8,8 +8,9 @@ import {
 import { useRouter } from 'next/router';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import { toast } from 'react-toastify';
+import jwtDecode from 'jwt-decode';
 
-// import api from '~/services/api';
+import api from '~/services/api';
 
 type User = {
   name: string;
@@ -21,6 +22,7 @@ type User = {
 type SignInCredentials = {
   email: string;
   password: string;
+  type: string;
 };
 
 export type AuthContextData = {
@@ -56,26 +58,36 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const signIn = useCallback(
-    async ({ email, password }: SignInCredentials) => {
-      // const response = await api.post('sessions', { email, password });
-      const token = 'faketoken';
+    async ({ email, password, type }: SignInCredentials) => {
+      try {
+        const response = await api.post('login', { email, password, type });
+        const { token, refreshToken } = response.data.data;
 
-      setUser({
-        name: 'Wederson Fagundes',
-        email: 'wederson@example.com',
-        role: 2,
-        permission: null,
-      });
+        const decoded = jwtDecode(token);
+        const institution = await api.get(`institutions/${decoded.id}`);
 
-      setCookie(undefined, 'fazumbem.token', token, {
-        maxAge: 60 * 60 * 24 * 1, // 1 days
-        path: '/',
-      });
+        console.log(institution);
 
-      // api.defaults.headers['Authorization'] = `Bearer ${token}`;
+        setCookie(undefined, 'fazumbem.token', token, {
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+          path: '/',
+        });
 
-      toast.success('Autenticação realizada com sucesso.');
-      router.push('/dashboard');
+        setCookie(undefined, 'fazumbem.refreshToken', refreshToken, {
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+          path: '/',
+        });
+
+        setUser(institution);
+
+        api.defaults.headers.Authorization = `Bearer ${token}`;
+
+        toast.success('Autenticação realizada com sucesso.');
+        router.push('/dashboard');
+      } catch (err) {
+        toast.error(err.response?.data.message);
+        console.log(err);
+      }
     },
     [router],
   );
