@@ -74,7 +74,7 @@ export default function Campaign() {
                 <h1>BAZAR LAR DAS VOVOZINHAS</h1>
                 <BiCheckShield size={25} />
               </div>
-              <h2>ASSOSSIAÇÃO AMPARO PROVIDÊNCIA LAR DAS VOVOZINHAS</h2>
+              <h2>ASSOCIAÇÃO AMPARO PROVIDÊNCIA LAR DAS VOVOZINHAS</h2>
             </div>
           </HeaderContent>
         </HeaderContainer>

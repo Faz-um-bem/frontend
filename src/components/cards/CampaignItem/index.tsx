@@ -26,10 +26,10 @@ export function CampaignItem({ campaign }: CardProps) {
   return (
     <Container onClick={handleCampaign}>
       <header>
+        <img src={campaign.image} alt={campaign.title} />
         <div>
           <h1>{campaign.title}</h1>
         </div>
-        <img src={campaign.image} alt={campaign.title} />
       </header>
 
       <main>

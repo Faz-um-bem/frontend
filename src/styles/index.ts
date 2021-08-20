@@ -429,4 +429,8 @@ export const SubmitButton = styled(Button)`
   color: var(--white);
   font-weight: bold;
   height: 4rem;
+
+  &:disabled {
+    cursor: progress;
+  }
 `;

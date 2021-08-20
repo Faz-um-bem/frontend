@@ -22,7 +22,7 @@ export default function Profile() {
   return (
     <>
       <Head>
-        <title>Gerênciar Perfil | Faz um bem!</title>
+        <title>Gerenciar Perfil | Faz um bem!</title>
       </Head>
 
       <Container>

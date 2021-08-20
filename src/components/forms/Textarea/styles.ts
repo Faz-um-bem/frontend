@@ -6,6 +6,7 @@ interface ContainerProps {
   isFocused: boolean;
   isFilled: boolean;
   isErrored: boolean;
+  disabled: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -14,7 +15,7 @@ export const Container = styled.div<ContainerProps>`
 
   background: var(--white);
   border-radius: 0.8rem;
-  border: 0.2rem solid var(--white);
+  border: 0.2rem solid ${props => (props.disabled ? '#fafafa' : 'var(--white)')};
 
   width: 100%;
 

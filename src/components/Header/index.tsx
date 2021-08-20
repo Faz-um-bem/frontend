@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {
   Drawer,
   DrawerBody,
@@ -25,13 +26,16 @@ import {
 
 export function Header() {
   const { signOut, isAuthenticated, user } = useAuth();
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isShowDrawerButton] = useMediaQuery('(max-width: 991.98px)');
 
   return (
     <Container isDrawerOpen={isShowDrawerButton}>
       <div>
-        <img src="/imgs/logo.svg" alt="Faz um bem!" />
+        <button type="button" onClick={() => router.push('/')}>
+          <img src="/imgs/logo.svg" alt="Faz um bem!" />
+        </button>
 
         {isShowDrawerButton ? (
           <button type="button" onClick={onOpen}>

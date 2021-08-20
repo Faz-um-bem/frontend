@@ -25,7 +25,27 @@ type SignInCredentials = {
   type: string;
 };
 
+type SignUpData = {
+  email: string;
+  password: string;
+  password_confirmation: string;
+  name: string;
+  corporate_name?: string;
+  cnpj?: string;
+  description?: string;
+  address?: string;
+  address_number?: string;
+  address_complement?: string;
+  neighborhood?: string;
+  postal_code?: string;
+  state?: string;
+  city?: string;
+  main_phone?: string;
+  secondary_phone?: string;
+};
+
 export type AuthContextData = {
+  signUp(data: SignUpData): Promise<void>;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
   isAuthenticated: boolean;
@@ -51,8 +71,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       setUser({
         name: 'Wederson Fagundes',
         email: 'wederson@example.com',
-        role: 2,
-        permission: null,
+        role: 1,
+        permission: 1,
       });
     }
   }, []);
@@ -92,15 +112,43 @@ function AuthProvider({ children }: AuthProviderProps) {
     [router],
   );
 
+  const signUp = useCallback(
+    async (data: SignUpData) => {
+      try {
+        const response = await api.post('/institutions', data);
+
+        if (response) {
+          toast.success('Cadastro realizado com sucesso.');
+          router.push('/sign');
+        }
+      } catch ({ response }) {
+        toast.error(response.data.message);
+      }
+    },
+    [router],
+  );
+
   const signOut = useCallback(() => {
     destroyCookie(undefined, 'fazumbem.token');
     setUser(null);
 
-    router.push('/');
+    if (
+      ![
+        '/',
+        '/campaigns',
+        '/campaigns/[slug]',
+        '/institutions',
+        '/institutions/[slug]',
+      ].includes(router.pathname)
+    ) {
+      router.push('/');
+    }
   }, [router]);
 
   return (
-    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, user }}>
+    <AuthContext.Provider
+      value={{ signIn, signUp, signOut, isAuthenticated, user }}
+    >
       {children}
     </AuthContext.Provider>
   );

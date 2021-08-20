@@ -45,7 +45,7 @@ export default function Gallery() {
   return (
     <>
       <Head>
-        <title>Gerênciar Galeria | Faz um bem!</title>
+        <title>Gerenciar Galeria | Faz um bem!</title>
       </Head>
 
       <Container>

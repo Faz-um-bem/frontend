@@ -12,32 +12,37 @@ import { roles } from '~/utils/enum';
 import { withSSRGuest } from '~/utils/withSSRGuest';
 
 import { Container, Content } from '~/styles/sign/up';
+import { useAuth } from '~/hooks/useAuth';
 
-// type SubmitData = {
-//   email: string;
-//   password: string;
-//   confirm_password: string;
-//   name: string;
-//   reason_social?: string;
-//   cnpj?: number;
-//   description?: string;
-//   address?: string;
-//   address_number?: string;
-//   address_complement?: string;
-//   neighborhood?: string;
-//   cep?: number;
-//   uf?: string;
-//   city?: string;
-//   phone?: number;
-//   phone_secondary?: number;
-// };
+type SubmitData = {
+  email: string;
+  password: string;
+  password_confirmation: string;
+  name: string;
+  corporate_name?: string;
+  cnpj?: string;
+  description?: string;
+  address?: string;
+  address_number?: string;
+  address_complement?: string;
+  neighborhood?: string;
+  postal_code?: string;
+  state?: string;
+  city?: string;
+  main_phone?: string;
+  secondary_phone?: string;
+};
 
 export default function SignUp() {
   const { query, push } = useRouter();
+  const { signUp } = useAuth();
 
-  const handleSubmit = useCallback(async () =>
-    // data: SubmitData
-    {}, []);
+  const handleSubmit = useCallback(
+    async (data: SubmitData) => {
+      await signUp(data);
+    },
+    [signUp],
+  );
 
   const handleSignIn = useCallback(() => {
     push({
