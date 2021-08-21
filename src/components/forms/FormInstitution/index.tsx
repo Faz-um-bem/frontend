@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useState } from 'react';
 import router from 'next/router';
+import { useEffect } from 'react';
 import {
   Container,
   SignInButton,
@@ -13,6 +14,7 @@ import {
   TextareaContent,
   MapContainer,
 } from './styles';
+import { useAuth } from '~/hooks/useAuth';
 
 const SelectMap = dynamic(() => import('~/components/maps/SelectMap'), {
   ssr: false,
@@ -100,12 +102,44 @@ export function FormInstitution({
   onSubmitForm,
   isEditing = false,
 }: FormInstitutionProps) {
+  const { user } = useAuth();
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
+    defaultValues: user || {
+      email: '',
+      password: '',
+      password_confirmation: '',
+      name: '',
+      corporate_name: '',
+      cnpj: '',
+      description: '',
+      address: '',
+      address_number: '',
+      address_complement: '',
+      neighborhood: '',
+      postal_code: '',
+      state: '',
+      city: '',
+      main_phone: '',
+      secondary_phone: '',
+    },
   });
   const { errors } = formState;
 
   const [position, setPosition] = useState(null);
+
+  const handlePosition = () => {
+    setPosition({
+      lat: Number(user.address_latitude),
+      lng: Number(user.address_longitude),
+    });
+  };
+
+  useEffect(() => {
+    if (user) {
+      handlePosition();
+    }
+  }, []);
 
   const handleSubmitForm: SubmitHandler<FormData> = useCallback(
     async (data, event) => {
@@ -195,8 +229,9 @@ export function FormInstitution({
       )}
       <MapContainer>
         <SelectMap
-          interactive={!isEditing}
+          // interactive={!isEditing}
           markerPosition={position}
+          // center={position}
           onChangeMakerPosition={setPosition}
         />
       </MapContainer>
