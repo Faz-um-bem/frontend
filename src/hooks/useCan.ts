@@ -14,7 +14,7 @@ export function useCan({ role, permission }: UseCanProps) {
   }
 
   if (role) {
-    const hasRole = user?.role !== Number(role);
+    const hasRole = user?.role === Number(role);
 
     if (!hasRole) {
       return false;

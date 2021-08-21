@@ -5,18 +5,34 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import { toast } from 'react-toastify';
 import jwtDecode from 'jwt-decode';
 
-import api from '~/services/api';
+import { api } from '~/services/apiClient';
+
+import { permissions, roles } from '~/utils/enum';
 
 type User = {
-  name: string;
   email: string;
-  role: number;
-  permission: number | null;
+  password: string;
+  password_confirmation: string;
+  name: string;
+  corporate_name?: string;
+  cnpj?: number;
+  description?: string;
+  address?: string;
+  address_number?: string;
+  address_complement?: string;
+  neighborhood?: string;
+  postal_code?: number;
+  state?: string;
+  city?: string;
+  main_phone?: number;
+  secondary_phone?: number;
+  address_latitude?: string;
+  address_longitude?: string;
 };
 
 type SignInCredentials = {
@@ -56,7 +72,34 @@ type AuthProviderProps = {
   children: ReactNode;
 };
 
+type DecodeData = {
+  id: number;
+  type: 'institution' | 'curator';
+  admin?: boolean;
+};
+
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+
+let authChannel: BroadcastChannel;
+
+export function signOut() {
+  destroyCookie(undefined, 'fazumbem.token');
+  destroyCookie(undefined, 'nextauth.refreshToken');
+
+  authChannel.postMessage('signOut');
+
+  if (
+    ![
+      '/',
+      '/campaigns',
+      '/campaigns/[slug]',
+      '/institutions',
+      '/institutions/[slug]',
+    ].includes(Router.pathname)
+  ) {
+    Router.push('/');
+  }
+}
 
 function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter();
@@ -64,24 +107,37 @@ function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>(null);
   const isAuthenticated = !!user;
 
+  const verify = decode => {
+    const role =
+      decode.type === 'institution' ? roles.institution : roles.curator;
+
+    const permission =
+      decode.type === 'curator'
+        ? decode.admin
+          ? permissions.administrator
+          : permissions.user
+        : null;
+
+    return { role, permission };
+  };
+
   const loadInstitution = async () => {
     const { 'fazumbem.token': token } = parseCookies();
 
     try {
-      const decoded = jwtDecode(token);
-      const institution = await api.get(`institutions/${decoded.id}`);
+      const decoded = jwtDecode<DecodeData>(token);
+      const { role, permission } = verify(decoded);
 
       if (token) {
-        setUser(institution.data.data);
+        const institution = await api.get(`institutions/${decoded.id}`);
+
+        setUser({ ...institution.data.data, role, permission });
       }
     } catch (err) {
-      toast.error(err.response.data.message);
+      toast.error(err.response?.data.message);
+      signOut();
     }
   };
-
-  useEffect(() => {
-    loadInstitution();
-  }, []);
 
   const signIn = useCallback(
     async ({ email, password, type }: SignInCredentials) => {
@@ -89,7 +145,9 @@ function AuthProvider({ children }: AuthProviderProps) {
         const response = await api.post('login', { email, password, type });
         const { token, refreshToken } = response.data.data;
 
-        const decoded = jwtDecode(token);
+        const decoded = jwtDecode<DecodeData>(token);
+        const { role, permission } = verify(decoded);
+
         const institution = await api.get(`institutions/${decoded.id}`);
 
         setCookie(undefined, 'fazumbem.token', token, {
@@ -102,7 +160,7 @@ function AuthProvider({ children }: AuthProviderProps) {
           path: '/',
         });
 
-        setUser(institution.data.data);
+        setUser({ ...institution.data.data, role, permission });
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
 
@@ -131,22 +189,23 @@ function AuthProvider({ children }: AuthProviderProps) {
     [router],
   );
 
-  const signOut = useCallback(() => {
-    destroyCookie(undefined, 'fazumbem.token');
-    destroyCookie(undefined, 'nextauth.refreshToken');
+  useEffect(() => {
+    authChannel = new BroadcastChannel('auth');
 
-    if (
-      ![
-        '/',
-        '/campaigns',
-        '/campaigns/[slug]',
-        '/institutions',
-        '/institutions/[slug]',
-      ].includes(router.pathname)
-    ) {
-      router.push('/');
-    }
-  }, [router]);
+    authChannel.onmessage = message => {
+      switch (message.data) {
+        case 'signOut':
+          signOut();
+          break;
+        default:
+          break;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    loadInstitution();
+  }, []);
 
   return (
     <AuthContext.Provider
