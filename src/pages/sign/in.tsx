@@ -50,7 +50,8 @@ export default function SigninInstitution() {
       signIn({
         email: data.email,
         password: data.password,
-        type: 'institution',
+        type:
+          query.role === String(roles.institution) ? 'institution' : 'curator',
       });
     },
     [signIn],

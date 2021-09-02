@@ -35,11 +35,15 @@ type SubmitData = {
 
 export default function SignUp() {
   const { query, push } = useRouter();
-  const { signUp } = useAuth();
+  const { signUp, signUpCurator } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: SubmitData) => {
-      await signUp(data);
+      if (query.role === String(roles.institution)) {
+        await signUp(data);
+      } else {
+        await signUpCurator(data);
+      }
     },
     [signUp],
   );

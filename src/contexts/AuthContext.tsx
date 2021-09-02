@@ -63,9 +63,10 @@ type SignUpData = {
 
 export type AuthContextData = {
   signUp(data: SignUpData): Promise<void>;
+  signUpCurator(data: SignUpData): Promise<void>;
   signIn(credentials: SignInCredentials): Promise<void>;
-  signOut(): void;
   signOutUser(): void;
+  signOut(): void;
   isAuthenticated: boolean;
   user: User;
 };
@@ -123,7 +124,7 @@ function AuthProvider({ children }: AuthProviderProps) {
     return { role, permission };
   };
 
-  const loadInstitution = async () => {
+  const loadUser = async () => {
     const { 'fazumbem.token': token } = parseCookies();
 
     try {
@@ -131,9 +132,15 @@ function AuthProvider({ children }: AuthProviderProps) {
       const { role, permission } = verify(decoded);
 
       if (token) {
-        const institution = await api.get(`institutions/${decoded.id}`);
+        let response;
 
-        setUser({ ...institution.data.data, role, permission });
+        if (role === roles.institution) {
+          response = await api.get(`institutions/${decoded.id}`);
+        } else {
+          response = await api.get(`curators/${decoded.id}`);
+        }
+
+        setUser({ ...response.data.data, role, permission });
       }
     } catch (err) {
       toast.error(err.response?.data.message);
@@ -195,6 +202,22 @@ function AuthProvider({ children }: AuthProviderProps) {
     [router],
   );
 
+  const signUpCurator = useCallback(
+    async (data: SignUpData) => {
+      try {
+        const response = await api.post('/curators', { ...data, admin: false });
+
+        if (response) {
+          toast.success('Cadastro realizado com sucesso.');
+          router.push('/sign');
+        }
+      } catch ({ response }) {
+        toast.error(response.data.message);
+      }
+    },
+    [router],
+  );
+
   useEffect(() => {
     authChannel = new BroadcastChannel('auth');
 
@@ -210,12 +233,20 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   useEffect(() => {
-    loadInstitution();
+    loadUser();
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ signIn, signUp, signOut, signOutUser, isAuthenticated, user }}
+      value={{
+        signIn,
+        signUp,
+        signUpCurator,
+        signOut,
+        signOutUser,
+        isAuthenticated,
+        user,
+      }}
     >
       {children}
     </AuthContext.Provider>
