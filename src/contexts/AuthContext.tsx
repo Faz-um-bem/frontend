@@ -65,6 +65,7 @@ export type AuthContextData = {
   signUp(data: SignUpData): Promise<void>;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
+  signOutUser(): void;
   isAuthenticated: boolean;
   user: User;
 };
@@ -140,6 +141,10 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  const signOutUser = useCallback(() => {
+    setUser(null);
+  }, []);
+
   const signIn = useCallback(
     async ({ email, password, type }: SignInCredentials) => {
       try {
@@ -210,7 +215,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ signIn, signUp, signOut, isAuthenticated, user }}
+      value={{ signIn, signUp, signOut, signOutUser, isAuthenticated, user }}
     >
       {children}
     </AuthContext.Provider>

@@ -25,7 +25,7 @@ import {
 } from './styles';
 
 export function Header() {
-  const { signOut, isAuthenticated, user } = useAuth();
+  const { signOut, signOutUser, isAuthenticated, user } = useAuth();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isShowDrawerButton] = useMediaQuery('(max-width: 991.98px)');
@@ -125,7 +125,13 @@ export function Header() {
                   <Link href="/sign">Entrar</Link>
                 </button>
               ) : (
-                <button type="button" onClick={signOut}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    signOut();
+                    signOutUser();
+                  }}
+                >
                   Sair
                 </button>
               )}
