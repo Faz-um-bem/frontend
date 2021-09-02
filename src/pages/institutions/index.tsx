@@ -4,6 +4,7 @@ import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { useState } from 'react';
+import { GetServerSideProps } from 'next';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
 import { InstitutionItem } from '~/components/cards/InstitutionItem';
@@ -15,6 +16,7 @@ import {
   MapContainer,
   ListContainer,
 } from '~/styles/institutions';
+import { api } from '~/services/apiClient';
 
 const InstitutionsMap = dynamic(
   () => import('~/components/maps/InstitutionsMap'),
@@ -23,45 +25,23 @@ const InstitutionsMap = dynamic(
   },
 );
 
-// const mapIcon = Leaflet.icon({
-//   iconUrl: '/imgs/marker.svg',
-//   iconSize: [58, 68],
-//   iconAnchor: [29, 68],
-//   popupAnchor: [170, 2],
-// });
+type InstitutionData = {
+  id: number;
+  name: string;
+  description: string;
+  logo?: string;
+  slug: string;
+};
 
-export default function Institutions() {
+type InstitutionsProps = {
+  institutionsData: Array<InstitutionData>;
+};
+
+export default function Institutions({ institutionsData }: InstitutionsProps) {
   const { push } = useRouter();
   const [currentLocation, setCurrentLocation] = useState([
     -29.6984707, -53.8853061,
   ]);
-
-  const institutions = [
-    {
-      id: 1,
-      image: null,
-      title: 'testando 123',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel',
-      slug: 'teste-123',
-      location: {
-        latitude: -29.6987317,
-        longitude: -53.8780534,
-      },
-    },
-    {
-      id: 2,
-      image: null,
-      title: 'testando 3333',
-      slug: 'testando-3333',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel',
-      location: {
-        latitude: -29.7063996,
-        longitude: -53.818438,
-      },
-    },
-  ];
 
   const handleGoToInstitution = useCallback(
     slug => {
@@ -101,16 +81,16 @@ export default function Institutions() {
               center={[-29.6984707, -53.8853061]}
               doubleClickZoom={false}
               onGoToInstitution={handleGoToInstitution}
-              institutions={institutions}
+              institutions={institutionsData}
             />
           </MapContainer>
 
           <ListContainer>
-            {institutions.map(item => (
+            {institutionsData.map(item => (
               <InstitutionItem
                 key={String(item.id)}
                 data={item}
-                onClick={() => handleGoToInstitution('teste')}
+                onClick={() => handleGoToInstitution(item.slug)}
               />
             ))}
           </ListContainer>
@@ -121,3 +101,13 @@ export default function Institutions() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await api.get('/institutions');
+
+  return {
+    props: {
+      institutionsData: response.data.data.data,
+    },
+  };
+};

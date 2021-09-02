@@ -20,14 +20,22 @@ const mapIcon = Leaflet.icon({
 
 type InstitutionData = {
   id: number;
-  image: string | null;
-  title: string;
+  logo: string | null;
+  name: string;
   slug: string;
   description: string;
-  location: {
-    latitude: number;
-    longitude: number;
-  };
+  address: string;
+  address_number: string;
+  address_complement: string;
+  neighborhood: string;
+  postal_code: string;
+  city: string;
+  state: string;
+  address_latitude: string;
+  address_longitude: string;
+  main_phone: string;
+  secondary_phone: string;
+  whatsapp_phone: string;
 };
 
 type MapProps = MapContainerProps & {
@@ -75,7 +83,7 @@ export default function Map({
           <Marker
             key={place.id}
             icon={mapIcon}
-            position={[place.location.latitude, place.location.longitude]}
+            position={[place.address_latitude, place.address_longitude]}
           >
             <Popup
               closeButton={false}
@@ -83,7 +91,7 @@ export default function Map({
               maxWidth={240}
               className="map-popup"
             >
-              {[place.title]}
+              {[place.name]}
 
               <button
                 type="button"
