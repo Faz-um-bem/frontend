@@ -87,7 +87,7 @@ let authChannel: BroadcastChannel;
 
 export function signOut() {
   destroyCookie(undefined, 'fazumbem.token');
-  destroyCookie(undefined, 'nextauth.refreshToken');
+  destroyCookie(undefined, 'fazumbem.refreshToken');
 
   authChannel.postMessage('signOut');
 
@@ -124,15 +124,22 @@ function AuthProvider({ children }: AuthProviderProps) {
     return { role, permission };
   };
 
+  const signOutUser = useCallback(() => {
+    setUser(null);
+  }, []);
+
   const loadUser = async () => {
     const { 'fazumbem.token': token } = parseCookies();
 
     try {
       const decoded = jwtDecode<DecodeData>(token);
-      const { role, permission } = verify(decoded);
 
       if (token) {
+        const { role, permission } = verify(decoded);
+
         let response;
+
+        console.log(role);
 
         if (role === roles.institution) {
           response = await api.get(`institutions/${decoded.id}`);
@@ -145,12 +152,9 @@ function AuthProvider({ children }: AuthProviderProps) {
     } catch (err) {
       toast.error(err.response?.data.message);
       signOut();
+      signOutUser();
     }
   };
-
-  const signOutUser = useCallback(() => {
-    setUser(null);
-  }, []);
 
   const signIn = useCallback(
     async ({ email, password, type }: SignInCredentials) => {
