@@ -13,8 +13,10 @@ import {
   InputContent,
   TextareaContent,
   MapContainer,
+  // SelectContent,
 } from './styles';
 import { useAuth } from '~/hooks/useAuth';
+// import apiIBGE from '~/services/apiIBGE';
 
 const SelectMap = dynamic(() => import('~/components/maps/SelectMap'), {
   ssr: false,
@@ -89,8 +91,8 @@ const formSchema = yup.object().shape({
     .number()
     .required('CEP é obrigatório')
     .min(8, 'CEP inválido'),
-  state: yup.string().required('Unidade Federativa é obrigatório'),
-  city: yup.string().required('Cidade é obrigatório'),
+  // state: yup.string().required('Unidade Federativa é obrigatório'),
+  // city: yup.string().required('Cidade é obrigatório'),
   main_phone: yup
     .number()
     .required('Número de telefone obrigatório')
@@ -122,11 +124,15 @@ export function FormInstitution({
       city: '',
       main_phone: '',
       secondary_phone: '',
+      whatsapp_phone: '',
     },
   });
   const { errors } = formState;
 
   const [position, setPosition] = useState(null);
+  // const [currentUf, setCurrentUf] = useState('');
+  // const [ufs, setUfs] = useState([]);
+  // const [cities, setCities] = useState([]);
 
   const handlePosition = () => {
     setPosition({
@@ -135,15 +141,36 @@ export function FormInstitution({
     });
   };
 
+  // const loadUFs = useCallback(async () => {
+  //   const response = await apiIBGE.get('/estados');
+  //   const attUfs = response.data.map(uf => uf.sigla);
+
+  //   setUfs(attUfs);
+  // }, []);
+
+  // const loadCities = useCallback(async uf => {
+  //   const response = await apiIBGE.get(`/estados/${uf}/municipios`);
+  //   const attCities = response.data.map(city => city.sigla);
+
+  //   setCities(attCities);
+  // }, []);
+
   useEffect(() => {
     if (user) {
       handlePosition();
     }
   }, []);
 
+  // useEffect(() => {
+  //   loadUFs();
+  // }, []);
+
+  // useEffect(() => {
+  //   loadCities(currentUf);
+  // }, [currentUf]);
+
   const handleSubmitForm: SubmitHandler<FormData> = useCallback(
     async (data, event) => {
-      await new Promise(resolve => setTimeout(resolve, 3000));
       event.preventDefault();
 
       if (!position) {
@@ -229,9 +256,9 @@ export function FormInstitution({
       )}
       <MapContainer>
         <SelectMap
-          // interactive={!isEditing}
+          interactive={!isEditing}
           markerPosition={position}
-          // center={position}
+          center={position}
           onChangeMakerPosition={setPosition}
         />
       </MapContainer>
@@ -307,6 +334,30 @@ export function FormInstitution({
         error={errors.secondary_phone}
         {...register('secondary_phone')}
       />
+
+      <InputContent
+        name="whatsapp_phone"
+        placeholder="WhatsApp"
+        type="number"
+        error={errors.whatsapp_phone}
+        {...register('whatsapp_phone')}
+      />
+
+      {/* <SelectContent
+        name="state"
+        onChange={e => console.log(e.target.value)}
+        {...register('state')}
+      >
+        {ufs.map(uf => (
+          <option value={uf}>{uf}</option>
+        ))}
+      </SelectContent>
+
+      <SelectContent {...register('city')}>
+        {cities.map(city => (
+          <option value={city}>{city}</option>
+        ))}
+      </SelectContent> */}
 
       <SignInButton type="submit">
         {formState.isSubmitting
