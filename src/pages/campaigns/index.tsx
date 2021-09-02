@@ -10,6 +10,7 @@ import { api } from '~/services/apiClient';
 
 type CampaignData = {
   id: number;
+  slug: string;
   title: string;
   tags?: string[];
 };

@@ -4,6 +4,7 @@ import { Container, Tag } from './styles';
 
 type CampaignData = {
   id: number;
+  slug: string;
   image?: string;
   title: string;
   tags?: string[];
@@ -20,7 +21,7 @@ export function CampaignItem({ campaign }: CardProps) {
   const router = useRouter();
 
   const handleCampaign = () => {
-    router.push(`/campaigns/${campaign.id}`);
+    router.push(`/campaigns/${campaign.slug}`);
   };
 
   return (

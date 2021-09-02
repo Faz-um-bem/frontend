@@ -4,7 +4,7 @@ import {
   TileLayer,
   Marker,
 } from 'react-leaflet';
-import Leaflet from 'leaflet';
+import Leaflet, { LatLngExpression } from 'leaflet';
 
 import { Container } from './styles';
 
@@ -17,13 +17,18 @@ const mapIcon = Leaflet.icon({
 
 type MapProps = MapContainerProps & {
   interactive?: boolean;
+  position?: LatLngExpression;
 };
 
-export default function ViewMap({ interactive = true, ...rest }: MapProps) {
+export default function ViewMap({
+  interactive = true,
+  position,
+  ...rest
+}: MapProps) {
   return (
     <Container>
       <MapContainer
-        center={[-29.7031818, -53.7027934]}
+        // center={[-29.7031818, -53.7027934]}
         zoom={15}
         style={{ width: '100%', height: '100%' }}
         scrollWheelZoom={false}
@@ -36,7 +41,7 @@ export default function ViewMap({ interactive = true, ...rest }: MapProps) {
         <TileLayer
           url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`}
         />
-        <Marker icon={mapIcon} position={[-29.6987317, -53.8868081]} />
+        {position && <Marker icon={mapIcon} position={position} />}
       </MapContainer>
     </Container>
   );
