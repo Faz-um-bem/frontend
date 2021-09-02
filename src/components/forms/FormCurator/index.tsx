@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from '~/components/forms/Input';
 
 import { Container, SignInButton } from './styles';
+import { useAuth } from '~/hooks/useAuth';
 
 type FormData = {
   email: string;
@@ -40,8 +41,13 @@ export function FormCurator({
   onSubmitForm,
   isEditing = false,
 }: FormCuratorProps) {
+  const { user } = useAuth();
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
+    defaultValues: user || {
+      email: '',
+      name: '',
+    },
   });
   const { errors } = formState;
 
