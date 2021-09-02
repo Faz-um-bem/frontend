@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import { Container, Tag } from './styles';
 
 type CampaignData = {
-  id: string;
-  image: string;
+  id: number;
+  image?: string;
   title: string;
-  tags: string[];
-  institution: {
+  tags?: string[];
+  institution?: {
     name: string;
   };
 };
@@ -36,7 +36,7 @@ export function CampaignItem({ campaign }: CardProps) {
         <img src="" alt="" />
 
         <div>
-          {campaign.tags.map((tag, index) => (
+          {campaign.tags?.map((tag, index) => (
             <Tag key={String(index)}>{tag}</Tag>
           ))}
         </div>
