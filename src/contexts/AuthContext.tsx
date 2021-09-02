@@ -15,6 +15,7 @@ import { api } from '~/services/apiClient';
 import { permissions, roles } from '~/utils/enum';
 
 type User = {
+  id: number;
   email: string;
   password: string;
   password_confirmation: string;

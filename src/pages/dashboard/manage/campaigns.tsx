@@ -5,6 +5,7 @@ import { BsPlusCircleFill } from 'react-icons/bs';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
+import { toast } from 'react-toastify';
 import { ListItem } from '~/components/cards/ListItem';
 import { Footer } from '~/components/Footer';
 import { Header } from '~/components/Header';
@@ -20,6 +21,8 @@ import {
 
 import { useCan } from '~/hooks/useCan';
 import { roles } from '~/utils/enum';
+import { api } from '~/services/apiClient';
+import { useAuth } from '~/hooks/useAuth';
 
 const CampaigModal = dynamic(() => import('~/components/modal/CampaigModal'), {
   ssr: false,
@@ -38,10 +41,11 @@ type CampaignData = {
   city: string;
   address_latitude: string;
   address_longitude: string;
-  status: 'active' | 'inactive' | 'draft' | 'refused' | null;
+  status: number;
 };
 
 export default function ManageCampaign() {
+  const { user } = useAuth();
   const userIsCurator = useCan({ role: roles.curator });
 
   const [campaigns, setCampaigns] = useState<CampaignData[]>([]);
@@ -71,79 +75,41 @@ export default function ManageCampaign() {
   }, []);
 
   const loadCampaigns = useCallback(async () => {
-    const response: CampaignData[] = [
-      {
-        id: 1,
-        title: 'Campanha 1',
-        description: 'Descrição da campanha 1',
-        address: 'Endereço tal',
-        address_number: '10',
-        address_complement: 'complemento',
-        neighborhood: 'Bairro tal',
-        postal_code: '970000000',
-        state: 'RS',
-        city: 'Santa Maria',
-        address_latitude: '111111111111',
-        address_longitude: '2222222222',
-        status: 'active',
-      },
-      {
-        id: 2,
-        title: 'Campanha 1',
-        description: 'Descrição da campanha 1',
-        address: 'Endereço tal',
-        address_number: '10',
-        address_complement: 'complemento',
-        neighborhood: 'Bairro tal',
-        postal_code: '970000000',
-        state: 'RS',
-        city: 'Santa Maria',
-        address_latitude: '111111111111',
-        address_longitude: '2222222222',
-        status: 'draft',
-      },
-      {
-        id: 3,
-        title: 'Campanha 1',
-        description: 'Descrição da campanha 1',
-        address: 'Endereço tal',
-        address_number: '10',
-        address_complement: 'complemento',
-        neighborhood: 'Bairro tal',
-        postal_code: '970000000',
-        state: 'RS',
-        city: 'Santa Maria',
-        address_latitude: '111111111111',
-        address_longitude: '2222222222',
-        status: 'active',
-      },
-      {
-        id: 4,
-        title: 'Campanha 1',
-        description: 'Descrição da campanha 1',
-        address: 'Endereço tal',
-        address_number: '10',
-        address_complement: 'complemento',
-        neighborhood: 'Bairro tal',
-        postal_code: '970000000',
-        state: 'RS',
-        city: 'Santa Maria',
-        address_latitude: '111111111111',
-        address_longitude: '2222222222',
-        status: 'active',
-      },
-    ];
+    try {
+      const response = await api.get<CampaignData[]>(
+        `/institutions/${user.id}/campaigns`,
+      );
 
-    setCampaigns(response);
-  }, []);
+      setCampaigns(response.data);
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
+  }, [user.id]);
 
   const handleUpdateCampaign = useCallback(async (data: CampaignData) => {},
   []);
-  const handleCreateCampaign = useCallback(async (data: CampaignData) => {},
-  []);
+
+  const handleCreateCampaign = useCallback(
+    async (data: CampaignData) => {
+      try {
+        const response = await api.post(
+          `/institutions/${user.id}/campaign`,
+          data,
+        );
+
+        setCampaigns([...campaigns, response.data]);
+
+        toast.success('Camanha enviada para auditagem');
+      } catch (err) {
+        toast.error(err.message);
+      }
+    },
+    [user.id],
+  );
+
   const handleDeleteCampaign = useCallback(async () => {}, []);
 
-  const handleRejectModal = () => {
+  const handleRejectModal = async () => {
     toggleModalCampaign();
     toggleModalReason();
   };
@@ -152,7 +118,7 @@ export default function ManageCampaign() {
     toggleModalReason();
   };
 
-  const handleAcceptCampaign = () => {
+  const handleAcceptCampaign = async () => {
     toggleModalCampaign();
   };
 

@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 interface ContentProps {
   description: string | null;
-  status: 'active' | 'draft' | 'inactive' | 'refused' | null;
+  status: number;
 }
 
 const colors = {
-  refused: '#D93636',
-  active: '#51B853',
-  draft: '#FFD666',
-  inactive: '#C4C4C4',
+  0: '#D93636',
+  1: '#51B853',
+  2: '#FFD666',
+  3: '#C4C4C4',
 };
 
 export const Container = styled.div`

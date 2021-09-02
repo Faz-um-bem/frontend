@@ -1,12 +1,13 @@
 import { ButtonHTMLAttributes } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
+import { campaignStatus } from '~/utils/enum/campaign';
 
 import { Container, Content } from './styled';
 
 type CardData = {
   title: string;
   description?: string;
-  status?: 'active' | 'draft' | 'inactive' | 'refused' | null;
+  status?: number;
 };
 
 type CardListItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -23,7 +24,14 @@ export function ListItem({ data, ...rest }: CardListItemProps) {
         </main>
 
         <aside>
-          {data.status && <span>{data.status}</span>}
+          {data.status && (
+            <span>
+              {data.status === campaignStatus.approved && 'Aprovada'}
+              {data.status === campaignStatus.refused && 'Recusada'}
+              {data.status === campaignStatus.inactive && 'Inativa'}
+              {data.status === campaignStatus.underReview && 'Em análise'}
+            </span>
+          )}
           <FiChevronRight size={20} />
         </aside>
       </Content>
