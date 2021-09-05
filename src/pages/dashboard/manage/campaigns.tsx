@@ -39,6 +39,7 @@ type CampaignData = {
   address_latitude: string;
   address_longitude: string;
   status: number;
+  logo: string;
 };
 
 type ResponseData = {
@@ -75,11 +76,12 @@ export default function ManageCampaign() {
       const response = await api.get<ResponseData>(
         `/institutions/${user.id}/campaigns`,
       );
+
       setCampaigns(response.data.data);
     } catch (err) {
       toast.error(err.response.data.message);
     }
-  }, []);
+  }, [user.id]);
 
   const handleUpdateCampaign = useCallback(
     async (data: CampaignData, id: number) => {
@@ -94,15 +96,13 @@ export default function ManageCampaign() {
         );
 
         setCampaigns(attCampaign);
-
         toast.success('Atualização enviada');
-
         toggleModalCampaign();
       } catch (err) {
         toast.error(err.response.data.message);
       }
     },
-    [],
+    [campaigns, user.id],
   );
 
   const handleCreateCampaign = useCallback(
@@ -113,10 +113,9 @@ export default function ManageCampaign() {
           data,
         );
 
-        setCampaigns([...campaigns, response.data]);
-
+        console.log(response);
+        setCampaigns([...campaigns, response.data.data.data]);
         toast.success('Campanha enviada para auditagem');
-
         toggleModalCampaign();
       } catch (err) {
         toast.error(err.response.data.message);
@@ -125,21 +124,24 @@ export default function ManageCampaign() {
     [campaigns, user],
   );
 
-  const handleDeleteCampaign = useCallback(async id => {
-    try {
-      await api.put(`/institutions/${user.id}/campaign/${id}`);
+  const handleDeleteCampaign = useCallback(
+    async id => {
+      try {
+        await api.put(`/institutions/${user.id}/campaign/${id}`);
 
-      const attCampaign = campaigns.filter(c => c.id !== id);
+        const attCampaign = campaigns.filter(c => c.id !== id);
 
-      setCampaigns(attCampaign);
+        setCampaigns(attCampaign);
 
-      toast.success('Campanha removida');
+        toast.success('Campanha removida');
 
-      toggleModalCampaign();
-    } catch (err) {
-      toast.error(err.response.data.message);
-    }
-  }, []);
+        toggleModalCampaign();
+      } catch (err) {
+        toast.error(err.response.data.message);
+      }
+    },
+    [campaigns, user.id],
+  );
 
   useEffect(() => {
     loadCampaigns();
