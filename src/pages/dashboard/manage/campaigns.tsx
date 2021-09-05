@@ -9,7 +9,6 @@ import { toast } from 'react-toastify';
 import { ListItem } from '~/components/cards/ListItem';
 import { Footer } from '~/components/Footer';
 import { Header } from '~/components/Header';
-import { AuditorMessageModal } from '~/components/modal/AuditorMessageModal';
 
 import { withSSRAuth } from '~/utils/withSSRAuth';
 
@@ -19,8 +18,6 @@ import {
   Content,
 } from '~/styles/dashboard/manage/campaigns';
 
-import { useCan } from '~/hooks/useCan';
-import { roles } from '~/utils/enum';
 import { api } from '~/services/apiClient';
 import { useAuth } from '~/hooks/useAuth';
 
@@ -44,19 +41,18 @@ type CampaignData = {
   status: number;
 };
 
+type ResponseData = {
+  data: CampaignData[];
+  message: string;
+};
+
 export default function ManageCampaign() {
   const { user } = useAuth();
-  const userIsCurator = useCan({ role: roles.curator });
 
   const [campaigns, setCampaigns] = useState<CampaignData[]>([]);
-
   const [isCreateNewCampaignOpen, setIsCreateNewCampaignOpen] = useState(false);
-  const [modalReasonIsVisible, setModalReasonIsVisible] = useState(false);
-
   const [modalData, setModalData] = useState<CampaignData>(null);
 
-  const toggleModalReason = () =>
-    setModalReasonIsVisible(currentValue => !currentValue);
   const toggleModalCampaign = () =>
     setIsCreateNewCampaignOpen(currentValue => !currentValue);
 
@@ -76,18 +72,38 @@ export default function ManageCampaign() {
 
   const loadCampaigns = useCallback(async () => {
     try {
-      const response = await api.get<CampaignData[]>(
+      const response = await api.get<ResponseData>(
         `/institutions/${user.id}/campaigns`,
       );
-
-      setCampaigns(response.data);
+      setCampaigns(response.data.data);
     } catch (err) {
       toast.error(err.response.data.message);
     }
-  }, [user.id]);
+  }, []);
 
-  const handleUpdateCampaign = useCallback(async (data: CampaignData) => {},
-  []);
+  const handleUpdateCampaign = useCallback(
+    async (data: CampaignData, id: number) => {
+      try {
+        const response = await api.put(
+          `/institutions/${user.id}/campaign/${id}`,
+          data,
+        );
+
+        const attCampaign = campaigns.map(c =>
+          c.id === response.data.id ? response.data.data : c,
+        );
+
+        setCampaigns(attCampaign);
+
+        toast.success('Atualização enviada');
+
+        toggleModalCampaign();
+      } catch (err) {
+        toast.error(err.response.data.message);
+      }
+    },
+    [],
+  );
 
   const handleCreateCampaign = useCallback(
     async (data: CampaignData) => {
@@ -99,28 +115,31 @@ export default function ManageCampaign() {
 
         setCampaigns([...campaigns, response.data]);
 
-        toast.success('Camanha enviada para auditagem');
+        toast.success('Campanha enviada para auditagem');
+
+        toggleModalCampaign();
       } catch (err) {
-        toast.error(err.message);
+        toast.error(err.response.data.message);
       }
     },
-    [user.id],
+    [campaigns, user],
   );
 
-  const handleDeleteCampaign = useCallback(async () => {}, []);
+  const handleDeleteCampaign = useCallback(async id => {
+    try {
+      await api.put(`/institutions/${user.id}/campaign/${id}`);
 
-  const handleRejectModal = async () => {
-    toggleModalCampaign();
-    toggleModalReason();
-  };
+      const attCampaign = campaigns.filter(c => c.id !== id);
 
-  const handleRejectCampaign = message => {
-    toggleModalReason();
-  };
+      setCampaigns(attCampaign);
 
-  const handleAcceptCampaign = async () => {
-    toggleModalCampaign();
-  };
+      toast.success('Campanha removida');
+
+      toggleModalCampaign();
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
+  }, []);
 
   useEffect(() => {
     loadCampaigns();
@@ -129,10 +148,7 @@ export default function ManageCampaign() {
   return (
     <>
       <Head>
-        <title>
-          {userIsCurator ? 'Auditar Campanhas' : 'Gerenciar Campanhas'} | Faz um
-          bem!
-        </title>
+        <title>Gerenciar Campanhas | Faz um bem!</title>
       </Head>
 
       <Container>
@@ -140,14 +156,11 @@ export default function ManageCampaign() {
 
         <Content>
           <header>
-            <h1>
-              {userIsCurator ? 'Auditar Campanhas' : 'Gerenciar Campanhas'}
-            </h1>
-            {!userIsCurator && (
-              <button type="button" onClick={handleCreateNewCampaignOpen}>
-                <BsPlusCircleFill size={24} />
-              </button>
-            )}
+            <h1>Gerenciar Campanhas</h1>
+
+            <button type="button" onClick={handleCreateNewCampaignOpen}>
+              <BsPlusCircleFill size={24} />
+            </button>
           </header>
 
           <CampaignList>
@@ -171,15 +184,6 @@ export default function ManageCampaign() {
         onCreate={handleCreateCampaign}
         onUpdate={handleUpdateCampaign}
         onDelete={handleDeleteCampaign}
-        onAccept={handleAcceptCampaign}
-        onReject={handleRejectModal}
-        isAuditing={userIsCurator}
-      />
-
-      <AuditorMessageModal
-        isOpen={modalReasonIsVisible}
-        onRequestClose={toggleModalReason}
-        onSubmit={handleRejectCampaign}
       />
     </>
   );

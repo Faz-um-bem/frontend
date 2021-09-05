@@ -69,6 +69,7 @@ type InstitutionProps = {
   main_phone: string;
   secondary_phone?: string;
   whatsapp_phone?: string;
+  slug: string;
 };
 
 export default function Institution({
@@ -89,14 +90,33 @@ export default function Institution({
   main_phone,
   secondary_phone,
   whatsapp_phone,
+  slug,
 }: InstitutionProps) {
-  const url = 'https://github.com';
+  const url = process.env.NEXT_PUBLIC_WEB_URL;
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   return (
     <>
       <Head>
         <title> Instituição | Faz um bem!</title>
+        <meta name="description" content={description} />+{' '}
+        <meta property="og:title" content={name} key="ogtitle" />+{' '}
+        <meta property="og:description" content={description} key="ogdesc" />
+        <meta name="twitter:card" content="summary" key="twcard" />
+        <meta name="twitter:creator" content={description} key="twhandle" />
+        <meta
+          property="og:url"
+          content={`${process.env.NEXT_PUBLIC_WEB_URL}/institutions/${slug}`}
+          key="ogurl"
+        />
+        <meta property="og:image" content={logo} key="ogimage" />
+        <meta property="og:site_name" content="Faz um bem!" key="ogsitename" />
+        <meta
+          property="og:title"
+          content="Plataforma de ações solidárias"
+          key="ogtitle"
+        />
+        <meta property="og:description" content={description} key="ogdesc" />
       </Head>
 
       <Container>
@@ -256,7 +276,7 @@ export default function Institution({
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const response = await api.get(`/institution/${query.slug}`);
-  console.log(response.data.data);
+  response.data.data);
   return {
     props: {
       ...response.data.data,
