@@ -74,13 +74,43 @@ type CampaingProps = {
 };
 
 export default function Campaign({ campaignData, institution }: CampaingProps) {
-  console.log(campaignData);
-  const url = 'https://github.com';
+  // console.log(campaignData);
+  const url = process.env.NEXT_PUBLIC_WEB_URL;
 
   return (
     <>
       <Head>
         <title> Campanha | Faz um bem!</title>
+        <meta name="description" content={campaignData.description} />+{' '}
+        <meta property="og:title" content={campaignData.title} key="ogtitle" />+{' '}
+        <meta
+          property="og:description"
+          content={campaignData.description}
+          key="ogdesc"
+        />
+        <meta name="twitter:card" content="summary" key="twcard" />
+        <meta
+          name="twitter:creator"
+          content={campaignData.description}
+          key="twhandle"
+        />
+        <meta
+          property="og:url"
+          content={`${process.env.NEXT_PUBLIC_WEB_URL}/campaigns/${campaignData.slug}`}
+          key="ogurl"
+        />
+        <meta property="og:image" content={campaignData.image} key="ogimage" />
+        <meta property="og:site_name" content="Faz um bem!" key="ogsitename" />
+        <meta
+          property="og:title"
+          content="Plataforma de ações solidárias"
+          key="ogtitle"
+        />
+        <meta
+          property="og:description"
+          content={campaignData.description}
+          key="ogdesc"
+        />
       </Head>
 
       <Container>

@@ -1,10 +1,16 @@
-import { useState, useCallback, ChangeEvent } from 'react';
+import { useState, useCallback, ChangeEvent, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { FiAlertCircle } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import Modal from 'react-modal';
 
 import { LatLngExpression } from 'leaflet';
+
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import { convertToBase64 } from '~/utils/convert';
 import {
   Container,
   UploadButton,
@@ -14,8 +20,6 @@ import {
   ButtonContent,
   MapContainer,
 } from './styles';
-
-import { convertToBase64 } from '~/utils/convert';
 
 const ViewMap = dynamic(() => import('~/components/maps/SelectMap'), {
   ssr: false,
@@ -34,20 +38,36 @@ type CampaignData = {
   city: string;
   address_latitude: string;
   address_longitude: string;
-  status: 'active' | 'inactive' | 'draft' | 'refused' | null;
+  status: number;
+  logo: string | null;
+  file?: {
+    name: string;
+    type: string;
+    size: number;
+    value: string;
+  };
 };
 
 type NewCampaigModalProps = {
   isOpen: boolean;
   data: CampaignData | null;
   onRequestClose: () => void;
-  onCreate: (values: CampaignData) => void;
-  onUpdate: (values: CampaignData) => void;
-  onDelete: () => void;
-  onAccept: () => void;
-  onReject: () => void;
-  isAuditing: boolean;
+  onCreate?: (values: CampaignData) => void;
+  onUpdate?: (values: CampaignData, id: number) => void;
+  onDelete?: (id: number) => void;
 };
+
+const formSchema = yup.object().shape({
+  title: yup.string().required('Titulo é obrigatório'),
+  description: yup.string().required('Descrição obrigatória'),
+  address: yup.string().required('Endereço obrigatório'),
+  address_number: yup.string().required('Número do endereço obrigatório'),
+  address_complement: yup.string().required('Complemento é obrigatório'),
+  neighborhood: yup.string().required('Bairro é obrigatório'),
+  postal_code: yup.string().required('CPF é obrigatório'),
+  state: yup.string().required('UF é obrigatório'),
+  city: yup.string().required('Cidade é obrigatória'),
+});
 
 export default function CampaigModal({
   isOpen,
@@ -56,39 +76,71 @@ export default function CampaigModal({
   onUpdate,
   onDelete,
   onRequestClose,
-  onAccept,
-  onReject,
-  isAuditing = false,
 }: NewCampaigModalProps) {
+  const { register, handleSubmit, formState, reset } = useForm({
+    resolver: yupResolver(formSchema),
+    defaultValues: data || {
+      title: '',
+      description: '',
+      address: '',
+      address_number: '',
+      address_complement: '',
+      neighborhood: '',
+      postal_code: '',
+      state: '',
+      city: '',
+    },
+  });
+
+  const { errors, dirtyFields } = formState;
   const [location, setLocation] = useState<LatLngExpression>();
   const [image, setImage] = useState(null);
 
-  const handleSubmit = useCallback(
-    values => {
-      if (isAuditing) {
-        onAccept();
-      } else if (data) {
-        onUpdate(values);
-      } else {
-        onCreate(values);
-      }
-    },
-    [data, onCreate, onUpdate],
-  );
-
-  const handleDelete = () => {
-    if (isAuditing) {
-      onReject();
+  const handleSubmitForm: SubmitHandler<CampaignData> = (values, event) => {
+    event.preventDefault();
+    if (data) {
+      onUpdate(
+        {
+          ...values,
+          file: image,
+          address_longitude: String(location.lng),
+          address_latitude: String(location.lat),
+        },
+        data.id,
+      );
     } else {
-      onDelete();
+      onCreate({
+        ...values,
+        file: image,
+        address_longitude: String(location.lng),
+        address_latitude: String(location.lat),
+      });
     }
   };
+
+  const handleDelete = () => {
+    onDelete(data.id);
+  };
+
+  useEffect(() => reset(), []);
 
   const handleSelectImages = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target) return;
     const imageBase64 = await convertToBase64(event.target.files[0]);
-    setImage(imageBase64);
+
+    const { name, size, type } = event.target.files[0];
+    setImage({
+      preview: imageBase64.urlPreview,
+      value: imageBase64.base64,
+      name,
+      size,
+      type,
+    });
   };
+
+  useEffect(() => {
+    return () => reset();
+  }, []);
 
   return (
     <Modal
@@ -97,7 +149,7 @@ export default function CampaigModal({
       overlayClassName="react-modal-overlay"
       className="react-modal-content"
     >
-      <Container>
+      <Container onSubmit={handleSubmit(handleSubmitForm)}>
         <header>
           <button
             type="button"
@@ -106,39 +158,53 @@ export default function CampaigModal({
           >
             <IoMdClose size={30} />
           </button>
-          <h2>
-            {data ? (isAuditing ? 'Auditar' : 'Editar') : 'Cadastrar'} campanha
-          </h2>
+          <h2>{data ? 'Editar' : 'Cadastrar'} campanha</h2>
         </header>
 
         <div>
-          {!!image && <img src={image} alt="Imagem" />}
-          <div className={isAuditing ? '' : 'name'}>
-            {!isAuditing && (
-              <UploadButton>
-                <label htmlFor="image">Upload da imagem</label>
+          {(!!data?.logo || !!image) && (
+            <img src={image?.preview || data.logo} alt="Imagem" />
+          )}
+          <div className="name">
+            <UploadButton>
+              <label htmlFor="image">
+                {!!data?.logo || !!image
+                  ? 'Alterar imagem'
+                  : 'Upload da imagem'}
+              </label>
 
-                <input type="file" id="image" onChange={handleSelectImages} />
-              </UploadButton>
-            )}
+              <input type="file" id="image" onChange={handleSelectImages} />
+            </UploadButton>
             <InputContent
               name="title"
               placeholder="Titulo"
-              disabled={isAuditing}
+              error={errors.title}
+              isFilled={dirtyFields.title}
+              {...register('title')}
             />
           </div>
           <TextareaContet
             name="description"
             placeholder="Descrição"
-            disabled={isAuditing}
+            error={errors.description}
+            isFilled={dirtyFields.description}
+            {...register('description')}
           />
 
           <MapContainer>
             <ViewMap
-              center={[-29.6984707, -53.8853061]}
-              markerPosition={location}
+              center={[
+                Number(data?.address_latitude) || -29.6984707,
+                Number(data?.address_longitude) || -53.8853061,
+              ]}
+              markerPosition={
+                location ||
+                (data?.address_latitude && [
+                  Number(data?.address_latitude),
+                  Number(data?.address_longitude),
+                ])
+              }
               onChangeMakerPosition={setLocation}
-              interactive={!isAuditing}
             />
           </MapContainer>
 
@@ -146,58 +212,76 @@ export default function CampaigModal({
             <InputContent
               name="address"
               placeholder="Endereço"
-              disabled={isAuditing}
+              error={errors.address}
+              isFilled={dirtyFields.address}
+              {...register('address')}
             />
             <InputContent
               name="address_number"
               placeholder="Número"
-              disabled={isAuditing}
+              error={errors.address_number}
+              isFilled={dirtyFields.address_number}
+              {...register('address_number')}
             />
           </div>
 
           <InputContent
             name="address_complement"
             placeholder="Complemento"
-            disabled={isAuditing}
+            error={errors.address_complement}
+            isFilled={dirtyFields.address_complement}
+            {...register('address_complement')}
           />
 
           <div className="neighborhood">
             <InputContent
               name="neighborhood"
               placeholder="Bairro"
-              disabled={isAuditing}
+              error={errors.neighborhood}
+              isFilled={dirtyFields.neighborhood}
+              {...register('neighborhood')}
             />
-            <InputContent name="cep" placeholder="CEP" disabled={isAuditing} />
+            <InputContent
+              name="postal_code"
+              placeholder="CEP"
+              error={errors.postal_code}
+              isFilled={dirtyFields.postal_code}
+              {...register('postal_code')}
+            />
           </div>
 
           <div className="state">
-            <InputContent name="uf" placeholder="UF" disabled={isAuditing} />
+            <InputContent
+              name="state"
+              placeholder="UF"
+              error={errors.state}
+              isFilled={dirtyFields.state}
+              {...register('state')}
+            />
             <InputContent
               name="city"
               placeholder="Cidade"
-              disabled={isAuditing}
+              error={errors.city}
+              isFilled={dirtyFields.city}
+              {...register('city')}
             />
           </div>
 
           <ButtonContainer delete={!!data}>
             <div>
-              {!isAuditing && (
-                <>
-                  <FiAlertCircle size={25} />
-                  <span>
-                    Sua campanha será analisada para poder ser publicada.
-                  </span>
-                </>
-              )}
+              <>
+                <FiAlertCircle size={25} />
+                <span>
+                  Sua campanha será analisada para poder ser publicada.
+                </span>
+              </>
             </div>
             {data && (
               <ButtonContent className="delete" onClick={handleDelete}>
-                {isAuditing ? 'Rejeitar' : 'Excluir'}
+                Excluir
               </ButtonContent>
             )}
-            <ButtonContent onClick={handleSubmit}>
-              {isAuditing ? 'Aceitar' : 'Publicar'}
-            </ButtonContent>
+            <ButtonContent type="submit">Publicar</ButtonContent>
           </ButtonContainer>
         </div>
       </Container>

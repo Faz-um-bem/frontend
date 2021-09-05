@@ -5,7 +5,10 @@ export function convertToBase64(file) {
     fileReader.readAsDataURL(file);
 
     fileReader.onload = () => {
-      resolve(fileReader.result);
+      resolve({
+        base64: fileReader.result.replace('data:', '').replace(/^.+,/, ''),
+        urlPreview: fileReader.result,
+      });
     };
 
     fileReader.onerror = error => {
