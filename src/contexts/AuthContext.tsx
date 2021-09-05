@@ -129,17 +129,14 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   const loadUser = async () => {
-    const { 'fazumbem.token': token } = parseCookies();
-
     try {
+      const { 'fazumbem.token': token } = parseCookies();
       const decoded = jwtDecode<DecodeData>(token);
 
       if (token) {
         const { role, permission } = verify(decoded);
 
         let response;
-
-        console.log(role);
 
         if (role === roles.institution) {
           response = await api.get(`institutions/${decoded.id}`);
