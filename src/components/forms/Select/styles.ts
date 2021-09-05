@@ -59,6 +59,10 @@ export const InputContent = styled.select`
   font-size: 1rem;
   height: 3rem;
 
+  &:not(:checked) {
+    background: transparent;
+  }
+
   ::placeholder {
     color: var(--description);
   }

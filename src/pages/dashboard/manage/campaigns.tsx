@@ -5,6 +5,8 @@ import { BsPlusCircleFill } from 'react-icons/bs';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
+import { FaSearch } from 'react-icons/fa';
+
 import { toast } from 'react-toastify';
 import { ListItem } from '~/components/cards/ListItem';
 import { Footer } from '~/components/Footer';
@@ -16,10 +18,15 @@ import {
   Container,
   CampaignList,
   Content,
+  FilterContainer,
+  InputContent,
+  SelectContent,
+  ButtonContent,
 } from '~/styles/dashboard/manage/campaigns';
 
 import { api } from '~/services/apiClient';
 import { useAuth } from '~/hooks/useAuth';
+import { campaignStatus } from '~/utils/enum/campaign';
 
 const CampaigModal = dynamic(() => import('~/components/modal/CampaigModal'), {
   ssr: false,
@@ -53,6 +60,8 @@ export default function ManageCampaign() {
   const [campaigns, setCampaigns] = useState<CampaignData[]>([]);
   const [isCreateNewCampaignOpen, setIsCreateNewCampaignOpen] = useState(false);
   const [modalData, setModalData] = useState<CampaignData>(null);
+  const [title, setTitle] = useState<string>('');
+  const [status, setStatus] = useState(null);
 
   const toggleModalCampaign = () =>
     setIsCreateNewCampaignOpen(currentValue => !currentValue);
@@ -75,6 +84,10 @@ export default function ManageCampaign() {
     try {
       const response = await api.get<ResponseData>(
         `/institutions/${user.id}/campaigns`,
+        {
+          title,
+          status: status !== 0 ? status : null,
+        },
       );
 
       setCampaigns(response.data.data);
@@ -164,6 +177,30 @@ export default function ManageCampaign() {
               <BsPlusCircleFill size={24} />
             </button>
           </header>
+
+          <FilterContainer>
+            <InputContent
+              icon={FaSearch}
+              placeholder="Titulo"
+              name="title"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+            <SelectContent
+              name="status"
+              value={status}
+              onChange={e => setStatus(e.target.value)}
+            >
+              <option value="0">Status</option>
+              <option value="0">Todos</option>
+              <option value={campaignStatus.approved}>Aprovada</option>
+              <option value={campaignStatus.inactive}>Inativa</option>
+              <option value={campaignStatus.refused}>Recusada</option>
+              <option value={campaignStatus.underReview}>Revisão</option>
+            </SelectContent>
+
+            <ButtonContent>Pesquisar</ButtonContent>
+          </FilterContainer>
 
           <CampaignList>
             {campaigns.map(campaign => (
