@@ -31,17 +31,17 @@ export default function Dashboard() {
     <OptionItem
       label="Editar Perfil"
       icon={FiEdit}
-      onClick={() => handleSubmit('/dashboard/manage/profile')}
+      onClick={() => handleSubmit('/dashboard/manage/institution/profile')}
     />,
     <OptionItem
       label="Gerenciar Campanhas"
       icon={FiList}
-      onClick={() => handleSubmit('/dashboard/manage/campaigns')}
+      onClick={() => handleSubmit('/dashboard/manage/institution/campaigns')}
     />,
     <OptionItem
       label="Gerenciar Galeria"
       icon={FiImage}
-      onClick={() => handleSubmit('/dashboard/manage/gallery')}
+      onClick={() => handleSubmit('/dashboard/manage/institution/gallery')}
     />,
     <OptionItem
       label="Histórico de Atualizações"
@@ -55,23 +55,23 @@ export default function Dashboard() {
     <OptionItem
       label="Editar Perfil"
       icon={FiEdit}
-      onClick={() => handleSubmit('/dashboard/manage/profile')}
+      onClick={() => handleSubmit('/dashboard/manage/curator/profile')}
     />,
     <OptionItem
       label="Gerenciar Curadores"
       icon={FaUsers}
-      onClick={() => handleSubmit('/dashboard/manage/curators')}
+      onClick={() => handleSubmit('/dashboard/manage/curator/curators')}
       disabled={!userCanSeeCurators}
     />,
     <OptionItem
       label="Auditar Instituições"
       icon={FaRegBuilding}
-      onClick={() => handleSubmit('/dashboard/manage/institutions')}
+      onClick={() => handleSubmit('/dashboard/manage/curator/institutions')}
     />,
     <OptionItem
       label="Auditar Campanhas"
       icon={HiOutlineClipboardCheck}
-      onClick={() => handleSubmit('/dashboard/manage/campaigns')}
+      onClick={() => handleSubmit('/dashboard/manage/curator/campaigns')}
     />,
   ];
 
