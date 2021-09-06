@@ -57,7 +57,7 @@ type CampaignData = {
   address_latitude: string;
   address_longitude: string;
   slug: string;
-  image?: string;
+  logo?: string;
 };
 
 type InsitutionData = {
@@ -74,7 +74,6 @@ type CampaingProps = {
 };
 
 export default function Campaign({ campaignData, institution }: CampaingProps) {
-  // console.log(campaignData);
   const url = process.env.NEXT_PUBLIC_WEB_URL;
 
   return (
@@ -99,7 +98,7 @@ export default function Campaign({ campaignData, institution }: CampaingProps) {
           content={`${process.env.NEXT_PUBLIC_WEB_URL}/campaigns/${campaignData.slug}`}
           key="ogurl"
         />
-        <meta property="og:image" content={campaignData.image} key="ogimage" />
+        <meta property="og:image" content={campaignData.logo} key="ogimage" />
         <meta property="og:site_name" content="Faz um bem!" key="ogsitename" />
         <meta
           property="og:title"
@@ -127,7 +126,7 @@ export default function Campaign({ campaignData, institution }: CampaingProps) {
           </div>
 
           <HeaderContent>
-            <img src={campaignData?.image || null} alt={campaignData?.title} />
+            <img src={campaignData?.logo || null} alt={campaignData?.title} />
             <div>
               <div>
                 <h1>{campaignData?.title}</h1>

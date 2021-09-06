@@ -18,17 +18,19 @@ const mapIcon = Leaflet.icon({
 type MapProps = MapContainerProps & {
   interactive?: boolean;
   position?: LatLngExpression;
+  center?: LatLngExpression;
 };
 
 export default function ViewMap({
   interactive = true,
   position,
+  center,
   ...rest
 }: MapProps) {
   return (
     <Container>
       <MapContainer
-        // center={[-29.7031818, -53.7027934]}
+        center={center || [-29.7031818, -53.7027934]}
         zoom={15}
         style={{ width: '100%', height: '100%' }}
         scrollWheelZoom={false}

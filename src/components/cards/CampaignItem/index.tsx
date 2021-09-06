@@ -5,12 +5,9 @@ import { Container, Tag } from './styles';
 type CampaignData = {
   id: number;
   slug: string;
-  image?: string;
   title: string;
   tags?: string[];
-  institution?: {
-    name: string;
-  };
+  logo?: string;
 };
 
 type CardProps = {
@@ -27,7 +24,7 @@ export function CampaignItem({ campaign }: CardProps) {
   return (
     <Container onClick={handleCampaign}>
       <header>
-        <img src={campaign.image} alt={campaign.title} />
+        <img src={campaign.logo} alt={campaign.title} />
         <div>
           <h1>{campaign.title}</h1>
         </div>
