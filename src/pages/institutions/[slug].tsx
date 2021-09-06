@@ -46,15 +46,16 @@ const ViewMap = dynamic(() => import('~/components/maps/ViewMap'), {
   ssr: false,
 });
 
-type ImagesData = {
+type GalleryData = {
   id: number;
   url: string;
+  institution_id: number;
 };
 
 type InstitutionProps = {
   name: string;
+  images?: GalleryData[];
   description: string;
-  images: ImagesData[];
   address: string;
   address_number: string;
   address_complement?: string;
@@ -64,12 +65,16 @@ type InstitutionProps = {
   state: string;
   address_latitude: number;
   address_longitude: number;
-  logo: string;
+  logo?: string | null;
   email: string;
   main_phone: string;
   secondary_phone?: string;
   whatsapp_phone?: string;
   slug: string;
+};
+
+type RequerstGalleryData = {
+  data: GalleryData[];
 };
 
 export default function Institution({
@@ -177,26 +182,26 @@ export default function Institution({
             </EmailShareButton>
           </ShareContainer>
 
-          {!!images && (
-            <>
-              <h1>Galeria de Fotos</h1>
-              <GalleryContainer>
-                <img src={images[activeImageIndex]?.url} alt={name} />
+          {/* {!!images && (
+            <> */}
+          <h1>Galeria de Fotos</h1>
+          <GalleryContainer>
+            <img src={images[activeImageIndex]?.url} alt={name} />
 
-                <div>
-                  {images.map((image, index) => (
-                    <button
-                      key={String(image.id)}
-                      type="button"
-                      onClick={() => setActiveImageIndex(index)}
-                    >
-                      <img src={image.url} alt={name} />
-                    </button>
-                  ))}
-                </div>
-              </GalleryContainer>
-            </>
-          )}
+            <div>
+              {images.map((image, index) => (
+                <button
+                  key={String(image.id)}
+                  type="button"
+                  onClick={() => setActiveImageIndex(index)}
+                >
+                  <img src={image.url} alt={name} />
+                </button>
+              ))}
+            </div>
+          </GalleryContainer>
+          {/* </>
+          )} */}
 
           <h1>Localização</h1>
           <MapContainer>
@@ -276,10 +281,19 @@ export default function Institution({
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const response = await api.get(`/institution/${query.slug}`);
-  response.data.data);
+  console.log(
+    'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+    response.data.data.id,
+  );
+
+  const gallery = await api.get(
+    `/institutions/${response.data.data.id}/photos`,
+  );
+
   return {
     props: {
       ...response.data.data,
+      images: gallery.data.data.data,
     },
   };
 };
