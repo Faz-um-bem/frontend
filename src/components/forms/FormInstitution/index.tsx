@@ -204,20 +204,24 @@ export function FormInstitution({
         error={errors.email}
         {...register('email')}
       />
-      <InputContent
-        name="password"
-        placeholder="Senha"
-        type="password"
-        error={errors.password}
-        {...register('password')}
-      />
-      <InputContent
-        name="password_confirmation"
-        placeholder="Confirmação de senha"
-        type="password"
-        error={errors.password_confirmation}
-        {...register('password_confirmation')}
-      />
+      {!isEditing && (
+        <>
+          <InputContent
+            name="password"
+            placeholder="Senha"
+            type="password"
+            error={errors.password}
+            {...register('password')}
+          />
+          <InputContent
+            name="password_confirmation"
+            placeholder="Confirmação de senha"
+            type="password"
+            error={errors.password_confirmation}
+            {...register('password_confirmation')}
+          />
+        </>
+      )}
 
       <h2>Dados da instituição</h2>
       <InputContent

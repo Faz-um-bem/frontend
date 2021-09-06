@@ -17,7 +17,7 @@ import {
   Container,
   Content,
   GalleryContainer,
-} from '~/styles/dashboard/manage/gallery';
+} from '~/styles/dashboard/manage/institution/gallery';
 import { convertToBase64 } from '~/utils/convert';
 import { api } from '~/services/apiClient';
 import { useAuth } from '~/hooks/useAuth';

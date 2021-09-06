@@ -22,7 +22,7 @@ import {
   InputContent,
   SelectContent,
   ButtonContent,
-} from '~/styles/dashboard/manage/campaigns';
+} from '~/styles/dashboard/manage/institution/campaigns';
 
 import { api } from '~/services/apiClient';
 import { useAuth } from '~/hooks/useAuth';
