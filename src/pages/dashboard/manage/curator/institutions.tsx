@@ -17,7 +17,7 @@ import {
   Container,
   CampaignList,
   Content,
-} from '~/styles/dashboard/manage/institutions';
+} from '~/styles/dashboard/manage/curator/institutions';
 
 type InstitutionData = {
   id: number;

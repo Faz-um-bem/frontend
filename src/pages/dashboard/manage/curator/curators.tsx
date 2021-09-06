@@ -16,7 +16,7 @@ import {
   Container,
   CampaignList,
   Content,
-} from '~/styles/dashboard/manage/curators';
+} from '~/styles/dashboard/manage/curator/curators';
 import { CuratorModal } from '~/components/modal/CuratorModal';
 
 export default function ManageInstitutions() {
