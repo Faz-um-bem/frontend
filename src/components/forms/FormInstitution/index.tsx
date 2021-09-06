@@ -58,6 +58,7 @@ type SubmitData = {
   city: string;
   main_phone: string;
   secondary_phone: string;
+  whatsapp_phone: string;
 };
 
 type FormInstitutionProps = {
