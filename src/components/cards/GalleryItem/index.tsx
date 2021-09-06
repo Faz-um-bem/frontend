@@ -6,20 +6,24 @@ import { Container, ImageContent, NoImage } from './styled';
 
 type GalleryItemProps = {
   url?: string;
+  id?: number;
   addNewImage?: boolean;
   onSelectImages?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onDelete?: (id: number) => void;
 };
 
 export function GalleryItem({
   url,
+  id,
   addNewImage = false,
   onSelectImages,
+  onDelete,
 }: GalleryItemProps) {
   return (
     <Container>
       {!addNewImage ? (
         <ImageContent>
-          <button type="button">
+          <button type="button" onClick={() => onDelete(id)}>
             <IoMdClose size={20} />
           </button>
           <img src={url} alt="Foto" />
@@ -30,7 +34,7 @@ export function GalleryItem({
             <FiPlus size={20} />
           </label>
 
-          <input multiple type="file" id="images" onChange={onSelectImages} />
+          <input type="file" id="images" onChange={onSelectImages} />
         </NoImage>
       )}
     </Container>

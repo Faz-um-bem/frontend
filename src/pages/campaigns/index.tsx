@@ -1,64 +1,26 @@
 import Head from 'next/head';
 
+import { GetServerSideProps } from 'next';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
 import { CampaignItem } from '~/components/cards/CampaignItem';
 
 import { Container, Content, Heading, ListContainer } from '~/styles/campaigns';
+import { api } from '~/services/apiClient';
 
-export default function Ccampaigns() {
-  const campaigns = [
-    {
-      id: '1',
-      image:
-        'https://www.anoregsp.org.br/__Documentos/Upload_Conteudo/destaques/60133/destaque.jpg',
-      title: 'Testando 1',
-      tags: ['Dinheiro', 'Comida'],
-      institution: {
-        name: 'Teste',
-      },
-    },
-    {
-      id: '2',
-      image:
-        'https://acontecendoaqui.com.br/sites/default/files/materia_acontecendo_aqui.jpg',
-      title: 'Testando 2',
-      tags: ['Dinheiro', 'Comida'],
-      institution: {
-        name: 'Teste',
-      },
-    },
-    {
-      id: '3',
-      image: 'https://fapto.org.br/images/noticia/A5fcfc59fa079b.jpg',
-      title: 'Testando 3',
-      tags: ['teste', 'Comida'],
-      institution: {
-        name: 'Teste',
-      },
-    },
-    {
-      id: '4',
-      image:
-        'https://www.anoregsp.org.br/__Documentos/Upload_Conteudo/destaques/60133/destaque.jpg',
-      title: 'Testando 4',
-      tags: ['Dinheiro', 'teste'],
-      institution: {
-        name: 'Teste',
-      },
-    },
-    {
-      id: '5',
-      image:
-        'https://acontecendoaqui.com.br/sites/default/files/materia_acontecendo_aqui.jpg',
-      title: 'Testando 5',
-      tags: ['Dinheiro', 'Comida'],
-      institution: {
-        name: 'Teste',
-      },
-    },
-  ];
+type CampaignData = {
+  id: number;
+  slug: string;
+  title: string;
+  tags?: string[];
+  logo?: string;
+};
 
+type CampaignProps = {
+  campaigns: Array<CampaignData>;
+};
+
+export default function Campaigns({ campaigns }: CampaignProps) {
   return (
     <>
       <Head>
@@ -93,3 +55,13 @@ export default function Ccampaigns() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await api.get('/campaigns');
+  console.log(response.data.data.data);
+  return {
+    props: {
+      campaigns: response.data.data.data,
+    },
+  };
+};

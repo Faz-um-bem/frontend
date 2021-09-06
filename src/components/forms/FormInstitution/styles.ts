@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Button } from '~/components/Button';
 import { Input } from '~/components/forms/Input';
 import { Textarea } from '~/components/forms/Textarea';
+import { Select } from '~/components/forms/Select';
 
 export const Container = styled.form`
   div {
@@ -36,6 +37,8 @@ export const SignInButton = styled(Button)`
 export const InputContent = styled(Input)``;
 
 export const TextareaContent = styled(Textarea)``;
+
+export const SelectContent = styled(Select)``;
 
 export const MapContainer = styled.div`
   height: 30rem;

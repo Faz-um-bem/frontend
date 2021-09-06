@@ -17,13 +17,13 @@ import {
   Container,
   CampaignList,
   Content,
-} from '~/styles/dashboard/manage/institutions';
+} from '~/styles/dashboard/manage/curator/institutions';
 
 type InstitutionData = {
   id: number;
   title: string;
   description: string;
-  status: 'active' | 'draft' | 'inactive' | 'refused' | null;
+  status: number;
 };
 
 export default function ManageInstitutions() {
@@ -35,28 +35,28 @@ export default function ManageInstitutions() {
       title: 'teste1',
       description:
         'HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA',
-      status: 'active',
+      status: 1,
     },
     {
       id: 2,
       title: 'teste2',
       description:
         'HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA',
-      status: 'draft',
+      status: 2,
     },
     {
       id: 3,
       title: 'teste3',
       description:
         'HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA',
-      status: 'active',
+      status: 3,
     },
     {
       id: 4,
       title: 'teste4',
       description:
         'HFUSDAGHASDUIFHGUISDAHFGIUDASHSIAUDHFIUASHGIUSADHFIUGHSADIUFHGIUSADHFUGSADHIFHGSUAIDHFSIA',
-      status: 'active',
+      status: 4,
     },
   ]);
   const [modalInstitutionInfo, setModalInstitutionInfo] = useState({});

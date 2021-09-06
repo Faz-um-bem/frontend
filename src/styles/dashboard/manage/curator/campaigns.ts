@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { Button } from '~/components/Button';
+import { Input } from '~/components/forms/Input';
+import { Select } from '~/components/forms/Select';
 
 export const Container = styled.div`
   display: flex;
@@ -42,4 +45,29 @@ export const Content = styled.div`
 
 export const CampaignList = styled.div`
   margin: 2.5rem 0;
+`;
+
+export const FilterContainer = styled.section`
+  height: 4rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-gap: 1rem;
+  margin-top: 1.5rem;
+`;
+
+export const InputContent = styled(Input)`
+  height: 3rem;
+`;
+
+export const SelectContent = styled(Select)`
+  height: 3rem;
+`;
+
+export const ButtonContent = styled(Button)`
+  background: var(--green);
+  height: 4rem;
+  &:hover {
+    color: var(--green);
+    border-color: var(--green);
+  }
 `;

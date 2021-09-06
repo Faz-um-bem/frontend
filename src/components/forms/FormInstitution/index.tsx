@@ -6,36 +6,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useState } from 'react';
 import router from 'next/router';
+import { useEffect } from 'react';
 import {
   Container,
   SignInButton,
   InputContent,
   TextareaContent,
   MapContainer,
+  // SelectContent,
 } from './styles';
+import { useAuth } from '~/hooks/useAuth';
+// import apiIBGE from '~/services/apiIBGE';
 
 const SelectMap = dynamic(() => import('~/components/maps/SelectMap'), {
   ssr: false,
 });
-
-type FormData = {
-  email: string;
-  password: string;
-  password_confirmation: string;
-  name: string;
-  corporate_name: string;
-  cnpj: number;
-  description: string;
-  address: string;
-  address_number: string;
-  address_complement: string;
-  neighborhood: string;
-  postal_code: number;
-  state: string;
-  city: string;
-  main_phone: number;
-  secondary_phone: number;
-};
 
 type SubmitData = {
   email: string;
@@ -54,6 +39,7 @@ type SubmitData = {
   city: string;
   main_phone: string;
   secondary_phone: string;
+  whatsapp_phone: string;
 };
 
 type FormInstitutionProps = {
@@ -87,8 +73,8 @@ const formSchema = yup.object().shape({
     .number()
     .required('CEP é obrigatório')
     .min(8, 'CEP inválido'),
-  state: yup.string().required('Unidade Federativa é obrigatório'),
-  city: yup.string().required('Cidade é obrigatório'),
+  // state: yup.string().required('Unidade Federativa é obrigatório'),
+  // city: yup.string().required('Cidade é obrigatório'),
   main_phone: yup
     .number()
     .required('Número de telefone obrigatório')
@@ -100,16 +86,73 @@ export function FormInstitution({
   onSubmitForm,
   isEditing = false,
 }: FormInstitutionProps) {
+  const { user } = useAuth();
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
+    defaultValues: user || {
+      email: '',
+      password: '',
+      password_confirmation: '',
+      name: '',
+      corporate_name: '',
+      cnpj: '',
+      description: '',
+      address: '',
+      address_number: '',
+      address_complement: '',
+      neighborhood: '',
+      postal_code: '',
+      state: '',
+      city: '',
+      main_phone: '',
+      secondary_phone: '',
+      whatsapp_phone: '',
+    },
   });
   const { errors } = formState;
 
   const [position, setPosition] = useState(null);
+  // const [currentUf, setCurrentUf] = useState('');
+  // const [ufs, setUfs] = useState([]);
+  // const [cities, setCities] = useState([]);
 
-  const handleSubmitForm: SubmitHandler<FormData> = useCallback(
+  const handlePosition = () => {
+    setPosition({
+      lat: Number(user.address_latitude),
+      lng: Number(user.address_longitude),
+    });
+  };
+
+  // const loadUFs = useCallback(async () => {
+  //   const response = await apiIBGE.get('/estados');
+  //   const attUfs = response.data.map(uf => uf.sigla);
+
+  //   setUfs(attUfs);
+  // }, []);
+
+  // const loadCities = useCallback(async uf => {
+  //   const response = await apiIBGE.get(`/estados/${uf}/municipios`);
+  //   const attCities = response.data.map(city => city.sigla);
+
+  //   setCities(attCities);
+  // }, []);
+
+  useEffect(() => {
+    if (user) {
+      handlePosition();
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   loadUFs();
+  // }, []);
+
+  // useEffect(() => {
+  //   loadCities(currentUf);
+  // }, [currentUf]);
+
+  const handleSubmitForm: SubmitHandler<SubmitData> = useCallback(
     async (data, event) => {
-      await new Promise(resolve => setTimeout(resolve, 3000));
       event.preventDefault();
 
       if (!position) {
@@ -143,20 +186,24 @@ export function FormInstitution({
         error={errors.email}
         {...register('email')}
       />
-      <InputContent
-        name="password"
-        placeholder="Senha"
-        type="password"
-        error={errors.password}
-        {...register('password')}
-      />
-      <InputContent
-        name="password_confirmation"
-        placeholder="Confirmação de senha"
-        type="password"
-        error={errors.password_confirmation}
-        {...register('password_confirmation')}
-      />
+      {!isEditing && (
+        <>
+          <InputContent
+            name="password"
+            placeholder="Senha"
+            type="password"
+            error={errors.password}
+            {...register('password')}
+          />
+          <InputContent
+            name="password_confirmation"
+            placeholder="Confirmação de senha"
+            type="password"
+            error={errors.password_confirmation}
+            {...register('password_confirmation')}
+          />
+        </>
+      )}
 
       <h2>Dados da instituição</h2>
       <InputContent
@@ -197,6 +244,7 @@ export function FormInstitution({
         <SelectMap
           interactive={!isEditing}
           markerPosition={position}
+          center={position}
           onChangeMakerPosition={setPosition}
         />
       </MapContainer>
@@ -272,6 +320,29 @@ export function FormInstitution({
         error={errors.secondary_phone}
         {...register('secondary_phone')}
       />
+
+      <InputContent
+        name="whatsapp_phone"
+        placeholder="WhatsApp"
+        type="number"
+        {...register('whatsapp_phone')}
+      />
+
+      {/* <SelectContent
+        name="state"
+        onChange={e => console.log(e.target.value)}
+        {...register('state')}
+      >
+        {ufs.map(uf => (
+          <option value={uf}>{uf}</option>
+        ))}
+      </SelectContent>
+
+      <SelectContent {...register('city')}>
+        {cities.map(city => (
+          <option value={city}>{city}</option>
+        ))}
+      </SelectContent> */}
 
       <SignInButton type="submit">
         {formState.isSubmitting

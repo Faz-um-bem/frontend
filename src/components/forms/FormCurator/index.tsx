@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Input } from '~/components/forms/Input';
 
 import { Container, SignInButton } from './styles';
+import { useAuth } from '~/hooks/useAuth';
 
 type FormData = {
   email: string;
@@ -40,8 +41,15 @@ export function FormCurator({
   onSubmitForm,
   isEditing = false,
 }: FormCuratorProps) {
+  const { user } = useAuth();
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
+    defaultValues: user || {
+      email: '',
+      name: '',
+      password: '',
+      password_confirmation: '',
+    },
   });
   const { errors } = formState;
 
@@ -64,20 +72,24 @@ export function FormCurator({
         error={errors.email}
         {...register('email')}
       />
-      <Input
-        name="password"
-        placeholder="Senha"
-        type="password"
-        error={errors.password}
-        {...register('password')}
-      />
-      <Input
-        name="password_confirmation"
-        placeholder="Confirmação de senha"
-        type="password"
-        error={errors.password_confirmation}
-        {...register('password_confirmation')}
-      />
+      {!isEditing && (
+        <>
+          <Input
+            name="password"
+            placeholder="Senha"
+            type="password"
+            error={errors.password}
+            {...register('password')}
+          />
+          <Input
+            name="password_confirmation"
+            placeholder="Confirmação de senha"
+            type="password"
+            error={errors.password_confirmation}
+            {...register('password_confirmation')}
+          />
+        </>
+      )}
 
       <h2>Dados do usuário</h2>
       <Input

@@ -1,6 +1,5 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
 import { Footer } from '~/components/Footer';
@@ -9,10 +8,9 @@ import { Header } from '~/components/Header';
 
 import { withSSRAuth } from '~/utils/withSSRAuth';
 
-import { Container, Content } from '~/styles/dashboard/manage/profile';
+import { Container, Content } from '~/styles/dashboard/manage/curator/profile';
 
 export default function Profile() {
-  const { back } = useRouter();
   const handleSubmit = useCallback(async () =>
     // data: Object
     {

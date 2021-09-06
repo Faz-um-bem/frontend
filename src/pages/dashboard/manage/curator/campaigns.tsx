@@ -5,6 +5,7 @@ import { BsPlusCircleFill } from 'react-icons/bs';
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
+import { toast } from 'react-toastify';
 import { ListItem } from '~/components/cards/ListItem';
 import { Footer } from '~/components/Footer';
 import { Header } from '~/components/Header';
@@ -16,10 +17,11 @@ import {
   Container,
   CampaignList,
   Content,
-} from '~/styles/dashboard/manage/campaigns';
+} from '~/styles/dashboard/manage/curator/campaigns';
 
 import { useCan } from '~/hooks/useCan';
 import { roles } from '~/utils/enum';
+import { api } from '~/services/apiClient';
 
 const CampaigModal = dynamic(() => import('~/components/modal/CampaigModal'), {
   ssr: false,
@@ -38,7 +40,9 @@ type CampaignData = {
   city: string;
   address_latitude: string;
   address_longitude: string;
-  status: 'active' | 'inactive' | 'draft' | 'refused' | null;
+  status: number;
+  logo?: string | null;
+  tags?: number[];
 };
 
 export default function ManageCampaign() {
@@ -71,79 +75,16 @@ export default function ManageCampaign() {
   }, []);
 
   const loadCampaigns = useCallback(async () => {
-    const response: CampaignData[] = [
-      {
-        id: 1,
-        title: 'Campanha 1',
-        description: 'Descrição da campanha 1',
-        address: 'Endereço tal',
-        address_number: '10',
-        address_complement: 'complemento',
-        neighborhood: 'Bairro tal',
-        postal_code: '970000000',
-        state: 'RS',
-        city: 'Santa Maria',
-        address_latitude: '111111111111',
-        address_longitude: '2222222222',
-        status: 'active',
-      },
-      {
-        id: 2,
-        title: 'Campanha 1',
-        description: 'Descrição da campanha 1',
-        address: 'Endereço tal',
-        address_number: '10',
-        address_complement: 'complemento',
-        neighborhood: 'Bairro tal',
-        postal_code: '970000000',
-        state: 'RS',
-        city: 'Santa Maria',
-        address_latitude: '111111111111',
-        address_longitude: '2222222222',
-        status: 'draft',
-      },
-      {
-        id: 3,
-        title: 'Campanha 1',
-        description: 'Descrição da campanha 1',
-        address: 'Endereço tal',
-        address_number: '10',
-        address_complement: 'complemento',
-        neighborhood: 'Bairro tal',
-        postal_code: '970000000',
-        state: 'RS',
-        city: 'Santa Maria',
-        address_latitude: '111111111111',
-        address_longitude: '2222222222',
-        status: 'active',
-      },
-      {
-        id: 4,
-        title: 'Campanha 1',
-        description: 'Descrição da campanha 1',
-        address: 'Endereço tal',
-        address_number: '10',
-        address_complement: 'complemento',
-        neighborhood: 'Bairro tal',
-        postal_code: '970000000',
-        state: 'RS',
-        city: 'Santa Maria',
-        address_latitude: '111111111111',
-        address_longitude: '2222222222',
-        status: 'active',
-      },
-    ];
+    try {
+      const response = await api.get<CampaignData[]>(`/campaigns/audit`);
 
-    setCampaigns(response);
+      setCampaigns(response.data);
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
   }, []);
 
-  const handleUpdateCampaign = useCallback(async (data: CampaignData) => {},
-  []);
-  const handleCreateCampaign = useCallback(async (data: CampaignData) => {},
-  []);
-  const handleDeleteCampaign = useCallback(async () => {}, []);
-
-  const handleRejectModal = () => {
+  const handleRejectModal = async () => {
     toggleModalCampaign();
     toggleModalReason();
   };
@@ -152,7 +93,7 @@ export default function ManageCampaign() {
     toggleModalReason();
   };
 
-  const handleAcceptCampaign = () => {
+  const handleAcceptCampaign = async () => {
     toggleModalCampaign();
   };
 
@@ -198,17 +139,14 @@ export default function ManageCampaign() {
         <Footer />
       </Container>
 
-      <CampaigModal
+      {/* <CampaigModal
         isOpen={isCreateNewCampaignOpen}
         onRequestClose={handleCreateNewCampaignClose}
         data={modalData}
-        onCreate={handleCreateCampaign}
-        onUpdate={handleUpdateCampaign}
-        onDelete={handleDeleteCampaign}
         onAccept={handleAcceptCampaign}
         onReject={handleRejectModal}
         isAuditing={userIsCurator}
-      />
+      /> */}
 
       <AuditorMessageModal
         isOpen={modalReasonIsVisible}

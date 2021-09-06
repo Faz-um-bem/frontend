@@ -3,8 +3,8 @@ import { ButtonHTMLAttributes } from 'react';
 import { Container } from './styled';
 
 type InstitutionData = {
-  image: string | null;
-  title: string;
+  logo?: string | null;
+  name: string;
   description: string;
 };
 
@@ -15,9 +15,9 @@ type InstitutionCardProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export function InstitutionItem({ data, ...rest }: InstitutionCardProps) {
   return (
     <Container {...rest}>
-      <img src={data?.image || '/imgs/noimage.png'} alt="Imagem" />
+      <img src={data?.logo || '/imgs/noimage.png'} alt="Imagem" />
       <header>
-        <h1>{data.title}</h1>
+        <h1>{data.name}</h1>
       </header>
 
       <main>
