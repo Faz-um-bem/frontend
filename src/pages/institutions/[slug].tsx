@@ -281,10 +281,6 @@ export default function Institution({
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const response = await api.get(`/institution/${query.slug}`);
-  console.log(
-    'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-    response.data.data.id,
-  );
 
   const gallery = await api.get(
     `/institutions/${response.data.data.id}/photos`,

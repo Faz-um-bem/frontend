@@ -58,7 +58,6 @@ export default function Campaigns({ campaigns }: CampaignProps) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await api.get('/campaigns');
-  console.log(response.data.data.data);
   return {
     props: {
       campaigns: response.data.data.data,
