@@ -47,6 +47,7 @@ type CampaignData = {
   address_longitude: string;
   status: number;
   logo: string;
+  tags: number[];
 };
 
 type ResponseData = {
@@ -54,10 +55,20 @@ type ResponseData = {
   message: string;
 };
 
+type TagData = {
+  id: number;
+  name: string;
+};
+
+type RequestTagData = {
+  data: TagData[];
+};
+
 export default function ManageCampaign() {
   const { user } = useAuth();
 
   const [campaigns, setCampaigns] = useState<CampaignData[]>([]);
+  const [tags, setTags] = useState<TagData[]>([]);
   const [isCreateNewCampaignOpen, setIsCreateNewCampaignOpen] = useState(false);
   const [modalData, setModalData] = useState<CampaignData>(null);
   const [title, setTitle] = useState<string>('');
@@ -99,7 +110,7 @@ export default function ManageCampaign() {
   const handleUpdateCampaign = useCallback(
     async (data: CampaignData, id: number) => {
       try {
-        const response = await api.put(
+        const response = await api.post(
           `/institutions/${user.id}/campaign/${id}`,
           data,
         );
@@ -156,9 +167,16 @@ export default function ManageCampaign() {
     [campaigns, user.id],
   );
 
+  const loadTagData = useCallback(async () => {
+    const result = await api.get<RequestTagData>('/tags');
+
+    setTags(result.data.data);
+  }, []);
+
   useEffect(() => {
     loadCampaigns();
-  }, [loadCampaigns]);
+    loadTagData();
+  }, [loadCampaigns, loadTagData]);
 
   return (
     <>
@@ -223,6 +241,7 @@ export default function ManageCampaign() {
         onCreate={handleCreateCampaign}
         onUpdate={handleUpdateCampaign}
         onDelete={handleDeleteCampaign}
+        tagData={tags}
       />
     </>
   );

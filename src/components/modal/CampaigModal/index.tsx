@@ -3,10 +3,10 @@ import dynamic from 'next/dynamic';
 import { FiAlertCircle } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 import Modal from 'react-modal';
+import Select from 'react-select';
+import { LatLng } from 'leaflet';
 
-import { LatLngExpression } from 'leaflet';
-
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -46,6 +46,12 @@ type CampaignData = {
     size: number;
     value: string;
   };
+  tags: number[];
+};
+
+type TagData = {
+  id: number;
+  name: string;
 };
 
 type NewCampaigModalProps = {
@@ -55,6 +61,7 @@ type NewCampaigModalProps = {
   onCreate?: (values: CampaignData) => void;
   onUpdate?: (values: CampaignData, id: number) => void;
   onDelete?: (id: number) => void;
+  tagData: TagData[];
 };
 
 const formSchema = yup.object().shape({
@@ -76,8 +83,9 @@ export default function CampaigModal({
   onUpdate,
   onDelete,
   onRequestClose,
+  tagData,
 }: NewCampaigModalProps) {
-  const { register, handleSubmit, formState, reset } = useForm({
+  const { control, register, handleSubmit, formState, reset } = useForm({
     resolver: yupResolver(formSchema),
     defaultValues: data || {
       title: '',
@@ -89,20 +97,24 @@ export default function CampaigModal({
       postal_code: '',
       state: '',
       city: '',
+      tags: [],
     },
   });
 
   const { errors, dirtyFields } = formState;
-  const [location, setLocation] = useState<LatLngExpression>();
+  const [location, setLocation] = useState<LatLng>();
   const [image, setImage] = useState(null);
 
   const handleSubmitForm: SubmitHandler<CampaignData> = (values, event) => {
     event.preventDefault();
+    const formattedTags = values.tags.map<number>(t => t.value);
+
     if (data) {
       onUpdate(
         {
           ...values,
           file: image,
+          tags: formattedTags,
           address_longitude: String(location.lng),
           address_latitude: String(location.lat),
         },
@@ -112,6 +124,7 @@ export default function CampaigModal({
       onCreate({
         ...values,
         file: image,
+        tags: formattedTags,
         address_longitude: String(location.lng),
         address_latitude: String(location.lat),
       });
@@ -121,8 +134,6 @@ export default function CampaigModal({
   const handleDelete = () => {
     onDelete(data.id);
   };
-
-  useEffect(() => reset(), []);
 
   const handleSelectImages = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target) return;
@@ -140,7 +151,7 @@ export default function CampaigModal({
 
   useEffect(() => {
     return () => reset();
-  }, []);
+  }, [reset]);
 
   return (
     <Modal
@@ -189,6 +200,37 @@ export default function CampaigModal({
             error={errors.description}
             isFilled={dirtyFields.description}
             {...register('description')}
+          />
+
+          <Controller
+            control={control}
+            name="tags"
+            render={({ field: { onChange, value, ref, name } }) => (
+              <Select
+                placeholder="Selecione as tags"
+                name={name}
+                onChange={e => {
+                  if (e.length > 3) return;
+                  onChange(e);
+                }}
+                value={value}
+                inputRef={ref}
+                isMulti
+                isValid
+                options={tagData.map(t => ({ value: t.id, label: t.name }))}
+                styles={{
+                  control: provided => ({
+                    ...provided,
+                    minHeight: '4rem',
+                    borderRadius: '0.8rem',
+                    borderColor: 0,
+                  }),
+                  menu: () => ({
+                    background: '#fff',
+                  }),
+                }}
+              />
+            )}
           />
 
           <MapContainer>
