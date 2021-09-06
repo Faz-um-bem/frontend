@@ -47,6 +47,8 @@ export function FormCurator({
     defaultValues: user || {
       email: '',
       name: '',
+      password: '',
+      password_confirmation: '',
     },
   });
   const { errors } = formState;
@@ -70,20 +72,24 @@ export function FormCurator({
         error={errors.email}
         {...register('email')}
       />
-      <Input
-        name="password"
-        placeholder="Senha"
-        type="password"
-        error={errors.password}
-        {...register('password')}
-      />
-      <Input
-        name="password_confirmation"
-        placeholder="Confirmação de senha"
-        type="password"
-        error={errors.password_confirmation}
-        {...register('password_confirmation')}
-      />
+      {!isEditing && (
+        <>
+          <Input
+            name="password"
+            placeholder="Senha"
+            type="password"
+            error={errors.password}
+            {...register('password')}
+          />
+          <Input
+            name="password_confirmation"
+            placeholder="Confirmação de senha"
+            type="password"
+            error={errors.password_confirmation}
+            {...register('password_confirmation')}
+          />
+        </>
+      )}
 
       <h2>Dados do usuário</h2>
       <Input
