@@ -135,7 +135,6 @@ export default function ManageCampaign() {
           data,
         );
 
-        console.log(response);
         setCampaigns([...campaigns, response.data.data.data]);
         toast.success('Campanha enviada para auditagem');
         toggleModalCampaign();

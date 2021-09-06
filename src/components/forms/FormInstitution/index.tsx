@@ -328,22 +328,6 @@ export function FormInstitution({
         {...register('whatsapp_phone')}
       />
 
-      {/* <SelectContent
-        name="state"
-        onChange={e => console.log(e.target.value)}
-        {...register('state')}
-      >
-        {ufs.map(uf => (
-          <option value={uf}>{uf}</option>
-        ))}
-      </SelectContent>
-
-      <SelectContent {...register('city')}>
-        {cities.map(city => (
-          <option value={city}>{city}</option>
-        ))}
-      </SelectContent> */}
-
       <SignInButton type="submit">
         {formState.isSubmitting
           ? 'Aguarde...'
