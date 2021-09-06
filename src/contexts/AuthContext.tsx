@@ -34,6 +34,8 @@ type User = {
   secondary_phone?: number;
   address_latitude?: string;
   address_longitude?: string;
+  role?: number;
+  permission?: number;
 };
 
 type SignInCredentials = {

@@ -29,12 +29,14 @@ type InstitutionData = {
   id: number;
   name: string;
   description: string;
-  logo?: string;
+  logo?: string | null;
   slug: string;
+  address_latitude: string;
+  address_longitude: string;
 };
 
 type InstitutionsProps = {
-  institutionsData: Array<InstitutionData>;
+  institutionsData: InstitutionData[];
 };
 
 export default function Institutions({ institutionsData }: InstitutionsProps) {

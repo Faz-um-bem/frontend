@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes } from 'react';
 import { Container } from './styled';
 
 type InstitutionData = {
-  logo: string | null;
+  logo?: string | null;
   name: string;
   description: string;
 };

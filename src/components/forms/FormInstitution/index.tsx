@@ -22,26 +22,6 @@ const SelectMap = dynamic(() => import('~/components/maps/SelectMap'), {
   ssr: false,
 });
 
-type FormData = {
-  email: string;
-  password: string;
-  password_confirmation: string;
-  name: string;
-  corporate_name: string;
-  cnpj: number;
-  description: string;
-  address: string;
-  address_number: string;
-  address_complement: string;
-  neighborhood: string;
-  postal_code: number;
-  state: string;
-  city: string;
-  main_phone: number;
-  secondary_phone: number;
-  whatsapp_phone: number;
-};
-
 type SubmitData = {
   email: string;
   password: string;
@@ -59,7 +39,7 @@ type SubmitData = {
   city: string;
   main_phone: string;
   secondary_phone: string;
-  whatsapp_phone: string | null;
+  whatsapp_phone: string;
 };
 
 type FormInstitutionProps = {
@@ -171,7 +151,7 @@ export function FormInstitution({
   //   loadCities(currentUf);
   // }, [currentUf]);
 
-  const handleSubmitForm: SubmitHandler<FormData> = useCallback(
+  const handleSubmitForm: SubmitHandler<SubmitData> = useCallback(
     async (data, event) => {
       event.preventDefault();
 
@@ -345,7 +325,6 @@ export function FormInstitution({
         name="whatsapp_phone"
         placeholder="WhatsApp"
         type="number"
-        error={errors.whatsapp_phone}
         {...register('whatsapp_phone')}
       />
 

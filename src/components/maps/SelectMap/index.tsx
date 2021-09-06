@@ -5,7 +5,7 @@ import {
   Marker,
   useMapEvents,
 } from 'react-leaflet';
-import Leaflet, { LatLngExpression } from 'leaflet';
+import Leaflet, { LatLng, LatLngExpression } from 'leaflet';
 
 import { Container } from './styles';
 
@@ -20,7 +20,7 @@ type MapProps = MapContainerProps & {
   center?: Array<number>;
   interactive?: boolean;
   markerPosition: LatLngExpression | null;
-  onChangeMakerPosition: (pos: LatLngExpression) => void;
+  onChangeMakerPosition: (pos: LatLng) => void;
 };
 
 export default function Map({

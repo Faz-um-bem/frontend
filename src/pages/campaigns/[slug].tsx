@@ -184,12 +184,12 @@ export default function Campaign({ campaignData, institution }: CampaingProps) {
             <ViewMap
               interactive={false}
               center={[
-                campaignData?.address_latitude,
-                campaignData?.address_longitude,
+                Number(campaignData?.address_latitude),
+                Number(campaignData?.address_longitude),
               ]}
               position={[
-                campaignData?.address_latitude,
-                campaignData?.address_longitude,
+                Number(campaignData?.address_latitude),
+                Number(campaignData?.address_longitude),
               ]}
             />
 

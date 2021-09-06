@@ -94,18 +94,16 @@ export default function ManageCampaign() {
   const loadCampaigns = useCallback(async () => {
     try {
       const response = await api.get<ResponseData>(
-        `/institutions/${user.id}/campaigns`,
-        {
-          title,
-          status: status !== 0 ? status : null,
-        },
+        `/institutions/${user.id}/campaigns?title=${title}&status=${
+          status !== 0 ? status : null
+        }`,
       );
 
       setCampaigns(response.data.data);
     } catch (err) {
       toast.error(err.response.data.message);
     }
-  }, [user.id]);
+  }, [user.id, title, status]);
 
   const handleUpdateCampaign = useCallback(
     async (data: CampaignData, id: number) => {

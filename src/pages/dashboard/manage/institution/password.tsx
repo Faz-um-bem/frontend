@@ -44,10 +44,10 @@ type PasswordData = {
 
 export default function Password() {
   const { user } = useAuth();
-  const { register, handleSubmit, formState, isSubmitting } = useForm({
+  const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(formSchema),
   });
-  const { errors } = formState;
+  const { errors, isSubmitting } = formState;
 
   const handleSubmitForm: SubmitHandler<PasswordData> = useCallback(
     async (data, event) => {

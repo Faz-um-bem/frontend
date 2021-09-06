@@ -25,6 +25,11 @@ const ViewMap = dynamic(() => import('~/components/maps/SelectMap'), {
   ssr: false,
 });
 
+type TagData = {
+  label: string;
+  value: number;
+};
+
 type CampaignData = {
   id: number;
   title: string;
@@ -39,17 +44,17 @@ type CampaignData = {
   address_latitude: string;
   address_longitude: string;
   status: number;
-  logo: string | null;
+  logo?: string | null;
   file?: {
     name: string;
     type: string;
     size: number;
     value: string;
   };
-  tags: number[];
+  tags?: TagData[] | number[];
 };
 
-type TagData = {
+type MapTagData = {
   id: number;
   name: string;
 };
@@ -61,7 +66,7 @@ type NewCampaigModalProps = {
   onCreate?: (values: CampaignData) => void;
   onUpdate?: (values: CampaignData, id: number) => void;
   onDelete?: (id: number) => void;
-  tagData: TagData[];
+  tagData: MapTagData[];
 };
 
 const formSchema = yup.object().shape({
@@ -107,7 +112,7 @@ export default function CampaigModal({
 
   const handleSubmitForm: SubmitHandler<CampaignData> = (values, event) => {
     event.preventDefault();
-    const formattedTags = values.tags.map<number>(t => t.value);
+    const formattedTags = values.tags.map(tag => tag.value);
 
     if (data) {
       onUpdate(
@@ -217,7 +222,10 @@ export default function CampaigModal({
                 inputRef={ref}
                 isMulti
                 isValid
-                options={tagData.map(t => ({ value: t.id, label: t.name }))}
+                options={tagData.map<TagData>(t => ({
+                  value: t.id,
+                  label: t.name,
+                }))}
                 styles={{
                   control: provided => ({
                     ...provided,

@@ -139,14 +139,14 @@ export default function ManageCampaign() {
         <Footer />
       </Container>
 
-      <CampaigModal
+      {/* <CampaigModal
         isOpen={isCreateNewCampaignOpen}
         onRequestClose={handleCreateNewCampaignClose}
         data={modalData}
         onAccept={handleAcceptCampaign}
         onReject={handleRejectModal}
         isAuditing={userIsCurator}
-      />
+      /> */}
 
       <AuditorMessageModal
         isOpen={modalReasonIsVisible}
